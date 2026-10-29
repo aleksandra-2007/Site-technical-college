@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДТПА им. А.В. Захарченко</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<!-- ============================================================
+     ПУБЛИЧНЫЙ САЙТ
+     ============================================================ -->
+<div id="publicSite">
+
+<header class="header">
+  <div class="container">
+    <div class="logo">🏛️ ДТПА <span>им. А.В. Захарченко</span></div>
+    <nav>
+      <ul class="nav-list" id="mainNav">
+        <li><a href="#" data-page="home">Главная</a></li>
+        <li><a href="#" data-page="news">Новости</a></li>
+        <li><a href="#" data-page="info">Сведения об образовательной организации</a></li>
+        <li><a href="#" data-page="student">Студенту</a></li>
+        <li><a href="#" data-page="abiturient">Абитуриенту</a></li>
+        <li><a href="#" data-page="prof">Профессионалитет</a></li>
+        <li><a href="#" data-page="location">Где находимся</a></li>
+        <li><a href="#" data-page="contacts">Контактные данные</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Переключить тему" title="Переключить тему"><span class="sphere"></span></button>
+      <button type="button" class="user-status" data-user-status aria-label="Открыть личный кабинет" title="Войти или зарегистрироваться"><span class="user-status__icon">👤</span><span class="user-status__label">Войти</span></button>
+      <button type="button" class="btn-perf" onclick="showPerfApp()">📊 Успеваемость</button>
+      <a href="#" data-page="register" class="btn-cta">Регистрация</a>
+      <a href="#" data-page="submit" class="btn-cta">Подать документы</a>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== ГЛАВНАЯ ==================== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Твоё будущее <span>начинается здесь</span></h1>
+        <p>Донецкий техникум промышленной автоматики — это современное образование, востребованные профессии и путь к успешной карьере.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn-cta" data-page="abiturient">Выбрать специальность</a>
+          <a href="#" class="btn-cta btn-cta-secondary" data-page="info">О техникуме</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stats-item"><div class="number">10+</div><div class="label">Специальностей</div></div>
+          <div class="hero-stats-item"><div class="number">100%</div><div class="label">Трудоустройство</div></div>
+          <div class="hero-stats-item"><div class="number">2026</div><div class="label">Год инноваций</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">Наши специальности</h2>
+      <p class="section-subtitle fade-in delay-1">Выбери направление, которое соответствует твоим интересам и открывает двери в мир высоких технологий.</p>
+      <div class="cards-grid">
+        <div class="card fade-in delay-1"><div class="card-icon">🛡️</div><h3>Обеспечение информационной безопасности</h3><p>Защита данных и систем от киберугроз.</p><ul><li>IT-специалист</li><li>Специалист по защите информации</li><li>Монтажник оборудования связи</li></ul><span class="tag">Кибербезопасность</span></div>
+        <div class="card fade-in delay-2"><div class="card-icon">💻</div><h3>Информационные системы и программирование</h3><p>Разработка ПО, веб-приложений и мобильных решений.</p><ul><li>Программист</li><li>Разработчик веб-сайтов</li><li>Тестировщик ПО</li></ul><span class="tag">IT</span></div>
+        <div class="card fade-in delay-3"><div class="card-icon">🌐</div><h3>Сетевое и системное администрирование</h3><p>Построение и обслуживание компьютерных сетей.</p><ul><li>Специалист по глобальным сетям</li><li>Системный администратор</li><li>Техник по обслуживанию ВТ</li></ul><span class="tag">Сети</span></div>
+        <div class="card fade-in delay-4"><div class="card-icon">🤖</div><h3>Роботизированное производство</h3><p>Автоматизация, ЧПУ и промышленные роботы.</p><ul><li>Техник по автоматизации</li><li>Программист станков ЧПУ</li><li>Робототехник</li></ul><span class="tag">Робототехника</span></div>
+        <div class="card fade-in delay-5"><div class="card-icon">📊</div><h3>Экономика и бухгалтерский учет</h3><p>Финансовый менеджмент и бизнес-аналитика.</p><ul><li>Бухгалтер</li><li>Финансовый менеджер</li><li>Бизнес-аналитик</li></ul><span class="tag">Экономика</span></div>
+        <div class="card fade-in delay-2"><div class="card-icon">📱</div><h3>Реклама</h3><p>Креативные стратегии, дизайн и digital-маркетинг.</p><ul><li>Копирайтер</li><li>Бренд-менеджер</li><li>Креативный директор</li></ul><span class="tag">Маркетинг</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background-color:var(--color-bg-light);">
+    <div class="container about-grid">
+      <div class="about-text">
+        <h2>Почему выбирают ДТПА?</h2>
+        <p><strong>Донецкий техникум промышленной автоматики им. А.В. Захарченко</strong> — это современная образовательная площадка, где теория сочетается с передовой практикой.</p>
+        <p>Мы готовим специалистов, востребованных на рынке труда, используя новейшее оборудование и методики.</p>
+        <div class="about-features">
+          <div class="feature-item"><span class="icon">🧪</span> Лаборатории с ЧПУ</div>
+          <div class="feature-item"><span class="icon">📡</span> Киберполигон</div>
+          <div class="feature-item"><span class="icon">👨‍🏫</span> Преподаватели-практики</div>
+          <div class="feature-item"><span class="icon">🤝</span> Партнеры-работодатели</div>
+        </div>
+      </div>
+      <div class="about-image-placeholder">
+        <span style="font-size:4rem; opacity:0.3;">🏛️</span>
+        <span>Фотогалерея техникума</span>
+        <span style="font-size:0.85rem; opacity:0.6;">(интерактивный 3D-тур)</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== НОВОСТИ ==================== -->
+<div class="page" id="page-news">
+<div class="news-admin-tools" id="newsAdminTools" hidden>
+  <section class="vk-composer-card" aria-label="Создание публикации">
+    <div class="vk-composer-start">
+      <div class="news-composer-avatar" aria-hidden="true">🏛️</div>
+      <button type="button" id="newsComposePrompt" class="vk-composer-prompt">
+        <span>Что нового, администрация ДТПА?</span><span class="vk-prompt-arrow">✍️</span>
+      </button>
+    </div>
+    <form class="news-admin-form news-composer" id="newsAdminForm" hidden>
+      <div class="vk-composer-form-head">
+        <div class="news-composer-avatar" aria-hidden="true">🏛️</div>
+        <div><strong id="newsAdminFormTitle">Создать публикацию</strong><span>Публикация от имени администрации ДТПА</span></div>
+      </div>
+      <div class="news-admin-grid">
+        <div class="news-admin-field full">
+          <label for="newsPostTitle">Заголовок <span class="vk-muted">(необязательно)</span></label>
+          <input id="newsPostTitle" name="title" maxlength="150" placeholder="Добавьте заголовок публикации">
+        </div>
+        <div class="news-admin-field full">
+          <label for="newsPostSummary">Краткое описание <span class="vk-muted">(необязательно)</span></label>
+          <input id="newsPostSummary" name="summary" maxlength="240" placeholder="Коротко о главном — появится под заголовком">
+        </div>
+        <div class="news-admin-field full">
+          <label for="newsPostBody">Текст публикации *</label>
+          <div class="news-format-toolbar" role="toolbar" aria-label="Форматирование текста">
+            <button type="button" data-news-format="bold" title="Полужирный"><strong>Ж</strong></button>
+            <button type="button" data-news-format="italic" title="Курсив">К</button>
+            <button type="button" data-news-format="underline" title="Подчёркнутый"><u>Ч</u></button>
+            <button type="button" data-news-format="strike" title="Зачёркнутый"><del>А</del></button>
+            <span class="news-format-divider"></span>
+            <button type="button" data-news-format="list" title="Маркированный список">☷ Список</button>
+            <button type="button" data-news-format="quote" title="Цитата">❝ Цитата</button>
+            <button type="button" data-news-format="link" title="Вставить ссылку">🔗 Ссылка</button>
+          </div>
+          <textarea id="newsPostBody" name="body" maxlength="12000" required placeholder="Поделитесь новостью, расскажите о событии или объявлении…
+
+Разделяйте абзацы пустой строкой."></textarea>
+          <div class="news-editor-preview-controls"><button type="button" id="newsBodyPreviewToggle" class="news-inline-action" aria-expanded="false">Предпросмотр текста</button><span>Поддерживаются выделение текста, ссылки, цитаты и списки</span></div>
+          <div id="newsBodyPreview" class="news-body-preview" hidden></div>
+        </div>
+        <div class="news-admin-field full">
+          <label>Фотографии <span class="vk-muted">(до 6 изображений)</span></label>
+          <label class="news-upload-box" for="newsPostImageFile">
+            <span class="news-upload-icon">🖼️</span>
+            <span><strong>Прикрепить фотографии</strong><small>Можно выбрать сразу несколько JPG, PNG или WEBP. Фото сжимаются перед сохранением.</small></span>
+          </label>
+          <input id="newsPostImageFile" name="imageFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple class="news-file-input">
+          <label for="newsPostImage" class="vk-link-label">Или добавьте ссылку на изображение</label>
+          <input id="newsPostImage" name="imageUrl" type="url" placeholder="https://example.com/photo.jpg">
+          <div id="newsPostImagesPreview" class="news-images-preview" aria-label="Предпросмотр фотографий"></div>
+        </div>
+        <div class="news-admin-field full">
+          <label>Документы <span class="vk-muted">(до 4 файлов, каждый до 450 КБ)</span></label>
+          <label class="news-upload-box" for="newsPostAttachmentFiles">
+            <span class="news-upload-icon">📎</span>
+            <span><strong>Прикрепить PDF или документ</strong><small>PDF, DOC, DOCX, XLS, XLSX, ODT, ODS, TXT, CSV</small></span>
+          </label>
+          <input id="newsPostAttachmentFiles" name="attachments" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.odt,.ods,.txt,.csv,application/pdf" multiple class="news-file-input">
+          <div id="newsPostAttachmentsPreview" class="news-attachments-preview" aria-label="Прикреплённые документы"></div>
+        </div>
+        <div class="news-admin-field full">
+          <label for="newsPostScheduleAt">Отложенная публикация <span class="vk-muted">(необязательно)</span></label>
+          <input id="newsPostScheduleAt" name="scheduledAt" type="datetime-local">
+          <small class="news-field-hint">Если оставить поле пустым, запись выйдет сразу. В текущей версии планировщик работает на этом сайте в браузере; для гарантированной публикации при закрытом сайте нужен сервер.</small>
+        </div>
+        <div class="news-admin-field full news-editor-options">
+          <label class="news-option"><input id="newsPostPinned" name="isPinned" type="checkbox"><span><strong>📌 Закрепить публикацию</strong><small>Закреплённая запись будет находиться вверху общей ленты.</small></span></label>
+          <label class="news-option"><input id="newsPostNotifyStudents" name="notifyStudents" type="checkbox"><span><strong>🔔 Уведомить студентов</strong><small>Создать уведомление в этом браузере после выхода публикации.</small></span></label>
+        </div>
+      </div>
+      <div class="news-admin-actions">
+        <button type="submit" class="btn-cta" id="newsPostSaveBtn">Опубликовать</button>
+        <button type="button" class="news-admin-secondary" id="newsPostCancelBtn">Отмена</button>
+        <button type="button" class="news-admin-secondary news-draft-clear" id="newsDraftClearBtn">Очистить черновик</button>
+      </div>
+      <div class="news-draft-status" id="newsDraftStatus" aria-live="polite">Автосохранение включено</div>
+    </form>
+    <div class="news-admin-status" id="newsAdminStatus" role="status" aria-live="polite"></div>
+    <div class="vk-composer-foot"><span>📷 Фото</span></div>
+  </section>
+  <div class="news-history-modal" id="newsHistoryModal" hidden role="dialog" aria-modal="true" aria-labelledby="newsHistoryTitle">
+    <div class="news-history-dialog">
+      <div class="news-history-head"><h3 id="newsHistoryTitle">История изменений</h3><button type="button" data-news-history-close aria-label="Закрыть историю">×</button></div>
+      <div id="newsHistoryList" class="news-history-list"></div>
+    </div>
+  </div>
+</div>
+
+<div class="student-notifications container" id="studentNotifications">
+  <div class="student-notifications-bar">
+    <button type="button" id="studentNotificationsToggle" aria-expanded="false">🔔 Уведомления <span id="studentNotificationsCount" class="student-notification-count">0</span></button>
+    <button type="button" id="studentNotificationsMarkRead" class="student-notifications-mark-read">Отметить все как прочитанные</button>
+  </div>
+  <div id="studentNotificationsPanel" class="student-notifications-panel" hidden><div id="studentNotificationsList"></div></div>
+</div>
+
+  <section class="news-section">
+    <div class="container">
+      <div class="news-layout">
+        <main class="feed" id="feed">
+          <article class="post" data-category="announcement">
+            <div class="post-header">
+              <div class="post-avatar">🏛️</div>
+              <div class="post-meta">
+                <div class="post-author">ДТПА им. А.В. Захарченко <span class="post-verified">✓</span></div>
+                <div class="post-time">сегодня в 10:24</div>
+              </div>
+            </div>
+            <div class="post-content">🎓 <strong>Дорогие студенты, преподаватели и сотрудники!</strong><br><br>Поздравляем всех с началом нового учебного года!<br><br><span class="hashtag">#ДТПА</span> <span class="hashtag">#ДеньЗнаний</span> <span class="hashtag">#УчебныйГод2026</span></div>
+            <div class="post-media"><span class="media-emoji">🎓</span></div>
+          </article>
+          <article class="post" data-category="achievement">
+            <div class="post-header">
+              <div class="post-avatar green">🏆</div>
+              <div class="post-meta">
+                <div class="post-author">Студенческий совет ДТПА <span class="post-verified">✓</span></div>
+                <div class="post-time">вчера в 16:45</div>
+              </div>
+            </div>
+            <div class="post-content">🏆 Поздравляем наших студентов с победой на региональной олимпиаде по программированию!<br><br><span class="hashtag">#ДТПА</span> <span class="hashtag">#IT</span> <span class="hashtag">#Олимпиада</span></div>
+            <div class="post-media"><span class="media-emoji">🏆</span></div>
+          </article>
+          <article class="post" data-category="admission">
+            <div class="post-header">
+              <div class="post-avatar orange">📝</div>
+              <div class="post-meta">
+                <div class="post-author">Приёмная комиссия ДТПА</div>
+                <div class="post-time">12 сентября в 09:00</div>
+              </div>
+            </div>
+            <div class="post-content">📢 <strong>Внимание абитуриентов!</strong> Приёмная кампания 2026 продолжается.<br><br><span class="hashtag">#ДТПА</span> <span class="hashtag">#Поступление2026</span></div>
+          </article>
+          <article class="post" data-category="innovation">
+            <div class="post-header">
+              <div class="post-avatar teal">🚀</div>
+              <div class="post-meta">
+                <div class="post-author">IT-клуб ДТПА <span class="post-verified">✓</span></div>
+                <div class="post-time">10 сентября в 14:32</div>
+              </div>
+            </div>
+            <div class="post-content">🚀 В техникуме открыт новый <strong>киберполигон</strong>!<br><br><span class="hashtag">#ДТПА</span> <span class="hashtag">#Кибербезопасность</span> <span class="hashtag">#IT</span></div>
+            <div class="post-media"><span class="media-emoji">🛡️</span></div>
+          </article>
+          <article class="post" data-category="event">
+            <div class="post-header">
+              <div class="post-avatar red">📸</div>
+              <div class="post-meta">
+                <div class="post-author">Медиацентр ДТПА</div>
+                <div class="post-time">8 сентября в 18:15</div>
+              </div>
+            </div>
+            <div class="post-content">📸 <strong>Как прошёл День открытых дверей в ДТПА?</strong><br><br><span class="hashtag">#ДТПА</span> <span class="hashtag">#ДеньОткрытыхДверей</span></div>
+            <div class="post-media"><span class="media-emoji">📸</span></div>
+          </article>
+          <article class="post" data-category="partnership">
+            <div class="post-header">
+              <div class="post-avatar purple">🤝</div>
+              <div class="post-meta">
+                <div class="post-author">ДТПА им. А.В. Захарченко <span class="post-verified">✓</span></div>
+                <div class="post-time">5 сентября в 11:00</div>
+              </div>
+            </div>
+            <div class="post-content">🤝 <strong>Подписано соглашение о сотрудничестве с ведущими предприятиями!</strong><br><br><span class="hashtag">#ДТПА</span> <span class="hashtag">#Партнёрство</span></div>
+          </article>
+          <div class="load-more-wrapper"><button class="btn-cta" id="load-more">Показать ещё новости</button></div>
+        </main>
+</div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== СВЕДЕНИЯ ==================== -->
+<div class="page" id="page-info">
+  <section class="page-hero">
+    <div class="container">
+      <div class="hero-badge">📋 Официальный раздел</div>
+      <h1>Сведения об <span>образовательной организации</span></h1>
+      <p>Полная и достоверная информация о ДТПА им. А.В. Захарченко в соответствии с требованиями законодательства РФ</p>
+    </div>
+  </section>
+  <div class="subnav">
+    <div class="container">
+      <a href="#main-info" data-scroll>Основные сведения</a>
+      <a href="#structure" data-scroll>Структура и органы управления</a>
+      <a href="#info-documents" data-scroll>Документы</a>
+      <a href="#education" data-scroll>Образование</a>
+      <a href="#info-teachers" data-scroll>Руководство. Педагогический состав</a>
+      <a href="#info-contacts" data-scroll>Контакты</a>
+    </div>
+  </div>
+  <section class="info-section">
+    <div class="container">
+      <div class="info-layout">
+        <main>
+          <div class="content-block" id="main-info">
+            <h2><span class="block-icon">🏛️</span> Основные сведения</h2>
+            <div class="requisites-grid">
+              <div class="requisite-item"><div class="req-label">Полное наименование</div><div class="req-value">ГБПОУ «Донецкий техникум промышленной автоматики имени А.В. Захарченко»</div></div>
+              <div class="requisite-item"><div class="req-label">Сокращённое наименование</div><div class="req-value">ГБПОУ «ДТПА им. А.В. Захарченко»</div></div>
+              <div class="requisite-item"><div class="req-label">Дата создания</div><div class="req-value">1963 год</div></div>
+              <div class="requisite-item"><div class="req-label">Учредитель</div><div class="req-value">Министерство образования и науки ДНР</div></div>
+              <div class="requisite-item"><div class="req-label">Место нахождения</div><div class="req-value">г. Донецк, ул. ...</div></div>
+              <div class="requisite-item"><div class="req-label">Режим работы</div><div class="req-value">Пн–Пт: 8:00 – 17:00</div></div>
+              <div class="requisite-item"><div class="req-label">Телефон</div><div class="req-value">+7 (XXX) XXX-XX-XX</div></div>
+              <div class="requisite-item"><div class="req-label">Email</div><div class="req-value">info@dontpa.ru</div></div>
+            </div>
+            <h3>О техникуме</h3>
+            <p><strong>ДТПА им. А.В. Захарченко</strong> — современная образовательная площадка, где теория сочетается с передовой практикой.</p>
+          </div>
+          <div class="content-block" id="structure">
+            <h2><span class="block-icon">🏢</span> Структура и органы управления</h2>
+            <table class="info-table">
+              <thead><tr><th>Орган управления</th><th>ФИО руководителя</th><th>Должность</th></tr></thead>
+              <tbody>
+                <tr><td>Директор</td><td>Иванов И.И.</td><td>Директор техникума</td></tr>
+                <tr><td>Педагогический совет</td><td>Иванов И.И.</td><td>Председатель</td></tr>
+                <tr><td>Методический совет</td><td>Петрова М.А.</td><td>Заместитель директора по УМР</td></tr>
+                <tr><td>Студенческий совет</td><td>—</td><td>Выборный орган</td></tr>
+              </tbody>
+            </table>
+            <h3>Структурные подразделения</h3>
+            <ul>
+              <li>Учебно-методический отдел</li>
+              <li>Отделение информационных технологий</li>
+              <li>Отделение промышленной автоматики</li>
+              <li>Отделение экономики и права</li>
+              <li>Приёмная комиссия</li>
+              <li>Библиотека с электронным читальным залом</li>
+            </ul>
+          </div>
+          <div class="content-block" id="info-documents">
+            <h2><span class="block-icon">📄</span> Документы</h2>
+            <div class="doc-list">
+              <a href="#" class="doc-item"><span class="doc-icon">PDF</span><div class="doc-info"><div class="doc-title">Устав ГБПОУ «ДТПА им. А.В. Захарченко»</div><div class="doc-meta">PDF · 2.4 МБ · от 12.01.2024</div></div><span class="doc-download">⬇</span></a>
+              <a href="#" class="doc-item"><span class="doc-icon">PDF</span><div class="doc-info"><div class="doc-title">Лицензия на осуществление образовательной деятельности</div><div class="doc-meta">PDF · 1.1 МБ · от 15.03.2023</div></div><span class="doc-download">⬇</span></a>
+              <a href="#" class="doc-item"><span class="doc-icon">PDF</span><div class="doc-info"><div class="doc-title">Свидетельство о государственной аккредитации</div><div class="doc-meta">PDF · 890 КБ · от 20.04.2023</div></div><span class="doc-download">⬇</span></a>
+              <a href="#" class="doc-item"><span class="doc-icon">PDF</span><div class="doc-info"><div class="doc-title">Правила внутреннего распорядка обучающихся</div><div class="doc-meta">PDF · 620 КБ · от 01.09.2024</div></div><span class="doc-download">⬇</span></a>
+              <a href="#" class="doc-item"><span class="doc-icon docx">DOCX</span><div class="doc-info"><div class="doc-title">Отчёт о результатах самообследования за 2025 год</div><div class="doc-meta">DOCX · 1.8 МБ</div></div><span class="doc-download">⬇</span></a>
+              <a href="#" class="doc-item"><span class="doc-icon xlsx">XLSX</span><div class="doc-info"><div class="doc-title">План финансово-хозяйственной деятельности на 2026 год</div><div class="doc-meta">XLSX · 340 КБ</div></div><span class="doc-download">⬇</span></a>
+            </div>
+          </div>
+          <div class="content-block" id="education">
+            <h2><span class="block-icon">🎓</span> Образование</h2>
+            <table class="info-table">
+              <thead><tr><th>Код</th><th>Специальность</th><th>Квалификация</th><th>Форма</th></tr></thead>
+              <tbody>
+                <tr><td>10.02.05</td><td>Обеспечение информационной безопасности</td><td>Специалист по защите информации</td><td>Очная</td></tr>
+                <tr><td>09.02.07</td><td>Информационные системы и программирование</td><td>Программист</td><td>Очная</td></tr>
+                <tr><td>09.02.06</td><td>Сетевое и системное администрирование</td><td>Системный администратор</td><td>Очная</td></tr>
+                <tr><td>15.02.10</td><td>Мехатроника и робототехника</td><td>Техник-мехатроник</td><td>Очная</td></tr>
+                <tr><td>38.02.01</td><td>Экономика и бухгалтерский учёт</td><td>Бухгалтер</td><td>Очная, заочная</td></tr>
+                <tr><td>42.02.01</td><td>Реклама</td><td>Специалист по рекламе</td><td>Очная</td></tr>
+              </tbody>
+            </table>
+            <h3>Учебные лаборатории</h3>
+            <ul>
+              <li>Лаборатории с ЧПУ-оборудованием</li>
+              <li>Учебный киберполигон</li>
+              <li>Компьютерные классы</li>
+              <li>Лаборатория робототехники</li>
+            </ul>
+          </div>
+          <div class="content-block" id="info-teachers">
+            <h2><span class="block-icon">👨‍🏫</span> Руководство. Педагогический состав</h2>
+            <table class="info-table">
+              <thead><tr><th>Должность</th><th>ФИО</th><th>Контакты</th></tr></thead>
+              <tbody>
+                <tr><td>Директор</td><td>Иванов Иван Иванович</td><td>+7 (XXX) XXX-XX-XX<br>info@dontpa.ru</td></tr>
+                <tr><td>Заместитель директора по учебной работе</td><td>Петрова Мария Александровна</td><td>+7 (XXX) XXX-XX-XX</td></tr>
+                <tr><td>Заместитель директора по воспитательной работе</td><td>Сидорова Анна Михайловна</td><td>+7 (XXX) XXX-XX-XX</td></tr>
+                <tr><td>Заместитель директора по АХЧ</td><td>Кузнецов Дмитрий Владимирович</td><td>+7 (XXX) XXX-XX-XX</td></tr>
+              </tbody>
+            </table>
+            <h3>Педагогический состав</h3>
+            <p>Общая численность педагогических работников — <strong>48 человек</strong>:</p>
+            <ul>
+              <li>Высшая категория — 22</li>
+              <li>Первая категория — 18</li>
+              <li>Кандидаты наук — 5</li>
+              <li>Практики предприятий — 12</li>
+            </ul>
+          </div>
+          <div class="content-block" id="info-contacts">
+            <h2><span class="block-icon">📞</span> Контакты</h2>
+            <table class="info-table">
+              <tbody>
+                <tr><td>Адрес</td><td>г. Донецк, ул. ...</td></tr>
+                <tr><td>Телефон приёмной</td><td>+7 (XXX) XXX-XX-XX</td></tr>
+                <tr><td>Телефон приёмной комиссии</td><td>+7 (XXX) XXX-XX-XX</td></tr>
+                <tr><td>Email</td><td>info@dontpa.ru</td></tr>
+                <tr><td>Режим работы</td><td>Пн–Пт: 8:00 – 17:00</td></tr>
+              </tbody>
+            </table>
+            <div class="contact-banner">
+              <h3>📍 Приёмная комиссия</h3>
+              <div class="contact-banner-grid">
+                <div><strong>Адрес</strong>г. Донецк, ул. ..., каб. 101</div>
+                <div><strong>Телефон</strong>+7 (XXX) XXX-XX-XX</div>
+                <div><strong>Email</strong>priem@dontpa.ru</div>
+                <div><strong>Часы работы</strong>Пн–Пт: 9:00 – 16:00</div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Разделы</h3>
+            <nav>
+              <a href="#main-info" data-scroll class="active"><span class="nav-icon">🏛️</span> Основные сведения</a>
+              <a href="#structure" data-scroll><span class="nav-icon">🏢</span> Структура и управление</a>
+              <a href="#info-documents" data-scroll><span class="nav-icon">📄</span> Документы</a>
+              <a href="#education" data-scroll><span class="nav-icon">🎓</span> Образование</a>
+              <a href="#info-teachers" data-scroll><span class="nav-icon">👨‍🏫</span> Педсостав</a>
+              <a href="#info-contacts" data-scroll><span class="nav-icon">📞</span> Контакты</a>
+            </nav>
+          </div>
+          <div class="sidebar-card director-card">
+            <div class="director-avatar">👤</div>
+            <h3>👤 Директор техникума</h3>
+            <div class="director-position">Директор техникума</div>
+            <div class="director-contacts">📞 +7 (XXX) XXX-XX-XX<br>✉️ director@dontpa.ru</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== СТУДЕНТУ ==================== -->
+<div class="page" id="page-student">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Всё для <span>студентов ДТПА</span></h1>
+        <p>Расписание, электронные ресурсы, стипендии, практика и полезные материалы.</p>
+        <div class="hero-buttons"><a href="#schedule" class="btn-cta" data-scroll>Расписание</a></div>
+        <div class="hero-stats">
+          <div class="hero-stats-item"><div class="number">4</div><div class="label">Раздела</div></div>
+          <div class="hero-stats-item"><div class="number">48</div><div class="label">Преподавателей</div></div>
+          <div class="hero-stats-item"><div class="number">16</div><div class="label">Групп</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="schedule">
+    <div class="container">
+      <h2 class="section-title fade-in">📅 Расписание занятий</h2>
+      <p class="section-subtitle fade-in delay-1">Актуальное расписание на осенний семестр 2026/2027 учебного года.</p>
+      <div class="cards-grid fade-in delay-2" style="margin-bottom:40px;">
+        <div class="card"><div class="card-icon">🕐</div><h3>Смены и звонки</h3><p>Организация учебного процесса</p><ul><li>Первая смена: 8:00 — 13:20</li><li>Вторая смена: 13:30 — 18:50</li><li>Продолжительность пары — 1 ч 30 мин</li></ul><span class="tag">Учебный процесс</span></div>
+        <div class="card"><div class="card-icon">📋</div><h3>Все группы</h3><p>Расписание для всех 4 курсов</p><ul><li>1 курс — 4 группы</li><li>2 курс — 4 группы</li><li>3 курс — 4 группы</li><li>4 курс — 4 группы</li></ul><span class="tag">16 групп</span></div>
+        <div class="card"><div class="card-icon">📊</div><h3>График учебного процесса</h3><p>Полный график на 2026/2027</p><ul><li>Теоретическое обучение</li><li>Сессии и каникулы</li><li>Производственная практика</li></ul><span class="tag">Документ</span></div>
+      </div>
+      <div class="schedule-tabs fade-in delay-3">
+        <button class="schedule-tab active" data-course="1">1 курс</button>
+        <button class="schedule-tab" data-course="2">2 курс</button>
+        <button class="schedule-tab" data-course="3">3 курс</button>
+        <button class="schedule-tab" data-course="4">4 курс</button>
+      </div>
+      <div class="schedule-pane active" id="course-1">
+        <div class="schedule-grid">
+          <div class="schedule-group"><div class="schedule-group-header"><span class="group-name">🎓 ИСП-11</span><span class="group-specialty">Информационные системы</span></div><div class="schedule-group-body"><div class="schedule-day"><span class="schedule-day-name">ПН</span><span class="schedule-day-time">8:00 — 13:20</span><span class="schedule-day-subject">Математика, Информатика, Русский язык, История</span></div><div class="schedule-day"><span class="schedule-day-name">ВТ</span><span class="schedule-day-time">8:00 — 13:20</span><span class="schedule-day-subject">Физика, Программирование, Английский язык</span></div><div class="schedule-day off"><span class="schedule-day-name">СБ</span><span class="schedule-day-time">—</span><span class="schedule-day-subject">Выходной</span></div></div></div>
+          <div class="schedule-group"><div class="schedule-group-header"><span class="group-name">🎓 ИБ-11</span><span class="group-specialty">Информационная безопасность</span></div><div class="schedule-group-body"><div class="schedule-day"><span class="schedule-day-name">ПН</span><span class="schedule-day-time">8:00 — 13:20</span><span class="schedule-day-subject">Математика, Информатика, Русский язык</span></div><div class="schedule-day"><span class="schedule-day-name">ВТ</span><span class="schedule-day-time">8:00 — 13:20</span><span class="schedule-day-subject">Физика, Основы ИБ, Английский язык</span></div><div class="schedule-day off"><span class="schedule-day-name">СБ</span><span class="schedule-day-time">—</span><span class="schedule-day-subject">Выходной</span></div></div></div>
+        </div>
+      </div>
+      <div class="schedule-pane" id="course-2">
+        <div class="schedule-grid">
+          <div class="schedule-group"><div class="schedule-group-header"><span class="group-name">🎓 ИСП-21</span><span class="group-specialty">Информационные системы</span></div><div class="schedule-group-body"><div class="schedule-day"><span class="schedule-day-name">ПН</span><span class="schedule-day-time">8:00 — 13:20</span><span class="schedule-day-subject">ООП, Базы данных, Математика</span></div><div class="schedule-day"><span class="schedule-day-name">ВТ</span><span class="schedule-day-time">8:00 — 13:20</span><span class="schedule-day-subject">Web-разработка, ООП, Физкультура</span></div><div class="schedule-day off"><span class="schedule-day-name">СБ</span><span class="schedule-day-time">—</span><span class="schedule-day-subject">Выходной</span></div></div></div>
+        </div>
+      </div>
+      <div class="schedule-pane" id="course-3">
+        <div class="schedule-grid">
+          <div class="schedule-group"><div class="schedule-group-header"><span class="group-name">🎓 ИСП-31</span><span class="group-specialty">Информационные системы</span></div><div class="schedule-group-body"><div class="schedule-day"><span class="schedule-day-name">ПН</span><span class="schedule-day-time">13:30 — 18:50</span><span class="schedule-day-subject">Мобильная разработка, ПМ.01</span></div><div class="schedule-day"><span class="schedule-day-name">СР</span><span class="schedule-day-time">13:30 — 18:50</span><span class="schedule-day-subject">ПМ.01, Учебная практика</span></div><div class="schedule-day off"><span class="schedule-day-name">СБ</span><span class="schedule-day-time">—</span><span class="schedule-day-subject">Выходной</span></div></div></div>
+        </div>
+      </div>
+      <div class="schedule-pane" id="course-4">
+        <div class="schedule-grid">
+          <div class="schedule-group"><div class="schedule-group-header"><span class="group-name">🎓 ИСП-41</span><span class="group-specialty">Информационные системы</span></div><div class="schedule-group-body"><div class="schedule-day"><span class="schedule-day-name">ПН</span><span class="schedule-day-time">13:30 — 18:50</span><span class="schedule-day-subject">ПМ.05, Преддипломная практика</span></div><div class="schedule-day"><span class="schedule-day-name">ВТ</span><span class="schedule-day-time">13:30 — 18:50</span><span class="schedule-day-subject">ПМ.05, Дипломное проектирование</span></div><div class="schedule-day off"><span class="schedule-day-name">СБ</span><span class="schedule-day-time">—</span><span class="schedule-day-subject">Выходной</span></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background-color:var(--color-bg-light);" id="scholarship">
+    <div class="container">
+      <h2 class="section-title fade-in">💰 Стипендии и меры поддержки</h2>
+      <p class="section-subtitle fade-in delay-1">Студенты ДТПА могут получать различные виды стипендий и материальной поддержки.</p>
+      <div class="cards-grid">
+        <div class="card fade-in delay-1"><div class="card-icon">🎓</div><h3>Академическая стипендия</h3><p>Для студентов с хорошей и отличной успеваемостью</p><ul><li>Размер: от 2 000 ₽ / мес.</li><li>Назначается по итогам сессии</li></ul><span class="tag">Стипендия</span></div>
+        <div class="card fade-in delay-2"><div class="card-icon">⭐</div><h3>Повышенная академическая</h3><p>За особые успехи в учёбе</p><ul><li>Размер: от 3 500 ₽ / мес.</li><li>Отличная учёба</li></ul><span class="tag">Повышенная</span></div>
+        <div class="card fade-in delay-3"><div class="card-icon">🤝</div><h3>Социальная стипендия</h3><p>Для льготных категорий студентов</p><ul><li>Размер: от 2 500 ₽ / мес.</li><li>Дети-сироты</li></ul><span class="tag">Социальная</span></div>
+        <div class="card fade-in delay-4"><div class="card-icon">🏆</div><h3>Стипендия студсовета</h3><p>За активное участие в жизни техникума</p><ul><li>Размер: от 3 000 ₽ / мес.</li><li>Организация мероприятий</li></ul><span class="tag">Студсовет</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== АБИТУРИЕНТУ ==================== -->
+<div class="page" id="page-abiturient">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Поступи в <span>ДТПА</span> — начни карьеру в IT и промышленности</h1>
+        <p>Приёмная кампания 2026 года. Современные специальности, бесплатное обучение, гарантированное трудоустройство.</p>
+        <div class="hero-buttons">
+          <a href="#specialties" class="btn-cta" data-scroll>Выбрать специальность</a>
+          <a href="#" class="btn-cta btn-cta-secondary" data-page="submit">Подать документы онлайн</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stats-item"><div class="number">10+</div><div class="label">Специальностей</div></div>
+          <div class="hero-stats-item"><div class="number">100%</div><div class="label">Трудоустройство</div></div>
+          <div class="hero-stats-item"><div class="number">2026</div><div class="label">Год набора</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="specialties">
+    <div class="container">
+      <h2 class="section-title fade-in">🎓 Наши специальности</h2>
+      <p class="section-subtitle fade-in delay-1">Выбери направление, которое соответствует твоим интересам.</p>
+      <div class="cards-grid">
+        <div class="card fade-in delay-1"><div class="card-icon">🛡️</div><h3>Обеспечение информационной безопасности</h3><p>Защита данных и систем от киберугроз.</p><ul><li>IT-специалист</li><li>Специалист по защите информации</li></ul><span class="tag">Кибербезопасность</span></div>
+        <div class="card fade-in delay-2"><div class="card-icon">💻</div><h3>Информационные системы и программирование</h3><p>Разработка ПО, веб-приложений.</p><ul><li>Программист</li><li>Разработчик веб-сайтов</li></ul><span class="tag">IT</span></div>
+        <div class="card fade-in delay-3"><div class="card-icon">🌐</div><h3>Сетевое и системное администрирование</h3><p>Построение и обслуживание сетей.</p><ul><li>Системный администратор</li><li>Техник по обслуживанию ВТ</li></ul><span class="tag">Сети</span></div>
+        <div class="card fade-in delay-4"><div class="card-icon">🤖</div><h3>Роботизированное производство</h3><p>Автоматизация, ЧПУ и роботы.</p><ul><li>Техник по автоматизации</li><li>Программист станков ЧПУ</li></ul><span class="tag">Робототехника</span></div>
+        <div class="card fade-in delay-5"><div class="card-icon">📊</div><h3>Экономика и бухгалтерский учёт</h3><p>Финансовый менеджмент.</p><ul><li>Бухгалтер</li><li>Финансовый менеджер</li></ul><span class="tag">Экономика</span></div>
+        <div class="card fade-in delay-2"><div class="card-icon">📱</div><h3>Реклама</h3><p>Креативные стратегии и digital-маркетинг.</p><ul><li>Копирайтер</li><li>Бренд-менеджер</li></ul><span class="tag">Маркетинг</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background-color:var(--color-bg-light);" id="how-to-apply">
+    <div class="container">
+      <h2 class="section-title fade-in">📝 Как поступить в ДТПА</h2>
+      <p class="section-subtitle fade-in delay-1">Процесс поступления простой и понятный.</p>
+      <div class="steps-grid fade-in delay-2">
+        <div class="step-item"><div class="step-number">1</div><h3>Выбери специальность</h3><p>Изучи направления подготовки</p></div>
+        <div class="step-item"><div class="step-number">2</div><h3>Собери документы</h3><p>Паспорт, аттестат, СНИЛС, медсправка</p></div>
+        <div class="step-item"><div class="step-number">3</div><h3>Подай заявление</h3><p>Онлайн или лично в приёмной комиссии</p></div>
+        <div class="step-item"><div class="step-number">4</div><h3>Дождись зачисления</h3><p>Проверь списки и приступи к учёбе</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background-color:var(--color-bg-light);" id="faq">
+    <div class="container">
+      <h2 class="section-title fade-in">❓ Часто задаваемые вопросы</h2>
+      <p class="section-subtitle fade-in delay-1">Ответы на самые популярные вопросы.</p>
+      <div class="faq-list fade-in delay-2">
+        <div class="faq-item"><button class="faq-question">Можно ли подать документы онлайн?<span class="faq-icon">+</span></button><div class="faq-answer">Да, вы можете подать документы онлайн через специальную форму на сайте техникума.</div></div>
+        <div class="faq-item"><button class="faq-question">На базе каких классов можно поступить?<span class="faq-icon">+</span></button><div class="faq-answer">Техникум принимает выпускников 9 и 11 классов.</div></div>
+        <div class="faq-item"><button class="faq-question">Есть ли вступительные испытания?<span class="faq-icon">+</span></button><div class="faq-answer">На большинство специальностей вступительные испытания не требуются.</div></div>
+        <div class="faq-item"><button class="faq-question">Предоставляется ли общежитие?<span class="faq-icon">+</span></button><div class="faq-answer">Да, иногородним студентам предоставляется общежитие.</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== ПРОФЕССИОНАЛИТЕТ ==================== -->
+<div class="page" id="page-prof">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">🚀 Федеральный проект</div>
+        <h1>Программа <span>«Профессионалитет»</span></h1>
+        <p>Обучение по программам нового поколения с гарантированным трудоустройством на ведущих предприятиях региона.</p>
+        <div class="hero-buttons">
+          <a href="#clusters" class="btn-cta" data-scroll>Направления подготовки</a>
+          <a href="#" class="btn-cta btn-cta-secondary" data-page="submit">Подать документы</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stats-item"><div class="number">2</div><div class="label">Года обучения</div></div>
+          <div class="hero-stats-item"><div class="number">70%</div><div class="label">Практики</div></div>
+          <div class="hero-stats-item"><div class="number">100%</div><div class="label">Трудоустройство</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background-color:var(--color-bg-light);" id="clusters">
+    <div class="container">
+      <h2 class="section-title fade-in">🏭 Направления подготовки</h2>
+      <p class="section-subtitle fade-in delay-1">ДТПА реализует программы «Профессионалитета» в ключевых отраслях.</p>
+      <div class="cluster-grid">
+        <div class="cluster-card fade-in delay-1"><div class="cluster-header"><span class="cluster-icon">💻</span><h3>IT-кластер</h3><p>Цифровые технологии</p></div><div class="cluster-body"><ul><li>Информационные системы и программирование</li><li>Веб-разработка</li><li>Тестирование ПО</li><li>Работа с базами данных</li></ul><span class="cluster-tag">IT и цифра</span></div></div>
+        <div class="cluster-card fade-in delay-2"><div class="cluster-header"><span class="cluster-icon">🛡️</span><h3>Кибербезопасность</h3><p>Защита информации</p></div><div class="cluster-body"><ul><li>Обеспечение информационной безопасности</li><li>Криптографическая защита</li><li>Киберполигон и CTF</li><li>Аудит защищённости</li></ul><span class="cluster-tag">Кибербезопасность</span></div></div>
+        <div class="cluster-card fade-in delay-3"><div class="cluster-header"><span class="cluster-icon">⚙️</span><h3>Промышленный кластер</h3><p>Автоматизация и роботы</p></div><div class="cluster-body"><ul><li>Роботизированное производство</li><li>Автоматизация процессов</li><li>Программирование ЧПУ</li><li>Промышленные роботы</li></ul><span class="cluster-tag">Промышленность</span></div></div>
+        <div class="cluster-card fade-in delay-4"><div class="cluster-header"><span class="cluster-icon">🌐</span><h3>Сети и связь</h3><p>Компьютерные сети</p></div><div class="cluster-body"><ul><li>Сетевое администрирование</li><li>Локальные и глобальные сети</li><li>Монтаж оборудования связи</li><li>Облачные технологии</li></ul><span class="cluster-tag">Сети</span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== ГДЕ НАХОДИМСЯ ==================== -->
+<div class="page" id="page-location">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">📍 Наш адрес</div>
+        <h1>Где находится <span>ДТПА</span></h1>
+        <p>Донецкий техникум промышленной автоматики имени А.В. Захарченко расположен в центре города Донецка.</p>
+        <div class="hero-buttons">
+          <a href="#map" class="btn-cta" data-scroll>Посмотреть на карте</a>
+          <a href="#how-to-get" class="btn-cta btn-cta-secondary" data-scroll>Как добраться</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="map">
+    <div class="container">
+      <h2 class="section-title fade-in">🗺️ Расположение на карте</h2>
+      <p class="section-subtitle fade-in delay-1">Техникум находится в центральной части Донецка.</p>
+      <div class="map-wrapper fade-in delay-2">
+        <div class="map-placeholder-icon">🗺️</div>
+        <h3>Интерактивная карта ДТПА</h3>
+        <p>Здесь будет размещена интерактивная карта с точкой расположения техникума, ближайшими остановками и ориентирами.</p>
+        <a href="https://yandex.ru/profile/1273400244" class="btn-cta" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="how-to-get">
+    <div class="container">
+      <h2 class="section-title fade-in">🚌 Как добраться</h2>
+      <p class="section-subtitle fade-in delay-1">ДТПА удобно расположен — до техникума легко добраться.</p>
+      <div class="transport-grid">
+        <div class="transport-item fade-in delay-1"><div class="transport-icon">🚌</div><h3>Автобусом</h3><p>Маршруты № 1, 5, 12, 28 — остановка «Техникум промышленной автоматики».</p></div>
+        <div class="transport-item fade-in delay-2"><div class="transport-icon">🚋</div><h3>Трамваем / троллейбусом</h3><p>Трамвай № 3, троллейбус № 7 — остановка «Улица ...».</p></div>
+        <div class="transport-item fade-in delay-3"><div class="transport-icon">🚗</div><h3>На автомобиле</h3><p>Рядом с техникумом есть бесплатная парковка для студентов и гостей.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== КОНТАКТЫ ==================== -->
+<div class="page" id="page-contacts">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">📞 Контакты</div>
+        <h1>Контактные <span>данные</span></h1>
+        <p>Все способы связи с ДТПА: телефоны, email, адреса отделов и режим работы.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="contacts-list">
+    <div class="container">
+      <h2 class="section-title fade-in">📇 Общие контакты</h2>
+      <p class="section-subtitle fade-in delay-1">Основные способы связи с техникумом.</p>
+      <div class="contact-cards">
+        <div class="contact-card fade-in delay-1">
+          <div class="contact-card-head"><div class="contact-card-avatar">📞</div><div class="contact-card-title"><h3>Приёмная директора</h3><div class="role">Общие вопросы</div></div></div>
+          <div class="contact-card-body">
+            <a href="tel:+7XXXXXXXXXX" class="contact-line"><span class="ico">📱</span><span class="txt">+7 (XXX) XXX-XX-XX</span></a>
+            <a href="mailto:info@dontpa.ru" class="contact-line"><span class="ico">✉️</span><span class="txt">info@dontpa.ru</span></a>
+            <div class="contact-line"><span class="ico">🕐</span><span class="txt">Пн–Пт: 8:00 – 17:00</span></div>
+          </div>
+        </div>
+        <div class="contact-card fade-in delay-2">
+          <div class="contact-card-head"><div class="contact-card-avatar">📝</div><div class="contact-card-title"><h3>Приёмная комиссия</h3><div class="role">Поступление и документы</div></div></div>
+          <div class="contact-card-body">
+            <a href="tel:+7XXXXXXXXXX" class="contact-line"><span class="ico">📱</span><span class="txt">+7 (XXX) XXX-XX-XX</span></a>
+            <a href="mailto:priem@dontpa.ru" class="contact-line"><span class="ico">✉️</span><span class="txt">priem@dontpa.ru</span></a>
+            <div class="contact-line"><span class="ico">🕐</span><span class="txt">Пн–Пт: 9:00 – 17:00, Сб: 9:00 – 13:00</span></div>
+          </div>
+        </div>
+        <div class="contact-card fade-in delay-3">
+          <div class="contact-card-head"><div class="contact-card-avatar">🎓</div><div class="contact-card-title"><h3>Студенческий офис</h3><div class="role">Вопросы студентов</div></div></div>
+          <div class="contact-card-body">
+            <a href="tel:+7XXXXXXXXXX" class="contact-line"><span class="ico">📱</span><span class="txt">+7 (XXX) XXX-XX-XX</span></a>
+            <a href="mailto:student@dontpa.ru" class="contact-line"><span class="ico">✉️</span><span class="txt">student@dontpa.ru</span></a>
+            <div class="contact-line"><span class="ico">🕐</span><span class="txt">Пн–Пт: 9:00 – 16:00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== ПОДАТЬ ДОКУМЕНТЫ ==================== -->
+<div class="page" id="page-submit">
+  <section class="section documents-section">
+    <div class="container">
+      <h1 class="section-title">Подача документов</h1>
+      <p class="section-subtitle">Заполните форму и загрузите необходимые документы для поступления в ДТПА.</p>
+      <div class="steps">
+        <div class="step-item"><div class="step-number">1</div><h3>Заполните форму</h3><p>Укажите личные данные и информацию об образовании</p></div>
+        <div class="step-item"><div class="step-number">2</div><h3>Загрузите документы</h3><p>Прикрепите сканы или фото необходимых документов</p></div>
+        <div class="step-item"><div class="step-number">3</div><h3>Отправьте заявку</h3><p>Нажмите кнопку и дождитесь подтверждения</p></div>
+        <div class="step-item"><div class="step-number">4</div><h3>Ожидайте ответа</h3><p>Приёмная комиссия свяжется с вами в течение 3 дней</p></div>
+      </div>
+      <div class="documents-list">
+        <h2>📋 Необходимые документы</h2>
+        <ul>
+          <li>Паспорт (все заполненные страницы)</li>
+          <li>Аттестат об основном/среднем общем образовании</li>
+          <li>СНИЛС</li>
+          <li>Медицинская справка (форма 086/у)</li>
+          <li>Фотография 3×4 (2 шт.)</li>
+          <li>ИНН (при наличии)</li>
+          <li>Документы, подтверждающие льготы (при наличии)</li>
+          <li>Портфолио (по желанию)</li>
+        </ul>
+      </div>
+      <form class="doc-form" id="doc-form" enctype="multipart/form-data">
+        <h2>Форма подачи документов</h2>
+        <p class="form-note">Поля, отмеченные <span style="color:red;">*</span>, обязательны. Все файлы — PDF, JPG, PNG (макс. 5 МБ).</p>
+        <h3 style="color:var(--color-primary); margin:20px 0 10px; font-size:1.2rem;">1. Личные данные</h3>
+        <div class="form-grid">
+          <div class="form-group"><label>ФИО <span class="required">*</span></label><input type="text" name="fullname" required placeholder="Иванов Иван Иванович"></div>
+          <div class="form-group"><label>Дата рождения <span class="required">*</span></label><input type="date" name="birthdate" required></div>
+          <div class="form-group"><label>Пол <span class="required">*</span></label><select name="gender" required><option value="">-- Выберите --</option><option value="Мужской">Мужской</option><option value="Женский">Женский</option></select></div>
+          <div class="form-group"><label>Гражданство <span class="required">*</span></label><input type="text" name="citizenship" required value="Российская Федерация"></div>
+          <div class="form-group"><label>Серия и номер паспорта <span class="required">*</span></label><input type="text" name="passport" required placeholder="1234 567890"></div>
+          <div class="form-group"><label>Кем выдан <span class="required">*</span></label><input type="text" name="passport_issued" required></div>
+          <div class="form-group"><label>Дата выдачи <span class="required">*</span></label><input type="date" name="passport_date" required></div>
+          <div class="form-group"><label>СНИЛС <span class="required">*</span></label><input type="text" name="snils" required placeholder="123-456-789 00"></div>
+          <div class="form-group"><label>ИНН (при наличии)</label><input type="text" name="inn"></div>
+          <div class="form-group"><label>Адрес регистрации <span class="required">*</span></label><input type="text" name="address" required></div>
+          <div class="form-group"><label>Контактный телефон <span class="required">*</span></label><input type="tel" name="phone" required></div>
+          <div class="form-group"><label>Email <span class="required">*</span></label><input type="email" name="email" required></div>
+        </div>
+        <h3 style="color:var(--color-primary); margin:30px 0 10px; font-size:1.2rem;">2. Образование</h3>
+        <div class="form-grid">
+          <div class="form-group full-width"><label>Название учебного заведения <span class="required">*</span></label><input type="text" name="school" required></div>
+          <div class="form-group"><label>Год окончания <span class="required">*</span></label><input type="number" name="grad_year" required min="2020" max="2026"></div>
+          <div class="form-group"><label>Средний балл аттестата <span class="required">*</span></label><input type="number" name="avg_grade" required step="0.01" min="1" max="5"></div>
+          <div class="form-group"><label>Выбранная специальность <span class="required">*</span></label>
+            <select name="specialty" required>
+              <option value="">-- Выберите --</option>
+              <option>Обеспечение информационной безопасности</option>
+              <option>Информационные системы и программирование</option>
+              <option>Сетевое и системное администрирование</option>
+              <option>Роботизированное производство</option>
+              <option>Экономика и бухгалтерский учет</option>
+              <option>Реклама</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Форма обучения <span class="required">*</span></label><select name="education_form" required><option value="">-- Выберите --</option><option>Очная</option><option>Заочная</option></select></div>
+        </div>
+        <h3 style="color:var(--color-primary); margin:30px 0 10px; font-size:1.2rem;">3. Загрузка документов</h3>
+        <div class="form-grid">
+          <div class="form-group"><label>Паспорт <span class="required">*</span></label><input type="file" name="file_passport" accept=".pdf,.jpg,.png" required><span class="file-hint">Все заполненные страницы</span></div>
+          <div class="form-group"><label>Аттестат <span class="required">*</span></label><input type="file" name="file_attestat" accept=".pdf,.jpg,.png" required></div>
+          <div class="form-group"><label>СНИЛС <span class="required">*</span></label><input type="file" name="file_snils" accept=".pdf,.jpg,.png" required></div>
+          <div class="form-group"><label>Медицинская справка <span class="required">*</span></label><input type="file" name="file_medical" accept=".pdf,.jpg,.png" required></div>
+          <div class="form-group"><label>Фотография 3×4 <span class="required">*</span></label><input type="file" name="file_photo" accept=".jpg,.png" required></div>
+          <div class="form-group"><label>ИНН (при наличии)</label><input type="file" name="file_inn" accept=".pdf,.jpg,.png"></div>
+          <div class="form-group full-width"><label>Другие документы</label><input type="file" name="file_other" accept=".pdf,.jpg,.png" multiple></div>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="consent" name="consent" required>
+          <label for="consent">Я даю согласие на обработку персональных данных в соответствии с ФЗ №152 <span class="required">*</span></label>
+        </div>
+        <button type="submit" class="btn-cta">Отправить документы</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== РЕГИСТРАЦИЯ ==================== -->
+<div class="page" id="page-register">
+  <div class="split">
+    <aside class="split__left">
+      <div class="brand"><span class="brand__logo">🏛️</span><span>ДТПА им. А.В. Захарченко</span></div>
+      <h1 class="split__title">Начните обучение<br>вместе с нами</h1>
+      <p class="split__text">Создайте аккаунт за минуту и получите доступ к личному кабинету, расписанию и учебным материалам техникума.</p>
+      <ul class="features">
+        <li>Более 10 направлений подготовки</li>
+        <li>Доступ с любого устройства</li>
+        <li>Личный кабинет и поддержка</li>
+      </ul>
+    </aside>
+    <main class="split__right">
+      <div class="form-box">
+        <div id="register-view">
+          <h2 class="form-box__title">Регистрация</h2>
+          <p class="form-box__subtitle">Заполните данные, чтобы создать аккаунт</p>
+          <form action="#" method="post" id="registerForm">
+            <div class="row">
+              <div class="field"><label for="lastname">Фамилия</label><input type="text" id="lastname" name="lastname" placeholder="Иванов" required></div>
+              <div class="field"><label for="firstname">Имя</label><input type="text" id="firstname" name="firstname" placeholder="Иван" required></div>
+            </div>
+            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="ivan@example.com" required></div>
+            <div class="field"><label for="phone">Телефон</label><input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__"></div>
+            <div class="field"><label for="password">Пароль</label><input type="password" id="password" name="password" placeholder="Минимум 8 символов" required></div>
+            <div class="field"><label for="password2">Повторите пароль</label><input type="password" id="password2" name="password2" placeholder="Повторите пароль" required></div>
+            <label class="check"><input type="checkbox" name="agree" required><span>Я согласен с <a href="#">условиями использования</a> и <a href="#">политикой конфиденциальности</a></span></label>
+            <button type="submit" class="btn">Зарегистрироваться</button>
+          </form>
+          <div class="divider">или</div>
+          <p class="login-link">Уже есть аккаунт?<a href="#" id="show-login">Войти</a></p>
+        </div>
+        <div id="login-view" hidden>
+          <h2 class="form-box__title">Вход</h2>
+          <p class="form-box__subtitle">Войдите в свой аккаунт</p>
+          <form action="#" method="post" id="loginForm">
+            <div class="field"><label for="login-email">Email</label><input type="email" id="login-email" name="email" placeholder="ivan@example.com" required></div>
+            <div class="field"><label for="login-password">Пароль</label><input type="password" id="login-password" name="password" placeholder="Введите пароль" required></div>
+            <div class="forgot"><a href="#" id="show-forgot">Забыли пароль?</a></div>
+            <label class="check"><input type="checkbox" name="remember"><span>Запомнить меня</span></label>
+            <button type="submit" class="btn">Войти</button>
+          </form>
+          <div class="divider">или</div>
+          <p class="login-link">Нет аккаунта?<a href="#" id="show-register">Зарегистрироваться</a></p>
+        </div>
+        <div id="forgot-view" hidden>
+          <h2 class="form-box__title">Восстановление аккаунта</h2>
+          <p class="form-box__subtitle">Укажите телефон, привязанный к аккаунту — мы отправим код подтверждения</p>
+          <a href="#" class="back-link" id="back-to-login-1">← Вернуться ко входу</a>
+          <form id="phone-form" action="#" method="post">
+            <div class="field"><label for="recover-phone">Номер телефона</label><input type="tel" id="recover-phone" name="phone" placeholder="+7 (___) ___-__-__" required><div class="field__hint">На этот номер придёт push-уведомление с кодом</div></div>
+            <button type="submit" class="btn">Отправить код</button>
+          </form>
+        </div>
+        <div id="code-view" hidden>
+          <h2 class="form-box__title">Введите код</h2>
+          <p class="form-box__subtitle">Мы отправили 4-значный код на номер <strong id="code-phone">+7 (___) ___-__-__</strong></p>
+          <a href="#" class="back-link" id="back-to-phone">← Изменить номер</a>
+          <form id="code-form" action="#" method="post">
+            <div class="code-inputs">
+              <input type="text" inputmode="numeric" maxlength="1" id="d1" required>
+              <input type="text" inputmode="numeric" maxlength="1" id="d2" required>
+              <input type="text" inputmode="numeric" maxlength="1" id="d3" required>
+              <input type="text" inputmode="numeric" maxlength="1" id="d4" required>
+            </div>
+            <div class="field"><label for="new-password">Новый пароль</label><input type="password" id="new-password" placeholder="Минимум 8 символов" required></div>
+            <div class="field"><label for="new-password2">Повторите новый пароль</label><input type="password" id="new-password2" placeholder="Повторите пароль" required></div>
+            <button type="submit" class="btn">Восстановить аккаунт</button>
+            <button type="button" class="btn btn--ghost" id="resend-code">Отправить код повторно</button>
+          </form>
+        </div>
+        <div id="success-view" hidden class="success">
+          <div class="success__icon">✓</div>
+          <h2 class="success__title">Аккаунт восстановлен</h2>
+          <p class="success__text">Пароль успешно изменён. Теперь вы можете войти с новым паролем.</p>
+          <button type="button" class="btn" id="go-to-login">Перейти ко входу</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ==================== ФУТЕР ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">🏛️ ДТПА <span>им. А.В. Захарченко</span></div>
+        <p style="margin-top:12px; max-width:280px;">ГБПОУ «Донецкий техникум промышленной автоматики имени А.В. Захарченко»</p>
+        <p style="margin-top:8px;">© 2026 Все права защищены</p>
+      </div>
+      <div>
+        <h4>Абитуриенту</h4>
+        <a href="#" data-page="abiturient">Специальности</a>
+        <a href="#" data-page="abiturient">Как поступить</a>
+        <a href="#" data-page="abiturient">Документы</a>
+      </div>
+      <div>
+        <h4>Студенту</h4>
+        <a href="#" data-page="student">Расписание</a>
+        <a href="#" data-page="student">Стипендии</a>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <a href="tel:+7XXXXXXXXXX">+7 (XXX) XXX-XX-XX</a>
+        <a href="mailto:info@dontpa.ru">info@dontpa.ru</a>
+        <a href="#" data-page="location">г. Донецк, ул. ...</a>
+      </div>
+    </div>
+    <div class="footer-bottom">Официальный сайт Донецкого техникума промышленной автоматики им. А.В. Захарченко</div>
+  </div>
+</footer>
+
+</div><!-- /#publicSite -->
+
+<!-- Личный кабинет -->
+<div class="profile-overlay" id="profileOverlay" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+  <section class="profile-dialog">
+    <header class="profile-dialog__head">
+      <h2 id="profileTitle">👤 Личный кабинет</h2>
+      <button type="button" class="profile-dialog__close" id="profileClose" aria-label="Закрыть личный кабинет">Закрыть ✕</button>
+    </header>
+    <div class="profile-dialog__body" id="profileBody"></div>
+  </section>
+</div>
+
+<!-- ============================================================
+     СИСТЕМА УСПЕВАЕМОСТИ
+     ============================================================ -->
+<div id="perfApp" style="display:none;">
+
+<header class="header">
+  <div class="container">
+    <div class="logo">📊 ДТПА <span>Успеваемость</span></div>
+    <nav id="perfNav">
+      <ul class="nav-list">
+        <li><a href="#dashboard" data-scroll>📊 Дашборд</a></li>
+        <li><a href="#groups" data-scroll>Группы</a></li>
+        <li><a href="#teachers" data-scroll>Преподаватели</a></li>
+        <li><a href="#students" data-scroll>Студенты</a></li>
+        <li><a href="#" id="navClaimsLink">📩 Заявки<span id="claimsBadge" class="claims-badge" style="display:none;">0</span></a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="btn-back" onclick="showPublicSite()">← На сайт</button>
+      <button type="button" class="theme-toggle" aria-label="Переключить тему" title="Переключить тему"><span class="sphere"></span></button>
+      <div class="save-status" id="saveStatus" title="Данные хранятся в localStorage">
+        <span>💾</span><span id="saveStatusText">Сохранено</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="storage-warning" id="storageWarning">⚠️ <strong>Внимание:</strong> локальное хранилище недоступно. Изменения не сохранятся при перезагрузке.</div>
+
+<div id="mainApp">
+
+<section class="dashboard-section" id="dashboard">
+  <div class="container">
+    <div class="dashboard-header">
+      <div>
+        <h2 class="section-heading">📊 Дашборд</h2>
+        <p class="section-subheading">Обзор ключевых показателей успеваемости и посещаемости</p>
+      </div>
+      <button class="btn-refresh-dashboard" id="refreshDashboardBtn" type="button">🔄 Обновить</button>
+    </div>
+    <div class="dashboard-grid">
+      <div class="dash-card dash-card-primary"><div class="dash-icon">👥</div><div class="dash-body"><div class="dash-value" id="dashTotalStudents">0</div><div class="dash-label">Всего студентов</div></div></div>
+      <div class="dash-card dash-card-blue"><div class="dash-icon">🏫</div><div class="dash-body"><div class="dash-value" id="dashTotalGroups">0</div><div class="dash-label">Групп</div></div></div>
+      <div class="dash-card dash-card-purple"><div class="dash-icon">👨‍🏫</div><div class="dash-body"><div class="dash-value" id="dashTotalTeachers">0</div><div class="dash-label">Преподавателей</div></div></div>
+      <div class="dash-card dash-card-green"><div class="dash-icon">📈</div><div class="dash-body"><div class="dash-value" id="dashAvgGpa">0.00</div><div class="dash-label">Средний балл</div></div></div>
+      <div class="dash-card dash-card-orange"><div class="dash-icon">✅</div><div class="dash-body"><div class="dash-value" id="dashAvgAtt">0%</div><div class="dash-label">Посещаемость</div></div></div>
+      <div class="dash-card dash-card-red"><div class="dash-icon">📩</div><div class="dash-body"><div class="dash-value" id="dashClaims">0</div><div class="dash-label">Новых заявок</div></div></div>
+    </div>
+    <div class="dashboard-details">
+      <div class="dash-panel"><div class="dash-panel-head"><h3 class="dash-panel-title">🎯 Распределение студентов</h3><span class="dash-panel-badge">по уровням</span></div><div class="dash-dist" id="dashDistribution"></div></div>
+      <div class="dash-panel"><div class="dash-panel-head"><h3 class="dash-panel-title">🏆 Топ-5 групп</h3><span class="dash-panel-badge">по среднему баллу</span></div><div class="dash-top-groups" id="dashTopGroups"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="groups-section" id="groups">
+  <div class="container">
+    <h2 class="section-heading">🏫 Посещаемость по группам</h2>
+    <p class="section-subheading">40 групп по 10 специальностям. У каждой — свой электронный журнал, Excel-отчёт и семестровые оценки.</p>
+    <div class="groups-legend">
+      <span><i class="dot dot-excellent"></i>Отличники (5)</span>
+      <span><i class="dot dot-good"></i>Хорошисты (4)</span>
+      <span><i class="dot dot-average"></i>Успевают (3)</span>
+      <span><i class="dot dot-low"></i>Требуют внимания (2)</span>
+    </div>
+    <div class="groups-grid" id="groupsGrid"></div>
+  </div>
+</section>
+
+<section class="teachers-section" id="teachers">
+  <div class="container">
+    <div class="section-header-row">
+      <div>
+        <h2 class="section-heading">👨‍🏫 Преподаватели и администрация</h2>
+        <p class="section-subheading">Директор, заместители, методисты, заведующие отделениями и преподаватели.</p>
+      </div>
+      <button class="btn-add-student" id="addTeacherBtn" type="button">➕ Добавить преподавателя</button>
+    </div>
+    <div class="filters-row" style="margin-bottom:20px; max-width:680px;">
+      <div class="filter-control" style="grid-column:span 2;"><label for="teacherSearch">Поиск по имени</label><input type="text" id="teacherSearch" placeholder="Начните вводить фамилию..."></div>
+      <div class="filter-control"><label for="teacherRoleFilter">Должность</label>
+        <select id="teacherRoleFilter">
+          <option value="all">Все</option>
+          <option value="director">👑 Директор</option>
+          <option value="deputy">📚 Заместители директора</option>
+          <option value="head">🏢 Руководители</option>
+          <option value="methodist">📋 Методисты</option>
+          <option value="support">🤝 Специалисты</option>
+          <option value="ct">🎓 Классные руководители</option>
+          <option value="teacher">👨‍🏫 Преподаватели</option>
+        </select>
+      </div>
+    </div>
+    <div class="teachers-grid" id="teachersGrid"></div>
+  </div>
+</section>
+
+<section class="students-section" id="students">
+  <div class="container">
+    <div class="filters-panel">
+      <div class="course-tabs" id="courseTabs">
+        <button class="course-tab active" data-course="all">🎓 Все курсы</button>
+        <button class="course-tab" data-course="1">1 курс</button>
+        <button class="course-tab" data-course="2">2 курс</button>
+        <button class="course-tab" data-course="3">3 курс</button>
+        <button class="course-tab" data-course="4">4 курс</button>
+        <button class="btn-trash" id="trashBtn" type="button">🗑️ <span id="trashLabel">Корзина</span></button>
+        <button class="btn-excel" id="exportExcelBtn" type="button">📊 Excel (все)</button>
+        <button class="btn-add-student" id="addStudentBtn" type="button">➕ Добавить студента</button>
+      </div>
+      <div class="filters-row">
+        <div class="filter-control"><label for="groupFilter">Группа</label><div class="group-filter-wrap"><select id="groupFilter" style="flex:1;"><option value="all">Все группы</option></select><button class="btn-journal-quick" id="quickJournalBtn" type="button" disabled title="Открыть журнал">📖</button></div></div>
+        <div class="filter-control"><label for="searchInput">Поиск по имени</label><input type="text" id="searchInput" placeholder="Начните вводить фамилию..."></div>
+        <div class="filter-control"><label for="sortSelect">Сортировка</label><select id="sortSelect"><option value="gpa-desc">По среднему баллу ↓</option><option value="gpa-asc">По среднему баллу ↑</option><option value="name-asc">По алфавиту А–Я</option><option value="name-desc">По алфавиту Я–А</option><option value="attendance-desc">По посещаемости ↓</option></select></div>
+      </div>
+    </div>
+    <div class="students-grid" id="studentsGrid"></div>
+    <div class="pagination">
+      <button class="page-btn" id="prevPage" type="button">← Назад</button>
+      <span class="page-info" id="pageInfo">Страница 1 из 1</span>
+      <button class="page-btn" id="nextPage" type="button">Вперёд →</button>
+    </div>
+    <div class="results-info" id="resultsInfo"></div>
+  </div>
+</section>
+
+<!-- Модальное окно студента -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent">
+    <div class="modal-hero">
+      <div class="modal-avatar" id="modalAvatar">👤</div>
+      <div class="modal-hero-info"><h2 id="modalName">—</h2><p id="modalMeta">—</p></div>
+      <div class="modal-actions">
+        <button class="modal-action-btn claim" id="modalClaimBtn" title="Создать заявку">📩</button>
+        <button class="modal-action-btn transfer" id="modalTransferBtn" title="Перевести">🚚</button>
+        <button class="modal-action-btn danger" id="modalDeleteBtn" title="Удалить">🗑️</button>
+        <button class="modal-action-btn info" id="modalInfoBtn" title="Редактировать ФИО">📝</button>
+        <button class="modal-action-btn modal-reset-btn" id="modalResetBtn" title="Сбросить">🔄</button>
+        <button class="modal-action-btn modal-edit-btn" id="modalEditBtn" title="Оценки">✏️</button>
+        <button class="modal-action-btn modal-close" id="modalClose" title="Закрыть">×</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="edit-hint">💡 <strong>Режим редактирования.</strong> Клик по оценке → (2→3→4→5→2). <strong>×</strong> — удалить, <strong>+</strong> — добавить.</div>
+      <div class="modal-stats" id="modalStats"></div>
+      <h3 class="modal-section-title">📊 Распределение оценок</h3>
+      <div class="grade-chart" id="modalChart"></div>
+      <h3 class="modal-section-title" id="modalSubjectsTitle">📚 Оценки и посещаемость</h3>
+      <div class="table-scroll"><table class="grades-table"><thead><tr><th>Предмет</th><th>Оценки</th><th>Посещ.</th><th>Средний</th></tr></thead><tbody id="modalGradesBody"></tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<!-- Форма студента -->
+<div class="modal-overlay form-overlay" id="studentFormOverlay">
+  <div class="modal student-form-modal">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <h2 class="form-title" id="studentFormTitle" style="color:#fff;margin:0;">➕ Добавить студента</h2>
+      <div class="modal-actions"><button class="modal-action-btn modal-close" id="studentFormClose">×</button></div>
+    </div>
+    <div class="modal-body">
+      <form id="studentForm">
+        <div class="form-row">
+          <div class="form-group"><label for="formLn">Фамилия *</label><input type="text" id="formLn" required maxlength="50" autocomplete="off"></div>
+          <div class="form-group"><label for="formFn">Имя *</label><input type="text" id="formFn" required maxlength="50" autocomplete="off"></div>
+        </div>
+        <div class="form-group"><label for="formMn">Отчество</label><input type="text" id="formMn" maxlength="50" autocomplete="off"></div>
+        <div class="form-group"><label for="formGroup">Группа *</label><select id="formGroup" required></select></div>
+        <div class="form-group"><label>Пол</label>
+          <div class="gender-options">
+            <label class="gender-option"><input type="radio" name="formGender" value="m" checked><span>👨 Мужской</span></label>
+            <label class="gender-option"><input type="radio" name="formGender" value="f"><span>👩 Женский</span></label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-danger" id="formDeleteBtn" style="display:none;">🗑️ Удалить</button>
+          <button type="button" class="btn-secondary" id="formCancelBtn">Отмена</button>
+          <button type="submit" class="btn-primary">💾 Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Форма преподавателя -->
+<div class="modal-overlay form-overlay" id="teacherFormOverlay">
+  <div class="modal student-form-modal">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <h2 class="form-title" id="teacherFormTitle" style="color:#fff;margin:0;">➕ Добавить преподавателя</h2>
+      <div class="modal-actions"><button class="modal-action-btn modal-close" id="teacherFormClose">×</button></div>
+    </div>
+    <div class="modal-body">
+      <form id="teacherForm">
+        <div class="form-row">
+          <div class="form-group"><label for="tFormLn">Фамилия *</label><input type="text" id="tFormLn" required maxlength="50" autocomplete="off"></div>
+          <div class="form-group"><label for="tFormFn">Имя *</label><input type="text" id="tFormFn" required maxlength="50" autocomplete="off"></div>
+        </div>
+        <div class="form-group"><label for="tFormMn">Отчество</label><input type="text" id="tFormMn" maxlength="50" autocomplete="off"></div>
+        <div class="form-group"><label>Пол</label>
+          <div class="gender-options">
+            <label class="gender-option"><input type="radio" name="tFormGender" value="m" checked><span>👨 Мужской</span></label>
+            <label class="gender-option"><input type="radio" name="tFormGender" value="f"><span>👩 Женский</span></label>
+          </div>
+        </div>
+        <div class="form-group"><label for="tFormRole">Должность</label>
+          <select id="tFormRole">
+            <option value="teacher">👨‍🏫 Преподаватель</option>
+            <option value="director">👑 Директор</option>
+            <option value="deputy_uvr">📚 Заместитель директора по УВР</option>
+            <option value="deputy_vr">🎭 Заместитель директора по ВР</option>
+            <option value="deputy_ahr">🔧 Заместитель директора по АХР</option>
+            <option value="methodist">📋 Методист</option>
+            <option value="head_ck">🎯 Председатель ЦК</option>
+            <option value="head_dept">🏢 Заведующий отделением</option>
+            <option value="social">🤝 Социальный педагог</option>
+            <option value="psych">🧠 Педагог-психолог</option>
+            <option value="organizer">🎉 Педагог-организатор</option>
+            <option value="librarian">📖 Библиотекарь</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="tFormSubjects">Предметы (через запятую)</label><input type="text" id="tFormSubjects" placeholder="Математика, Информатика" autocomplete="off"></div>
+        <div class="form-actions">
+          <button type="button" class="btn-danger" id="teacherFormDeleteBtn" style="display:none;">🗑️ Удалить</button>
+          <button type="button" class="btn-secondary" id="teacherFormCancel">Отмена</button>
+          <button type="submit" class="btn-primary">💾 Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Корзина -->
+<div class="modal-overlay form-overlay" id="trashOverlay">
+  <div class="modal trash-modal">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <h2 class="form-title" style="color:#fff;margin:0;">🗑️ Корзина</h2>
+      <div class="modal-actions"><button class="modal-action-btn modal-close" id="trashClose">×</button></div>
+    </div>
+    <div class="modal-body">
+      <div style="margin-bottom:16px;font-size:0.88rem;opacity:0.8;">Удалённые студенты. Нажмите «Восстановить», чтобы вернуть.</div>
+      <div class="trash-list" id="trashList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Перевод -->
+<div class="modal-overlay form-overlay" id="transferOverlay">
+  <div class="modal transfer-modal">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <h2 class="form-title" style="color:#fff;margin:0;">🚚 Перевести студента</h2>
+      <div class="modal-actions"><button class="modal-action-btn modal-close" id="transferClose">×</button></div>
+    </div>
+    <div class="modal-body">
+      <div class="transfer-current-info">
+        <div><strong id="transferStudentName">—</strong></div>
+        <div style="margin-top:4px;">Текущая группа: <span class="transfer-accent" id="transferCurrentGroup">—</span></div>
+        <div class="transfer-hint" id="transferHint" style="display:none;">⚠️ Смена курса/специальности приведёт к перегенерации предметов и оценок.</div>
+      </div>
+      <div class="form-group"><label for="transferGroup">Новая группа *</label><select id="transferGroup"></select></div>
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" id="transferCancel">Отмена</button>
+        <button type="button" class="btn-primary" id="transferConfirm">🚚 Перевести</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Журнал -->
+<div class="modal-overlay journal-overlay" id="journalOverlay">
+  <div class="modal journal-modal">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <div style="flex:1;">
+        <h2 class="form-title" id="journalTitle" style="color:#fff;margin:0 0 4px;">📖 Электронный журнал</h2>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.85rem;" id="journalSubtitle">—</p>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-action-btn excel" id="journalExcelBtn" title="Скачать журнал в Excel">📊</button>
+        <button class="modal-action-btn modal-edit-btn" id="journalEditBtn" title="Редактировать оценки">✏️</button>
+        <button class="modal-action-btn modal-close" id="journalClose">×</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="journal-semester-tabs" id="journalSemesterTabs">
+        <button class="journal-sem-tab active" data-sem="all" type="button">📋 Все оценки</button>
+        <button class="journal-sem-tab" data-sem="1" type="button">1️⃣ Семестр 1</button>
+        <button class="journal-sem-tab" data-sem="2" type="button">2️⃣ Семестр 2</button>
+        <button class="journal-sem-tab" data-sem="year" type="button">🎓 Год</button>
+      </div>
+      <div class="journal-info" id="journalInfo"></div>
+      <div class="journal-table-wrap"><table class="journal-table" id="journalTable"></table></div>
+    </div>
+  </div>
+</div>
+
+<!-- Выбор преподавателя -->
+<div class="modal-overlay form-overlay" id="pickerOverlay">
+  <div class="modal picker-modal">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <h2 class="form-title" id="pickerTitle" style="color:#fff;margin:0;">Выбрать преподавателя</h2>
+      <div class="modal-actions"><button class="modal-action-btn modal-close" id="pickerClose">×</button></div>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="picker-search" id="pickerSearch" placeholder="Поиск по ФИО...">
+      <div class="picker-list" id="pickerList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Форма заявки -->
+<div class="modal-overlay form-overlay" id="claimFormOverlay">
+  <div class="modal student-form-modal">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <h2 class="form-title" id="claimFormTitle" style="color:#fff;margin:0;">📩 Новая заявка</h2>
+      <div class="modal-actions"><button class="modal-action-btn modal-close" id="claimFormClose">×</button></div>
+    </div>
+    <div class="modal-body">
+      <div id="claimStudentInfo" style="margin-bottom:16px;padding:10px 14px;background:var(--color-bg-light);border-radius:10px;font-size:0.9rem;display:none;"></div>
+      <form id="claimForm">
+        <div class="form-group"><label for="claimType">Тип заявки</label>
+          <select id="claimType">
+            <option value="transfer">🚚 Перевод в другую группу</option>
+            <option value="resit">📝 Пересдать предмет</option>
+            <option value="question">❓ Вопрос по оценке</option>
+            <option value="other">📌 Другое</option>
+          </select>
+        </div>
+        <div class="claim-conditional" id="claimResitFields" style="display:none;">
+          <div class="form-group"><label for="claimSubject">📚 Предмет для пересдачи</label><select id="claimSubject"></select></div>
+          <div class="form-group"><label for="claimTeacher">👨‍🏫 Преподаватель</label><select id="claimTeacher"></select><div id="claimTeacherHint" style="font-size:0.72rem;opacity:0.7;margin-top:4px;display:none;"></div></div>
+        </div>
+        <div class="claim-conditional" id="claimTransferFields" style="display:none;">
+          <div class="form-group"><label for="claimTargetGroup">🏫 Группа для перевода</label><select id="claimTargetGroup"></select><div class="claim-group-info" id="claimTargetGroupInfo"></div></div>
+        </div>
+        <div class="form-group"><label for="claimText">Текст заявки *</label><textarea id="claimText" required maxlength="1000" rows="5"></textarea></div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="claimCancelBtn">Отмена</button>
+          <button type="submit" class="btn-primary">📤 Отправить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Список заявок (админ-просмотр) -->
+<div class="modal-overlay form-overlay" id="claimsAdminOverlay">
+  <div class="modal trash-modal" style="max-width:680px;">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <h2 class="form-title" style="color:#fff;margin:0;">📩 Заявки</h2>
+      <div class="modal-actions"><button class="modal-action-btn modal-close" id="claimsAdminClose">×</button></div>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap;">
+        <div style="font-size:0.88rem;opacity:0.8;" id="claimsStats"></div>
+        <button class="btn-primary" id="claimsAdminNewBtn" type="button" style="padding:8px 14px;font-size:0.85rem;">➕ Создать заявку</button>
+      </div>
+      <div class="trash-list" id="claimsAdminList"></div>
+      <div style="margin-top:16px;text-align:center;">
+        <button class="btn-primary" id="openFullAdminBtn" type="button" style="padding:10px 20px;font-size:0.88rem;">🔐 Открыть полную админ-панель</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#mainApp -->
+
+<div id="adminApp" class="admin-app" style="display:none;">
+  <div class="container">
+    <div class="stats-grid" id="adminStatsGrid"></div>
+    <div class="controls-row">
+      <div class="status-tabs" id="adminStatusTabs">
+        <button class="status-tab active" data-status="all">Все</button>
+        <button class="status-tab" data-status="new">🆕 Новые</button>
+        <button class="status-tab" data-status="in_progress">⚙️ В работе</button>
+        <button class="status-tab" data-status="done">✅ Решённые</button>
+        <button class="status-tab" data-status="rejected">❌ Отклонённые</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <button class="admin-new-btn" id="adminNewClaimBtn" type="button">➕ Создать заявку</button>
+        <button class="btn-export" id="adminExportBtn" type="button">📊 Экспорт в Excel</button>
+        <button class="btn-refresh" id="adminRefreshBtn" type="button">🔄 Обновить</button>
+      </div>
+    </div>
+    <div class="filters-row">
+      <div class="filter-control"><label for="adminSearchInput">Поиск</label><input type="text" id="adminSearchInput" placeholder="ФИО, группа или текст..."></div>
+      <div class="filter-control"><label for="adminTypeFilter">Тип</label><select id="adminTypeFilter"><option value="all">Все типы</option><option value="transfer">🚚 Перевод</option><option value="resit">📝 Пересдача</option><option value="question">❓ Вопрос</option><option value="other">📌 Другое</option></select></div>
+      <div class="filter-control"><label for="adminGroupFilter">Группа</label><select id="adminGroupFilter"><option value="all">Все группы</option></select></div>
+      <div class="filter-control"><label for="adminSortSelect">Сортировка</label><select id="adminSortSelect"><option value="date-desc">Сначала новые</option><option value="date-asc">Сначала старые</option><option value="status">По статусу</option></select></div>
+    </div>
+    <div class="bulk-actions" id="adminBulkActions" style="display:none;">
+      <span class="bulk-info" id="adminBulkInfo">Выбрано: 0</span>
+      <button class="bulk-btn" data-action="done" style="background:#2E8B2E;" type="button">✅ Решены</button>
+      <button class="bulk-btn" data-action="rejected" style="background:#E64646;" type="button">❌ Отклонить</button>
+      <button class="bulk-btn" data-action="delete" style="background:#666;" type="button">🗑 Удалить</button>
+      <button class="bulk-btn" data-action="clear" style="background:#888;" type="button">✕ Снять выбор</button>
+    </div>
+    <div class="claims-list" id="adminClaimsList"></div>
+    <div class="results-info" id="adminResultsInfo"></div>
+
+    <section class="registered-users-panel" id="registeredUsersPanel" aria-labelledby="registeredUsersTitle">
+      <div class="registered-users-head">
+        <div>
+          <h2 id="registeredUsersTitle">👥 Зарегистрированные пользователи</h2>
+          <p class="registered-users-note">Данные регистрации, сохранённые в локальном хранилище этого браузера.</p>
+          <div id="registeredUsersSummary" class="registered-users-summary">Загрузка списка…</div>
+        </div>
+        <div class="registered-users-actions">
+          <button type="button" class="btn-refresh" id="refreshRegisteredUsersBtn">🔄 Обновить список</button>
+          <button type="button" class="btn-export" id="exportRegisteredUsersBtn">⬇️ Экспорт CSV</button>
+        </div>
+      </div>
+      <div class="registered-users-search">
+        <label for="registeredUsersSearch">Поиск по ФИО, email, телефону или группе</label>
+        <input type="search" id="registeredUsersSearch" placeholder="Начните вводить данные…" autocomplete="off">
+      </div>
+      <div class="registered-users-table-wrap">
+        <table class="info-table registered-users-table">
+          <thead><tr><th>№</th><th>ФИО</th><th>Email</th><th>Телефон</th><th>Роль</th><th>Группа</th><th>Дата регистрации</th><th>Действия</th></tr></thead>
+          <tbody id="registeredUsersBody"></tbody>
+        </table>
+      </div>
+      <p id="registeredUsersEmpty" class="registered-users-empty" hidden>Пока нет зарегистрированных аккаунтов в хранилище этого браузера.</p>
+      <p class="registered-users-privacy">Пароли не отображаются и не экспортируются. Для сбора регистраций от посетителей сайта с разных устройств потребуется сервер и база данных.</p>
+    </section>
+  </div>
+</div>
+
+<!-- Модалка пароля -->
+<div class="modal-overlay password-overlay" id="passwordOverlay">
+  <div class="modal student-form-modal" style="max-width:440px;">
+    <div class="modal-hero" style="padding:22px 28px;">
+      <h2 class="form-title" style="color:#fff;margin:0;">🔐 Вход в админ-панель</h2>
+      <div class="modal-actions"><button class="modal-action-btn modal-close" id="passwordClose">×</button></div>
+    </div>
+    <div class="modal-body" style="padding:28px;">
+      <p style="margin-bottom:18px;font-size:0.9rem;opacity:0.8;">Введите пароль администратора для доступа к панели заявок.</p>
+      <form id="passwordForm">
+        <div class="form-group"><label for="passwordInput">Пароль</label><input type="password" id="passwordInput" required autocomplete="current-password" placeholder="••••••••" maxlength="50"></div>
+        <div class="pass-error" id="passwordError">❌ Неверный пароль</div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="passwordCancel">Отмена</button>
+          <button type="submit" class="btn-primary">🔓 Войти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#perfApp -->
+
+<!-- Общая область push-уведомлений -->
+<div class="push-area" id="push-area"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html> 
