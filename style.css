@@ -1,4 +1,3 @@
-
 /* ============================================================
    БАЗА (общая)
    ============================================================ */
@@ -3846,6 +3845,16 @@ a:hover{color:var(--accent-hover)}
   .attendance-period-bar input { flex:1 1 130px; min-width:0; }
 }
 /* Paper-register treatment adapted from the supplied journal prototype. */
+#perfApp #attendanceJournal .attendance-journal-card {
+  width:calc(100% - 80px);
+  max-width:1280px;
+  margin-right:auto;
+  margin-left:auto;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:transparent;
+}
 #attendanceJournal .attendance-journal-body {
   padding:clamp(14px,2.4vw,30px);
   background:#c9c2b4;
@@ -4211,12 +4220,14 @@ a:hover{color:var(--accent-hover)}
 #attendanceJournal #attendanceJournalContent .journal-legend .mark.e { color:#3e579d; background:#fffdf5; }
 #attendanceJournal #attendanceJournalContent .journal-legend .hint { margin-left:auto; color:#7a5535; font-style:italic; }
 @media(max-width:900px) {
+  #perfApp #attendanceJournal .attendance-journal-card { width:calc(100% - 40px); }
   #attendanceJournal #attendanceJournalContent .attendance-register::before { display:none; }
   #attendanceJournal #attendanceJournalContent .journal-head { padding:16px; }
   #attendanceJournal #attendanceJournalContent .attendance-register-access { padding-left:16px; }
   #attendanceJournal #attendanceJournalContent .journal-legend { padding-left:16px; }
 }
 @media(max-width:680px) {
+  #perfApp #attendanceJournal .attendance-journal-card { width:calc(100% - 32px); }
   #attendanceJournal .attendance-journal-toolbar { align-items:stretch; }
   #attendanceJournal .attendance-journal-toolbar .filter-control { flex:1 1 100%; }
   #attendanceJournal .attendance-journal-toolbar select,
