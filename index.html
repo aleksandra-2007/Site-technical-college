@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ДТПА им. А.В. Захарченко</title>
+    <title> ГБПОУ "Донецкий техникум промышленной автоматики имени А. В. Захарченко"ДТПА</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
@@ -12,10 +12,10 @@
      ПУБЛИЧНЫЙ САЙТ
      ============================================================ -->
 <div id="publicSite">
-
 <header class="header">
   <div class="container">
-    <div class="logo">🏛️ ДТПА <span>им. А.В. Захарченко</span></div>
+    <div class="logo">🏛️ГБПОУ "Донецкий техникум промышленной автоматики <span>им. А.В. Захарченко</span></div>
+    <button type="button" class="mobile-nav-toggle" data-nav-toggle aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню"><span aria-hidden="true">☰</span><span class="mobile-nav-toggle-label">Меню</span></button>
     <nav>
       <ul class="nav-list" id="mainNav">
         <li><a href="#" data-page="home">Главная</a></li>
@@ -33,11 +33,9 @@
       <button type="button" class="user-status" data-user-status aria-label="Открыть личный кабинет" title="Войти или зарегистрироваться"><span class="user-status__icon">👤</span><span class="user-status__label">Войти</span></button>
       <button type="button" class="btn-perf" onclick="showPerfApp()">📊 Успеваемость</button>
       <a href="#" data-page="register" class="btn-cta">Регистрация</a>
-      <a href="#" data-page="submit" class="btn-cta">Подать документы</a>
     </div>
   </div>
 </header>
-
 <!-- ==================== ГЛАВНАЯ ==================== -->
 <div class="page active" id="page-home">
   <section class="hero">
@@ -57,7 +55,6 @@
       </div>
     </div>
   </section>
-
   <section class="section">
     <div class="container">
       <h2 class="section-title fade-in">Наши специальности</h2>
@@ -72,7 +69,6 @@
       </div>
     </div>
   </section>
-
   <section class="section" style="background-color:var(--color-bg-light);">
     <div class="container about-grid">
       <div class="about-text">
@@ -94,88 +90,99 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== НОВОСТИ ==================== -->
 <div class="page" id="page-news">
 <div class="news-admin-tools" id="newsAdminTools" hidden>
-  <section class="vk-composer-card" aria-label="Создание публикации">
-    <div class="vk-composer-start">
+  <section class="composer news-publication-composer" id="newsPublicationComposer" aria-label="Создание публикации">
+    <div class="composer-start">
       <div class="news-composer-avatar" aria-hidden="true">🏛️</div>
-      <button type="button" id="newsComposePrompt" class="vk-composer-prompt">
-        <span>Что нового, администрация ДТПА?</span><span class="vk-prompt-arrow">✍️</span>
+      <button type="button" id="newsComposePrompt" class="composer-prompt">
+        <span>Что нового, администрация ДТПА?</span><span class="composer-prompt-arrow" aria-hidden="true">✍️</span>
       </button>
     </div>
-    <form class="news-admin-form news-composer" id="newsAdminForm" hidden>
-      <div class="vk-composer-form-head">
+    <form class="news-admin-form composer-body" id="newsAdminForm" hidden>
+      <div class="composer-head">
         <div class="news-composer-avatar" aria-hidden="true">🏛️</div>
-        <div><strong id="newsAdminFormTitle">Создать публикацию</strong><span>Публикация от имени администрации ДТПА</span></div>
+        <div class="composer-author-info">
+          <strong class="composer-author-name"><span id="newsAdminFormTitle">Создать публикацию</span><span class="composer-verified" aria-label="Подтверждённая страница">✓</span></strong>
+          <span class="composer-author-meta">Публичная страница · администрация ДТПА</span>
+        </div>
       </div>
       <div class="news-admin-grid">
         <div class="news-admin-field full">
-          <label for="newsPostTitle">Заголовок <span class="vk-muted">(необязательно)</span></label>
-          <input id="newsPostTitle" name="title" maxlength="150" placeholder="Добавьте заголовок публикации">
-        </div>
-        <div class="news-admin-field full">
-          <label for="newsPostSummary">Краткое описание <span class="vk-muted">(необязательно)</span></label>
-          <input id="newsPostSummary" name="summary" maxlength="240" placeholder="Коротко о главном — появится под заголовком">
-        </div>
-        <div class="news-admin-field full">
           <label for="newsPostBody">Текст публикации *</label>
+          <div class="composer-input-wrap">
+            <textarea id="newsPostBody" name="body" maxlength="12000" rows="3" required placeholder="Поделитесь новостью, событием или объявлением…"></textarea>
+          </div>
           <div class="news-format-toolbar" role="toolbar" aria-label="Форматирование текста">
             <button type="button" data-news-format="bold" title="Полужирный"><strong>Ж</strong></button>
-            <button type="button" data-news-format="italic" title="Курсив">К</button>
+            <button type="button" data-news-format="italic" title="Курсив"><em>К</em></button>
             <button type="button" data-news-format="underline" title="Подчёркнутый"><u>Ч</u></button>
             <button type="button" data-news-format="strike" title="Зачёркнутый"><del>А</del></button>
             <span class="news-format-divider"></span>
             <button type="button" data-news-format="list" title="Маркированный список">☷ Список</button>
             <button type="button" data-news-format="quote" title="Цитата">❝ Цитата</button>
             <button type="button" data-news-format="link" title="Вставить ссылку">🔗 Ссылка</button>
+            <span class="news-format-divider"></span>
+            <button type="button" id="newsEmojiToggle" aria-expanded="false" aria-controls="newsEmojiPicker" title="Добавить эмодзи">😊</button>
           </div>
-          <textarea id="newsPostBody" name="body" maxlength="12000" required placeholder="Поделитесь новостью, расскажите о событии или объявлении…
-
-Разделяйте абзацы пустой строкой."></textarea>
+          <div class="news-emoji-picker" id="newsEmojiPicker" hidden aria-label="Выберите эмодзи">
+            <button type="button" data-news-emoji="😀">😀</button><button type="button" data-news-emoji="😊">😊</button><button type="button" data-news-emoji="🎓">🎓</button><button type="button" data-news-emoji="📚">📚</button><button type="button" data-news-emoji="📢">📢</button><button type="button" data-news-emoji="📅">📅</button><button type="button" data-news-emoji="🏛️">🏛️</button><button type="button" data-news-emoji="🏆">🏆</button><button type="button" data-news-emoji="✨">✨</button><button type="button" data-news-emoji="✅">✅</button><button type="button" data-news-emoji="❤️">❤️</button><button type="button" data-news-emoji="👏">👏</button>
+          </div>
           <div class="news-editor-preview-controls"><button type="button" id="newsBodyPreviewToggle" class="news-inline-action" aria-expanded="false">Предпросмотр текста</button><span>Поддерживаются выделение текста, ссылки, цитаты и списки</span></div>
           <div id="newsBodyPreview" class="news-body-preview" hidden></div>
+          <div class="composer-editor-meta"><span id="newsBodyCharCount">0 / 12000</span><span class="news-draft-status" id="newsDraftStatus" aria-live="polite">Автосохранение включено</span></div>
         </div>
-        <div class="news-admin-field full">
+        <details class="news-admin-field full composer-advanced" id="newsAdvancedFields">
+          <summary>Дополнительные параметры публикации</summary>
+          <div class="news-admin-grid">
+            <div class="news-admin-field full">
+              <label for="newsPostTitle">Заголовок <span class="vk-muted">(необязательно)</span></label>
+              <input id="newsPostTitle" name="title" maxlength="150" placeholder="Добавьте заголовок публикации">
+            </div>
+            <div class="news-admin-field full">
+              <label for="newsPostSummary">Краткое описание <span class="vk-muted">(необязательно)</span></label>
+              <input id="newsPostSummary" name="summary" maxlength="240" placeholder="Коротко о главном — появится под заголовком">
+            </div>
+            <div class="news-admin-field full">
+              <label for="newsPostImage">Ссылка на изображение <span class="vk-muted">(необязательно)</span></label>
+              <input id="newsPostImage" name="imageUrl" type="url" placeholder="https://example.com/photo.jpg">
+            </div>
+            <div class="news-admin-field full">
+              <label for="newsPostScheduleAt">Отложенная публикация <span class="vk-muted">(необязательно)</span></label>
+              <input id="newsPostScheduleAt" name="scheduledAt" type="datetime-local">
+              <small class="news-field-hint">Если оставить поле пустым, запись выйдет сразу. Планировщик работает в этом браузере; для публикации при закрытом сайте нужен сервер.</small>
+            </div>
+          </div>
+        </details>
+        <div class="news-admin-field full composer-images-field">
           <label>Фотографии <span class="vk-muted">(до 6 изображений)</span></label>
-          <label class="news-upload-box" for="newsPostImageFile">
-            <span class="news-upload-icon">🖼️</span>
-            <span><strong>Прикрепить фотографии</strong><small>Можно выбрать сразу несколько JPG, PNG или WEBP. Фото сжимаются перед сохранением.</small></span>
-          </label>
           <input id="newsPostImageFile" name="imageFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple class="news-file-input">
-          <label for="newsPostImage" class="vk-link-label">Или добавьте ссылку на изображение</label>
-          <input id="newsPostImage" name="imageUrl" type="url" placeholder="https://example.com/photo.jpg">
           <div id="newsPostImagesPreview" class="news-images-preview" aria-label="Предпросмотр фотографий"></div>
         </div>
-        <div class="news-admin-field full">
+        <div class="news-admin-field full composer-documents-field">
           <label>Документы <span class="vk-muted">(до 4 файлов, каждый до 450 КБ)</span></label>
-          <label class="news-upload-box" for="newsPostAttachmentFiles">
-            <span class="news-upload-icon">📎</span>
-            <span><strong>Прикрепить PDF или документ</strong><small>PDF, DOC, DOCX, XLS, XLSX, ODT, ODS, TXT, CSV</small></span>
-          </label>
           <input id="newsPostAttachmentFiles" name="attachments" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.odt,.ods,.txt,.csv,application/pdf" multiple class="news-file-input">
           <div id="newsPostAttachmentsPreview" class="news-attachments-preview" aria-label="Прикреплённые документы"></div>
         </div>
-        <div class="news-admin-field full">
-          <label for="newsPostScheduleAt">Отложенная публикация <span class="vk-muted">(необязательно)</span></label>
-          <input id="newsPostScheduleAt" name="scheduledAt" type="datetime-local">
-          <small class="news-field-hint">Если оставить поле пустым, запись выйдет сразу. В текущей версии планировщик работает на этом сайте в браузере; для гарантированной публикации при закрытом сайте нужен сервер.</small>
-        </div>
         <div class="news-admin-field full news-editor-options">
-          <label class="news-option"><input id="newsPostPinned" name="isPinned" type="checkbox"><span><strong>📌 Закрепить публикацию</strong><small>Закреплённая запись будет находиться вверху общей ленты.</small></span></label>
-          <label class="news-option"><input id="newsPostNotifyStudents" name="notifyStudents" type="checkbox"><span><strong>🔔 Уведомить студентов</strong><small>Создать уведомление в этом браузере после выхода публикации.</small></span></label>
+          <label class="news-option"><input id="newsPostNotifyStudents" name="notifyStudents" type="checkbox"><span><strong>🔔 Уведомить всех студентов</strong><small>После публикации запись появится в панели уведомлений этого сайта в данном браузере.</small></span></label>
         </div>
       </div>
-      <div class="news-admin-actions">
-        <button type="submit" class="btn-cta" id="newsPostSaveBtn">Опубликовать</button>
-        <button type="button" class="news-admin-secondary" id="newsPostCancelBtn">Отмена</button>
-        <button type="button" class="news-admin-secondary news-draft-clear" id="newsDraftClearBtn">Очистить черновик</button>
+      <div class="composer-footer">
+        <div class="composer-tools">
+          <button type="button" class="composer-tool" id="newsAttachImageBtn" title="Добавить фотографии"><span aria-hidden="true">📷</span><span>Фото</span></button>
+          <button type="button" class="composer-tool" id="newsAttachFileBtn" title="Добавить документы"><span aria-hidden="true">📎</span><span>Документ</span></button>
+          <button type="button" class="composer-tool news-draft-clear" id="newsDraftClearBtn">Очистить черновик</button>
+          <span class="news-field-hint">Фотографии: JPG, PNG или WEBP · документы: PDF, DOCX, XLSX, ODT, ODS, TXT, CSV</span>
+        </div>
+        <div class="composer-actions">
+          <button type="button" class="composer-cancel" id="newsPostCancelBtn">Отмена</button>
+          <button type="submit" class="composer-publish" id="newsPostSaveBtn">Опубликовать</button>
+        </div>
       </div>
-      <div class="news-draft-status" id="newsDraftStatus" aria-live="polite">Автосохранение включено</div>
     </form>
     <div class="news-admin-status" id="newsAdminStatus" role="status" aria-live="polite"></div>
-    <div class="vk-composer-foot"><span>📷 Фото</span></div>
   </section>
   <div class="news-history-modal" id="newsHistoryModal" hidden role="dialog" aria-modal="true" aria-labelledby="newsHistoryTitle">
     <div class="news-history-dialog">
@@ -184,7 +191,6 @@
     </div>
   </div>
 </div>
-
 <div class="student-notifications container" id="studentNotifications">
   <div class="student-notifications-bar">
     <button type="button" id="studentNotificationsToggle" aria-expanded="false">🔔 Уведомления <span id="studentNotificationsCount" class="student-notification-count">0</span></button>
@@ -192,7 +198,6 @@
   </div>
   <div id="studentNotificationsPanel" class="student-notifications-panel" hidden><div id="studentNotificationsList"></div></div>
 </div>
-
   <section class="news-section">
     <div class="container">
       <div class="news-layout">
@@ -267,7 +272,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== СВЕДЕНИЯ ==================== -->
 <div class="page" id="page-info">
   <section class="page-hero">
@@ -424,7 +428,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== СТУДЕНТУ ==================== -->
 <div class="page" id="page-student">
   <section class="hero">
@@ -492,7 +495,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== АБИТУРИЕНТУ ==================== -->
 <div class="page" id="page-abiturient">
   <section class="hero">
@@ -502,7 +504,6 @@
         <p>Приёмная кампания 2026 года. Современные специальности, бесплатное обучение, гарантированное трудоустройство.</p>
         <div class="hero-buttons">
           <a href="#specialties" class="btn-cta" data-scroll>Выбрать специальность</a>
-          <a href="#" class="btn-cta btn-cta-secondary" data-page="submit">Подать документы онлайн</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stats-item"><div class="number">10+</div><div class="label">Специальностей</div></div>
@@ -551,7 +552,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== ПРОФЕССИОНАЛИТЕТ ==================== -->
 <div class="page" id="page-prof">
   <section class="hero">
@@ -562,7 +562,6 @@
         <p>Обучение по программам нового поколения с гарантированным трудоустройством на ведущих предприятиях региона.</p>
         <div class="hero-buttons">
           <a href="#clusters" class="btn-cta" data-scroll>Направления подготовки</a>
-          <a href="#" class="btn-cta btn-cta-secondary" data-page="submit">Подать документы</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stats-item"><div class="number">2</div><div class="label">Года обучения</div></div>
@@ -585,7 +584,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== ГДЕ НАХОДИМСЯ ==================== -->
 <div class="page" id="page-location">
   <section class="hero">
@@ -625,7 +623,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== КОНТАКТЫ ==================== -->
 <div class="page" id="page-contacts">
   <section class="hero">
@@ -670,89 +667,7 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== ПОДАТЬ ДОКУМЕНТЫ ==================== -->
-<div class="page" id="page-submit">
-  <section class="section documents-section">
-    <div class="container">
-      <h1 class="section-title">Подача документов</h1>
-      <p class="section-subtitle">Заполните форму и загрузите необходимые документы для поступления в ДТПА.</p>
-      <div class="steps">
-        <div class="step-item"><div class="step-number">1</div><h3>Заполните форму</h3><p>Укажите личные данные и информацию об образовании</p></div>
-        <div class="step-item"><div class="step-number">2</div><h3>Загрузите документы</h3><p>Прикрепите сканы или фото необходимых документов</p></div>
-        <div class="step-item"><div class="step-number">3</div><h3>Отправьте заявку</h3><p>Нажмите кнопку и дождитесь подтверждения</p></div>
-        <div class="step-item"><div class="step-number">4</div><h3>Ожидайте ответа</h3><p>Приёмная комиссия свяжется с вами в течение 3 дней</p></div>
-      </div>
-      <div class="documents-list">
-        <h2>📋 Необходимые документы</h2>
-        <ul>
-          <li>Паспорт (все заполненные страницы)</li>
-          <li>Аттестат об основном/среднем общем образовании</li>
-          <li>СНИЛС</li>
-          <li>Медицинская справка (форма 086/у)</li>
-          <li>Фотография 3×4 (2 шт.)</li>
-          <li>ИНН (при наличии)</li>
-          <li>Документы, подтверждающие льготы (при наличии)</li>
-          <li>Портфолио (по желанию)</li>
-        </ul>
-      </div>
-      <form class="doc-form" id="doc-form" enctype="multipart/form-data">
-        <h2>Форма подачи документов</h2>
-        <p class="form-note">Поля, отмеченные <span style="color:red;">*</span>, обязательны. Все файлы — PDF, JPG, PNG (макс. 5 МБ).</p>
-        <h3 style="color:var(--color-primary); margin:20px 0 10px; font-size:1.2rem;">1. Личные данные</h3>
-        <div class="form-grid">
-          <div class="form-group"><label>ФИО <span class="required">*</span></label><input type="text" name="fullname" required placeholder="Иванов Иван Иванович"></div>
-          <div class="form-group"><label>Дата рождения <span class="required">*</span></label><input type="date" name="birthdate" required></div>
-          <div class="form-group"><label>Пол <span class="required">*</span></label><select name="gender" required><option value="">-- Выберите --</option><option value="Мужской">Мужской</option><option value="Женский">Женский</option></select></div>
-          <div class="form-group"><label>Гражданство <span class="required">*</span></label><input type="text" name="citizenship" required value="Российская Федерация"></div>
-          <div class="form-group"><label>Серия и номер паспорта <span class="required">*</span></label><input type="text" name="passport" required placeholder="1234 567890"></div>
-          <div class="form-group"><label>Кем выдан <span class="required">*</span></label><input type="text" name="passport_issued" required></div>
-          <div class="form-group"><label>Дата выдачи <span class="required">*</span></label><input type="date" name="passport_date" required></div>
-          <div class="form-group"><label>СНИЛС <span class="required">*</span></label><input type="text" name="snils" required placeholder="123-456-789 00"></div>
-          <div class="form-group"><label>ИНН (при наличии)</label><input type="text" name="inn"></div>
-          <div class="form-group"><label>Адрес регистрации <span class="required">*</span></label><input type="text" name="address" required></div>
-          <div class="form-group"><label>Контактный телефон <span class="required">*</span></label><input type="tel" name="phone" required></div>
-          <div class="form-group"><label>Email <span class="required">*</span></label><input type="email" name="email" required></div>
-        </div>
-        <h3 style="color:var(--color-primary); margin:30px 0 10px; font-size:1.2rem;">2. Образование</h3>
-        <div class="form-grid">
-          <div class="form-group full-width"><label>Название учебного заведения <span class="required">*</span></label><input type="text" name="school" required></div>
-          <div class="form-group"><label>Год окончания <span class="required">*</span></label><input type="number" name="grad_year" required min="2020" max="2026"></div>
-          <div class="form-group"><label>Средний балл аттестата <span class="required">*</span></label><input type="number" name="avg_grade" required step="0.01" min="1" max="5"></div>
-          <div class="form-group"><label>Выбранная специальность <span class="required">*</span></label>
-            <select name="specialty" required>
-              <option value="">-- Выберите --</option>
-              <option>Обеспечение информационной безопасности</option>
-              <option>Информационные системы и программирование</option>
-              <option>Сетевое и системное администрирование</option>
-              <option>Роботизированное производство</option>
-              <option>Экономика и бухгалтерский учет</option>
-              <option>Реклама</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Форма обучения <span class="required">*</span></label><select name="education_form" required><option value="">-- Выберите --</option><option>Очная</option><option>Заочная</option></select></div>
-        </div>
-        <h3 style="color:var(--color-primary); margin:30px 0 10px; font-size:1.2rem;">3. Загрузка документов</h3>
-        <div class="form-grid">
-          <div class="form-group"><label>Паспорт <span class="required">*</span></label><input type="file" name="file_passport" accept=".pdf,.jpg,.png" required><span class="file-hint">Все заполненные страницы</span></div>
-          <div class="form-group"><label>Аттестат <span class="required">*</span></label><input type="file" name="file_attestat" accept=".pdf,.jpg,.png" required></div>
-          <div class="form-group"><label>СНИЛС <span class="required">*</span></label><input type="file" name="file_snils" accept=".pdf,.jpg,.png" required></div>
-          <div class="form-group"><label>Медицинская справка <span class="required">*</span></label><input type="file" name="file_medical" accept=".pdf,.jpg,.png" required></div>
-          <div class="form-group"><label>Фотография 3×4 <span class="required">*</span></label><input type="file" name="file_photo" accept=".jpg,.png" required></div>
-          <div class="form-group"><label>ИНН (при наличии)</label><input type="file" name="file_inn" accept=".pdf,.jpg,.png"></div>
-          <div class="form-group full-width"><label>Другие документы</label><input type="file" name="file_other" accept=".pdf,.jpg,.png" multiple></div>
-        </div>
-        <div class="checkbox-group">
-          <input type="checkbox" id="consent" name="consent" required>
-          <label for="consent">Я даю согласие на обработку персональных данных в соответствии с ФЗ №152 <span class="required">*</span></label>
-        </div>
-        <button type="submit" class="btn-cta">Отправить документы</button>
-      </form>
-    </div>
-  </section>
-</div>
-
-<!-- ==================== РЕГИСТРАЦИЯ ==================== -->
 <div class="page" id="page-register">
   <div class="split">
     <aside class="split__left">
@@ -834,7 +749,6 @@
     </main>
   </div>
 </div>
-
 <!-- ==================== ФУТЕР ==================== -->
 <footer class="footer">
   <div class="container">
@@ -865,9 +779,7 @@
     <div class="footer-bottom">Официальный сайт Донецкого техникума промышленной автоматики им. А.В. Захарченко</div>
   </div>
 </footer>
-
 </div><!-- /#publicSite -->
-
 <!-- Личный кабинет -->
 <div class="profile-overlay" id="profileOverlay" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
   <section class="profile-dialog">
@@ -878,19 +790,19 @@
     <div class="profile-dialog__body" id="profileBody"></div>
   </section>
 </div>
-
 <!-- ============================================================
      СИСТЕМА УСПЕВАЕМОСТИ
      ============================================================ -->
 <div id="perfApp" style="display:none;">
-
 <header class="header">
   <div class="container">
     <div class="logo">📊 ДТПА <span>Успеваемость</span></div>
+    <button type="button" class="mobile-nav-toggle" data-nav-toggle aria-controls="perfNav" aria-expanded="false" aria-label="Открыть меню"><span aria-hidden="true">☰</span><span class="mobile-nav-toggle-label">Меню</span></button>
     <nav id="perfNav">
       <ul class="nav-list">
         <li><a href="#dashboard" data-scroll>📊 Дашборд</a></li>
         <li><a href="#groups" data-scroll>Группы</a></li>
+        <li><a href="#attendanceJournal" data-scroll>📋 Журнал посещаемости</a></li>
         <li><a href="#teachers" data-scroll>Преподаватели</a></li>
         <li><a href="#students" data-scroll>Студенты</a></li>
         <li><a href="#" id="navClaimsLink">📩 Заявки<span id="claimsBadge" class="claims-badge" style="display:none;">0</span></a></li>
@@ -905,11 +817,8 @@
     </div>
   </div>
 </header>
-
 <div class="storage-warning" id="storageWarning">⚠️ <strong>Внимание:</strong> локальное хранилище недоступно. Изменения не сохранятся при перезагрузке.</div>
-
 <div id="mainApp">
-
 <section class="dashboard-section" id="dashboard">
   <div class="container">
     <div class="dashboard-header">
@@ -933,7 +842,6 @@
     </div>
   </div>
 </section>
-
 <section class="groups-section" id="groups">
   <div class="container">
     <h2 class="section-heading">🏫 Посещаемость по группам</h2>
@@ -947,7 +855,26 @@
     <div class="groups-grid" id="groupsGrid"></div>
   </div>
 </section>
-
+<section class="attendance-journal-section" id="attendanceJournal">
+  <div class="container attendance-journal-card">
+    <header class="attendance-journal-hero">
+      <div class="attendance-journal-icon" aria-hidden="true">📋</div>
+      <div><h2 class="attendance-journal-title">Журнал посещаемости</h2>
+        <p class="attendance-journal-description">Ежедневные отметки студентов по группам. Администратор видит свой курс, староста — закреплённую группу.</p>
+      </div>
+    </header>
+    <div class="attendance-journal-body">
+      <div class="filters-row attendance-journal-toolbar">
+        <div class="filter-control"><label for="attendanceJournalGroup">Группа</label><select id="attendanceJournalGroup"></select></div>
+        <div class="filter-control"><label for="attendanceJournalDate">Дата занятия</label><input id="attendanceJournalDate" type="date"></div>
+        <div class="filter-control"><label for="attendancePeriodStart">Период с</label><input id="attendancePeriodStart" type="date"></div>
+        <div class="filter-control"><label for="attendancePeriodEnd">Период по</label><input id="attendancePeriodEnd" type="date"></div>
+        <button class="attendance-export-btn" id="exportAttendanceJournalBtn" type="button">📊 Экспорт в Excel</button>
+      </div>
+      <div id="attendanceJournalContent"></div>
+    </div>
+  </div>
+</section>
 <section class="teachers-section" id="teachers">
   <div class="container">
     <div class="section-header-row">
@@ -962,6 +889,7 @@
       <div class="filter-control"><label for="teacherRoleFilter">Должность</label>
         <select id="teacherRoleFilter">
           <option value="all">Все</option>
+          <option value="secretary">🗂️ Секретари</option>
           <option value="director">👑 Директор</option>
           <option value="deputy">📚 Заместители директора</option>
           <option value="head">🏢 Руководители</option>
@@ -975,7 +903,6 @@
     <div class="teachers-grid" id="teachersGrid"></div>
   </div>
 </section>
-
 <section class="students-section" id="students">
   <div class="container">
     <div class="filters-panel">
@@ -990,7 +917,7 @@
         <button class="btn-add-student" id="addStudentBtn" type="button">➕ Добавить студента</button>
       </div>
       <div class="filters-row">
-        <div class="filter-control"><label for="groupFilter">Группа</label><div class="group-filter-wrap"><select id="groupFilter" style="flex:1;"><option value="all">Все группы</option></select><button class="btn-journal-quick" id="quickJournalBtn" type="button" disabled title="Открыть журнал">📖</button></div></div>
+        <div class="filter-control"><label for="groupFilter">Группа</label><div class="group-filter-wrap"><select id="groupFilter" style="flex:1;"><option value="all">Все группы</option></select><button class="btn-journal-quick" id="quickJournalBtn" type="button" disabled title="Открыть журнал" aria-label="Открыть журнал">📖</button><button class="btn-journal-quick" id="quickAttendanceBtn" type="button" disabled title="Сначала выберите группу" aria-label="Открыть ведомость посещаемости">📋</button></div></div>
         <div class="filter-control"><label for="searchInput">Поиск по имени</label><input type="text" id="searchInput" placeholder="Начните вводить фамилию..."></div>
         <div class="filter-control"><label for="sortSelect">Сортировка</label><select id="sortSelect"><option value="gpa-desc">По среднему баллу ↓</option><option value="gpa-asc">По среднему баллу ↑</option><option value="name-asc">По алфавиту А–Я</option><option value="name-desc">По алфавиту Я–А</option><option value="attendance-desc">По посещаемости ↓</option></select></div>
       </div>
@@ -1004,7 +931,6 @@
     <div class="results-info" id="resultsInfo"></div>
   </div>
 </section>
-
 <!-- Модальное окно студента -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modalContent">
@@ -1012,7 +938,7 @@
       <div class="modal-avatar" id="modalAvatar">👤</div>
       <div class="modal-hero-info"><h2 id="modalName">—</h2><p id="modalMeta">—</p></div>
       <div class="modal-actions">
-        <button class="modal-action-btn claim" id="modalClaimBtn" title="Создать заявку">📩</button>
+        <button class="modal-action-btn claim" id="modalClaimBtn" title="Создать заявку" hidden>📩</button>
         <button class="modal-action-btn transfer" id="modalTransferBtn" title="Перевести">🚚</button>
         <button class="modal-action-btn danger" id="modalDeleteBtn" title="Удалить">🗑️</button>
         <button class="modal-action-btn info" id="modalInfoBtn" title="Редактировать ФИО">📝</button>
@@ -1031,7 +957,11 @@
     </div>
   </div>
 </div>
-
+<section class="dtpa-ux-demo-section" id="dtpaUxDemo" style="padding:54px 40px;background:#efe9dd">
+  <h2 class="section-heading">Студенты — UX-интерфейс</h2>
+  <p class="section-subheading">Демонстрация фильтров, загрузки фото, inline-редактирования, уведомлений и подсказок.</p>
+  <iframe id="dtpaUxDemoFrame" title="Демонстрация улучшенного управления студентами" loading="lazy" sandbox="allow-scripts allow-forms" style="display:block;width:100%;height:1000px;border:1px solid #d4c9b0;border-radius:6px;background:#f8f5ef;box-shadow:0 12px 30px rgba(0,45,98,.1)"></iframe>
+</section>
 <!-- Форма студента -->
 <div class="modal-overlay form-overlay" id="studentFormOverlay">
   <div class="modal student-form-modal">
@@ -1062,7 +992,6 @@
     </div>
   </div>
 </div>
-
 <!-- Форма преподавателя -->
 <div class="modal-overlay form-overlay" id="teacherFormOverlay">
   <div class="modal student-form-modal">
@@ -1086,6 +1015,7 @@
         <div class="form-group"><label for="tFormRole">Должность</label>
           <select id="tFormRole">
             <option value="teacher">👨‍🏫 Преподаватель</option>
+            <option value="secretary">🗂️ Секретарь</option>
             <option value="director">👑 Директор</option>
             <option value="deputy_uvr">📚 Заместитель директора по УВР</option>
             <option value="deputy_vr">🎭 Заместитель директора по ВР</option>
@@ -1109,7 +1039,6 @@
     </div>
   </div>
 </div>
-
 <!-- Корзина -->
 <div class="modal-overlay form-overlay" id="trashOverlay">
   <div class="modal trash-modal">
@@ -1123,7 +1052,6 @@
     </div>
   </div>
 </div>
-
 <!-- Перевод -->
 <div class="modal-overlay form-overlay" id="transferOverlay">
   <div class="modal transfer-modal">
@@ -1145,7 +1073,6 @@
     </div>
   </div>
 </div>
-
 <!-- Журнал -->
 <div class="modal-overlay journal-overlay" id="journalOverlay">
   <div class="modal journal-modal">
@@ -1172,7 +1099,6 @@
     </div>
   </div>
 </div>
-
 <!-- Выбор преподавателя -->
 <div class="modal-overlay form-overlay" id="pickerOverlay">
   <div class="modal picker-modal">
@@ -1186,9 +1112,8 @@
     </div>
   </div>
 </div>
-
 <!-- Форма заявки -->
-<div class="modal-overlay form-overlay" id="claimFormOverlay">
+<div class="modal-overlay form-overlay" id="claimFormOverlay" hidden>
   <div class="modal student-form-modal">
     <div class="modal-hero" style="padding:22px 28px;">
       <h2 class="form-title" id="claimFormTitle" style="color:#fff;margin:0;">📩 Новая заявка</h2>
@@ -1221,7 +1146,6 @@
     </div>
   </div>
 </div>
-
 <!-- Список заявок (админ-просмотр) -->
 <div class="modal-overlay form-overlay" id="claimsAdminOverlay">
   <div class="modal trash-modal" style="max-width:680px;">
@@ -1232,7 +1156,7 @@
     <div class="modal-body">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap;">
         <div style="font-size:0.88rem;opacity:0.8;" id="claimsStats"></div>
-        <button class="btn-primary" id="claimsAdminNewBtn" type="button" style="padding:8px 14px;font-size:0.85rem;">➕ Создать заявку</button>
+        <button class="btn-primary" id="claimsAdminNewBtn" type="button" hidden>➕ Создать заявку</button>
       </div>
       <div class="trash-list" id="claimsAdminList"></div>
       <div style="margin-top:16px;text-align:center;">
@@ -1241,9 +1165,7 @@
     </div>
   </div>
 </div>
-
 </div><!-- /#mainApp -->
-
 <div id="adminApp" class="admin-app" style="display:none;">
   <div class="container">
     <div class="stats-grid" id="adminStatsGrid"></div>
@@ -1256,7 +1178,7 @@
         <button class="status-tab" data-status="rejected">❌ Отклонённые</button>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-        <button class="admin-new-btn" id="adminNewClaimBtn" type="button">➕ Создать заявку</button>
+        <button class="admin-new-btn" id="adminNewClaimBtn" type="button" hidden>➕ Создать заявку</button>
         <button class="btn-export" id="adminExportBtn" type="button">📊 Экспорт в Excel</button>
         <button class="btn-refresh" id="adminRefreshBtn" type="button">🔄 Обновить</button>
       </div>
@@ -1276,7 +1198,6 @@
     </div>
     <div class="claims-list" id="adminClaimsList"></div>
     <div class="results-info" id="adminResultsInfo"></div>
-
     <section class="registered-users-panel" id="registeredUsersPanel" aria-labelledby="registeredUsersTitle">
       <div class="registered-users-head">
         <div>
@@ -1304,16 +1225,15 @@
     </section>
   </div>
 </div>
-
 <!-- Модалка пароля -->
 <div class="modal-overlay password-overlay" id="passwordOverlay">
-  <div class="modal student-form-modal" style="max-width:440px;">
-    <div class="modal-hero" style="padding:22px 28px;">
-      <h2 class="form-title" style="color:#fff;margin:0;">🔐 Вход в админ-панель</h2>
+  <div class="modal student-form-modal">
+    <div class="modal-hero">
+      <h2 class="form-title">🔐 Вход в админ-панель</h2>
       <div class="modal-actions"><button class="modal-action-btn modal-close" id="passwordClose">×</button></div>
     </div>
-    <div class="modal-body" style="padding:28px;">
-      <p style="margin-bottom:18px;font-size:0.9rem;opacity:0.8;">Введите пароль администратора для доступа к панели заявок.</p>
+    <div class="modal-body">
+      <p>Введите пароль администратора для доступа к панели заявок.</p>
       <form id="passwordForm">
         <div class="form-group"><label for="passwordInput">Пароль</label><input type="password" id="passwordInput" required autocomplete="current-password" placeholder="••••••••" maxlength="50"></div>
         <div class="pass-error" id="passwordError">❌ Неверный пароль</div>
@@ -1325,14 +1245,18 @@
     </div>
   </div>
 </div>
-
 </div><!-- /#perfApp -->
-
 <!-- Общая область push-уведомлений -->
 <div class="push-area" id="push-area"></div>
-
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 
 <script src="script.js"></script>
 </body>
 </html> 
+
+
+
+
+
+
