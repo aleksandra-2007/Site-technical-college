@@ -12,6 +12,7 @@ function showPublicSite() {
   document.getElementById('publicSite').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'auto' });
 }
+
 document.querySelectorAll('.header').forEach(header => {
   const spacer = document.createElement('div');
   spacer.className = 'header-spacer';
@@ -29,6 +30,7 @@ document.querySelectorAll('.header').forEach(header => {
     header.__dtpaHeaderResizeObserver = observer;
   } else window.addEventListener('resize', syncSpacer);
 });
+
 document.querySelectorAll('[data-nav-toggle]').forEach(button => {
   const header = button.closest('.header');
   const nav = header && header.querySelector('nav');
@@ -53,17 +55,21 @@ function getVisibleHeaderHeight() {
   const header = [...document.querySelectorAll('.header')].find(item => item.getClientRects().length);
   return header ? header.getBoundingClientRect().height : 0;
 }
+
 /* ============================================================
    ПУБЛИЧНЫЙ САЙТ
    ============================================================ */
 (function () {
 document.addEventListener('DOMContentLoaded', function () {
+
   const STORAGE_KEY = 'dontpa-theme';
   const toggleBtns = document.querySelectorAll('.theme-toggle');
+
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
+
   function updateIcons() {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     toggleBtns.forEach(btn => {
@@ -72,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   updateIcons();
+
   toggleBtns.forEach(btn => {
     btn.addEventListener('click', function () {
       const cur = document.documentElement.getAttribute('data-theme');
@@ -82,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
       updateIcons();
     });
   });
+
   const pushArea = document.getElementById('push-area');
   const PUSH_ICONS = { success:'✅', error:'❌', info:'ℹ️', code:'🔐' };
   function push(message, type, duration) {
@@ -98,8 +106,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }, duration || 3200);
   }
   window.__dtpaPush = push;
+
   const pages = document.querySelectorAll('#publicSite .page');
   const navLinks = document.querySelectorAll('#mainNav a');
+
   function showPage(name) {
     pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + name));
     navLinks.forEach(a => a.classList.toggle('active', a.dataset.page === name));
@@ -113,12 +123,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   window.DTPA_navigate = showPage;
+
   document.querySelectorAll('[data-page]').forEach(el => {
     el.addEventListener('click', function (e) {
       e.preventDefault();
       showPage(this.dataset.page);
     });
   });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -128,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('#publicSite .fade-in').forEach(el => observer.observe(el));
+
   document.querySelectorAll('.faq-question').forEach(btn => {
     btn.addEventListener('click', function () {
       const item = this.closest('.faq-item');
@@ -136,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!isOpen) item.classList.add('open');
     });
   });
+
   const loadMoreBtn = document.getElementById('load-more');
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', function () {
@@ -147,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 800);
     });
   }
+
   const scheduleTabs = document.querySelectorAll('.schedule-tab');
   const schedulePanes = document.querySelectorAll('.schedule-pane');
   scheduleTabs.forEach(tab => {
@@ -159,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (activePane) activePane.classList.add('active');
     });
   });
+
   const docForm = document.getElementById('doc-form');
   if (docForm) {
     docForm.addEventListener('submit', function (e) {
@@ -193,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
       el.addEventListener('change', function () { this.style.borderColor = ''; this.style.outline = ''; });
     });
   }
+
   document.querySelectorAll('#publicSite a[href^="#"], #publicSite [data-scroll]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href') || '';
@@ -207,9 +224,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
   const sections = document.querySelectorAll('#page-info .content-block');
   const subnavLinks = document.querySelectorAll('.subnav a');
   const sidebarLinks = document.querySelectorAll('#page-info .sidebar-card nav a[href^="#"]');
+
   function updateActiveLink() {
     const infoPage = document.getElementById('page-info');
     if (!infoPage || !infoPage.classList.contains('active')) return;
@@ -224,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   window.addEventListener('scroll', updateActiveLink);
   updateActiveLink();
+
   const views = {
     register: document.getElementById('register-view'),
     login: document.getElementById('login-view'),
@@ -231,11 +251,13 @@ document.addEventListener('DOMContentLoaded', function () {
     code: document.getElementById('code-view'),
     success: document.getElementById('success-view')
   };
+
   function showView(name) {
     Object.keys(views).forEach(k => {
       if (views[k]) views[k].hidden = (k !== name);
     });
   }
+
   const bindClick = (id, view) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('click', function (e) {
@@ -249,6 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
   bindClick('back-to-login-1', 'login');
   bindClick('back-to-phone', 'forgot');
   bindClick('go-to-login', 'login');
+
   const AUTH_USERS_KEY = 'dontpa-accounts-v1';
   const CURRENT_USER_KEY = 'dontpa-user';
   window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS = {
@@ -267,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const profileOverlay = document.getElementById('profileOverlay');
   const profileBody = document.getElementById('profileBody');
   const profileClose = document.getElementById('profileClose');
+
   let memoryAccounts = [];
   let memorySession = null;
   let authStorageWarningShown = false;
@@ -378,6 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!displayName || displayName.length > 100) return { ok:false, message:'Введите имя администратора (до 100 символов).' };
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) return { ok:false, message:'Введите корректный email для входа.' };
     if (rawPassword.length < 8) return { ok:false, message:'Пароль должен содержать не менее 8 символов.' };
+
     const accounts = readAccounts().slice();
     if (accounts.some(account => String(account.email || '').trim().toLowerCase() === normalizedEmail)) {
       return { ok:false, message:'Аккаунт с таким email уже существует.' };
@@ -512,6 +537,7 @@ document.addEventListener('DOMContentLoaded', function () {
     profileOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
+
   /* ==== ИСПРАВЛЕНИЕ: делегирование клика для кнопки «Войти» ==== */
   document.addEventListener('click', function (e) {
     const btn = e.target.closest('[data-user-status]');
@@ -520,10 +546,12 @@ document.addEventListener('DOMContentLoaded', function () {
       openProfile();
     }
   });
+
   if (profileClose) profileClose.addEventListener('click', closeProfile);
   if (profileOverlay) profileOverlay.addEventListener('click', e => { if (e.target === profileOverlay) closeProfile(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && profileOverlay && profileOverlay.classList.contains('open')) closeProfile(); });
   updateUserStatus();
+
   let recoveryCode = '';
   let recoveryPhone = '';
   function generateRecoveryCode() { return String(Math.floor(1000 + Math.random() * 9000)); }
@@ -536,6 +564,7 @@ document.addEventListener('DOMContentLoaded', function () {
       'border-radius:10px;padding:10px 0;font-family:monospace;">' + code + '</div>';
     push(html, 'code', 10000);
   }
+
   const phoneForm = document.getElementById('phone-form');
   const codePhone = document.getElementById('code-phone');
   if (phoneForm) {
@@ -552,6 +581,7 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(() => showView('code'), 400);
     });
   }
+
   const codeForm = document.getElementById('code-form');
   if (codeForm) {
     codeForm.addEventListener('submit', async function (e) {
@@ -581,6 +611,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } catch (err) { push(err.message || 'Не удалось обновить пароль.', 'error', 5000); }
     });
   }
+
   const resendBtn = document.getElementById('resend-code');
   if (resendBtn) {
     resendBtn.addEventListener('click', function () {
@@ -589,6 +620,7 @@ document.addEventListener('DOMContentLoaded', function () {
       sendRecoveryCode(recoveryPhone, recoveryCode);
     });
   }
+
   const registerForm = document.getElementById('registerForm');
   if (registerForm) {
     registerForm.addEventListener('submit', async function (e) {
@@ -617,6 +649,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } catch (err) { push(err.message || 'Не удалось создать аккаунт.', 'error', 5000); }
     });
   }
+
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
     loginForm.addEventListener('submit', async function (e) {
@@ -635,6 +668,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } catch (err) { push(err.message || 'Не удалось выполнить вход.', 'error', 5000); }
     });
   }
+
   const codeInputs = ['d1','d2','d3','d4'].map(id => document.getElementById(id)).filter(Boolean);
   codeInputs.forEach((input, i) => {
     input.addEventListener('input', () => {
@@ -656,6 +690,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 })();
+
 /* ============================================================
    СИСТЕМА УСПЕВАЕМОСТИ
    ============================================================ */
@@ -667,6 +702,7 @@ window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS = window.__DTPA_ADMIN_SPECIALTY_ASSIGN
   3:['РЕК','БД'],
   4:['ЭБУ','ОПС']
 };
+
 const SafeStorage = (function () {
   let available = false;
   try { localStorage.setItem('__t','1'); localStorage.removeItem('__t'); available = true; } catch(e) { available = false; }
@@ -676,12 +712,14 @@ const SafeStorage = (function () {
     set(k, v) { if (!available) return false; try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch(e) { return false; } }
   };
 })();
+
 document.addEventListener('DOMContentLoaded', () => {
   if (!SafeStorage.available) {
     const w = document.getElementById('storageWarning');
     if (w) w.classList.add('show');
   }
 });
+
 const TEACHER_ROLES = {
   secretary:{label:'Секретарь техникума',short:'Секретарь',icon:'🗂️',color:'#0757A6',bg:'rgba(20,121,209,0.14)'},
   director:{label:'Директор',short:'Директор',icon:'👑',color:'#7A5C00',bg:'rgba(184,134,11,0.22)'},
@@ -712,6 +750,7 @@ function getRoleAvatarClass(role) {
   if (role === 'head_ck' || role === 'head_dept') return 'role-head';
   return '';
 }
+
 const SUBJECTS_GENERAL = ['Русский язык','Литература','Математика','История','Обществознание','Физика','Химия','Биология','География','Иностранный язык','Информатика','Физическая культура','ОБЖ'];
 const SUBJECTS_COURSE2 = {
   'ПРОГ':['Математика (проф.)','Информатика (проф.)','Иностранный язык (проф.)','Основы программирования','Архитектура ЭВМ','Операционные системы'],
@@ -786,6 +825,7 @@ SPEC_CODES.forEach(spec => {
     GROUPS_META.push({ code:`${spec}-${course}1`, course, spec, base:BASE_LEVELS[spec] + (course - 1) * 0.02 });
   }
 });
+
 const SURNAMES_BASE = (function () {
   const out = [], seen = new Set();
   const add = s => { if (s && !seen.has(s) && out.length < 1000) { seen.add(s); out.push(s); } };
@@ -810,6 +850,7 @@ const AVATARS = {
   'ИБТС':['🧑‍💻','👩‍💻'],'ТЭРП':['🧑‍🔧','👩‍🔧'],'РЕК':['🧑‍🎨','👩‍🎨'],'БД':['🧑‍💼','👩‍💼'],
   'ЭБУ':['🧑‍💼','👩‍💼'],'ОПС':['🧑‍💼','👩‍💼']
 };
+
 const EDITS_KEY = 'dontpa-grade-edits-v4';
 const INFO_KEY = 'dontpa-student-info-v4';
 const CUSTOM_KEY = 'dontpa-custom-students-v4';
@@ -819,6 +860,7 @@ const TEACHERS_KEY = 'dontpa-teachers-v4';
 const CLASS_TEACHER_KEY = 'dontpa-class-teacher-v4';
 const SUBJ_TEACHER_KEY = 'dontpa-subject-teacher-v4';
 const CLAIMS_KEY = 'dontpa-claims-v4';
+
 let savedEdits = SafeStorage.get(EDITS_KEY, {});
 let savedInfo = SafeStorage.get(INFO_KEY, {});
 let customStudents = SafeStorage.get(CUSTOM_KEY, {});
@@ -827,6 +869,7 @@ let trash = SafeStorage.get(TRASH_KEY, []); if (!Array.isArray(trash)) trash = [
 let customTeachers = SafeStorage.get(TEACHERS_KEY, {});
 let classTeacherMap = SafeStorage.get(CLASS_TEACHER_KEY, {});
 let subjectTeacherMap = SafeStorage.get(SUBJ_TEACHER_KEY, {});
+
 function normalizeClaims(arr) {
   if (!Array.isArray(arr)) return [];
   return arr.map(c => {
@@ -844,6 +887,7 @@ function normalizeClaims(arr) {
   });
 }
 let claims = normalizeClaims(SafeStorage.get(CLAIMS_KEY, []));
+
 const PAGE_SIZE = 24;
 const RING_CIRCUMFERENCE = 2 * Math.PI * 26;
 const state = { course:'all', group:'all', search:'', sort:'gpa-desc', page:1 };
@@ -857,6 +901,7 @@ const adminSelectedIds = new Set();
 let isAdminView = false;
 let isAdminAuthed = false;
 let adminOrigin = 'public'; // 'public' | 'perf'
+
 function getScopedAdminSpecialties() {
   const user = currentAttendanceUser();
   if (!user || user.role !== 'admin') return [];
@@ -882,6 +927,7 @@ function getVisibleStudents() {
   const specialties = getScopedAdminSpecialties();
   return specialties.length ? STUDENTS.filter(student => specialties.includes(student.spec)) : STUDENTS;
 }
+
 let saveStatusTimer = null;
 function setSaveStatus(status) {
   const el = document.getElementById('saveStatus');
@@ -909,6 +955,7 @@ function saveAll() {
   if (ok.every(x => x)) { setSaveStatus('saved'); return true; }
   setSaveStatus('error'); return false;
 }
+
 function seededRandom(seed) { let s = seed * 9301 + 49297; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
 function femaleSurname(s) { return s.endsWith('а') ? s : s + 'а'; }
 function generateGrades(seed, level, spec, course) {
@@ -941,6 +988,7 @@ function generateSubjectAttendance(seed, baseAttendance, subjects) {
   for (const subj of subjects) result[subj] = Math.max(55, Math.min(100, Math.round(baseAttendance + (sRng() - 0.5) * 16)));
   return result;
 }
+
 function computeAutoSemester(grades, semester) {
   if (!grades || !grades.length) return null;
   if (grades.length === 1) return grades[0];
@@ -974,6 +1022,7 @@ function setSemesterGrade(student, subject, semester, value) {
   else se.semesterGrades[subject]['s' + semester] = value;
   savedEdits[student.id] = se;
 }
+
 function recomputeStudent(student) {
   let total = 0, count = 0;
   Object.values(student.grades).forEach(a => a.forEach(g => { total += g; count++; }));
@@ -992,6 +1041,7 @@ function recomputeGroup(group) {
   group.counts = { excellent:0, good:0, average:0, low:0 };
   arr.forEach(s => group.counts[s.levelClass]++);
 }
+
 const BASE_STUDENTS = [];
 let uid = 1;
 GROUPS_META.forEach((meta, gi) => {
@@ -1021,6 +1071,7 @@ GROUPS_META.forEach((meta, gi) => {
     });
   }
 });
+
 const BASE_TEACHERS = [];
 const TEACHER_LAST_M = SURNAMES_BASE.slice(0, 120);
 const TEACHER_LAST_F = SURNAMES_BASE.slice(120, 240).map(femaleSurname);
@@ -1068,9 +1119,11 @@ BASE_TEACHERS.push(...generateBaseTeachers());
     }
   });
 })();
+
 let STUDENTS = [];
 let GROUPS = [];
 let TEACHERS = [];
+
 function buildAll() {
   STUDENTS = [];
   BASE_STUDENTS.forEach(base => {
@@ -1109,6 +1162,7 @@ function buildAll() {
     s.isCustom = true;
     STUDENTS.push(s);
   });
+
   const map = {};
   STUDENTS.forEach(s => {
     if (!map[s.group]) {
@@ -1124,6 +1178,7 @@ function buildAll() {
   GROUPS = Object.values(map);
   GROUPS.forEach(recomputeGroup);
   GROUPS.sort((a,b) => a.course !== b.course ? a.course - b.course : a.code.localeCompare(b.code));
+
   TEACHERS = [];
   const hiddenBaseTeachers = customTeachers['__hidden_base_teachers__'] || [];
   BASE_TEACHERS.forEach(t => {
@@ -1142,6 +1197,7 @@ function buildAll() {
     const role = t.role || 'teacher';
     TEACHERS.push({ ...t, subjects:[...(t.subjects || [])], role, avatar:getRoleAvatar(role, t.gender), isCustom:true });
   });
+
   GROUPS.forEach(g => {
     if (!classTeacherMap[g.code]) {
       const groupSubjects = getSubjectsFor(g.spec, g.course);
@@ -1178,6 +1234,7 @@ function getTeachersForSubject(subject, groupCode) {
   }
   return list;
 }
+
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c])); }
 const pushArea = document.getElementById('push-area');
 const PUSH_ICONS = { success:'✅', error:'❌', info:'ℹ️' };
@@ -1194,6 +1251,7 @@ function anyModalOpen() {
   return ids.some(id => { const el = document.getElementById(id); return el && el.classList.contains('open'); });
 }
 function releaseBodyScroll() { if (!anyModalOpen()) document.body.style.overflow = ''; }
+
 function renderDashboard() {
   const root = document.getElementById('dashTotalStudents');
   if (!root) return;
@@ -1232,6 +1290,7 @@ function renderDashboard() {
 }
 const refreshDashboardBtn = document.getElementById('refreshDashboardBtn');
 if (refreshDashboardBtn) refreshDashboardBtn.addEventListener('click', () => { renderDashboard(); push('Дашборд обновлён', 'success', 1500); });
+
 function renderGroups() {
   const grid = document.getElementById('groupsGrid');
   grid.innerHTML = getVisibleGroups().map(g => {
@@ -1281,6 +1340,7 @@ function goToGroupStudents(code, course) {
   renderStudents();
   scrollToElement('students');
 }
+
 function renderTeachers() {
   const grid = document.getElementById('teachersGrid');
   const specialtyAssignments = window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS || {
@@ -1339,6 +1399,7 @@ function renderTeachers() {
     });
   });
 }
+
 function updateGroupOptions() {
   const groupSelect = document.getElementById('groupFilter');
   const current = groupSelect.value;
@@ -1363,6 +1424,7 @@ function updateQuickJournalBtn() {
     attendanceBtn.title = state.group === 'all' ? 'Сначала выберите группу' : `Ведомость посещаемости группы ${state.group}`;
   }
 }
+
 function getFilteredStudents() {
   let list = STUDENTS.slice();
   const scopedSpecialties = getScopedAdminSpecialties();
@@ -1382,6 +1444,7 @@ function getFilteredStudents() {
   }
   return list;
 }
+
 function updatePagination(page, totalPages, total, start, count) {
   document.getElementById('pageInfo').innerHTML = `Страница <strong>${page}</strong> из <strong>${totalPages}</strong>`;
   document.getElementById('prevPage').disabled = page <= 1;
@@ -1396,6 +1459,7 @@ function scrollToElement(id) {
   const offset = target.getBoundingClientRect().top + window.pageYOffset - Math.max(getVisibleHeaderHeight() + 16, 80);
   window.scrollTo({ top:offset, behavior:'smooth' });
 }
+
 function renderStudents() {
   const grid = document.getElementById('studentsGrid');
   const list = getFilteredStudents();
@@ -1439,6 +1503,7 @@ function renderStudents() {
   });
   updatePagination(state.page, totalPages, total, start, pageItems.length);
 }
+
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const modalEditBtn = document.getElementById('modalEditBtn');
@@ -1576,6 +1641,7 @@ modalResetBtn.addEventListener('click', () => {
   renderGroups(); renderTeachers(); updateGroupOptions(); renderStudents();
   push('Все изменения сброшены', 'info', 2200);
 });
+
 const studentFormOverlay = document.getElementById('studentFormOverlay');
 const studentForm = document.getElementById('studentForm');
 const studentFormTitle = document.getElementById('studentFormTitle');
@@ -1675,6 +1741,7 @@ studentForm.addEventListener('submit', (e) => {
     push('Данные обновлены', 'success', 2500);
   }
 });
+
 function addToTrash(entry) { trash.unshift(entry); if (trash.length > 100) trash.length = 100; }
 function updateTrashButton() {
   const btn = document.getElementById('trashBtn');
@@ -1708,6 +1775,7 @@ function deleteStudentById(id) {
   closeStudentForm(); closeModal();
   push(`«${student.fullName}» удалён`, 'info', 2500);
 }
+
 const trashOverlay = document.getElementById('trashOverlay');
 const trashList = document.getElementById('trashList');
 function renderTrash() {
@@ -1727,6 +1795,7 @@ function renderTrash() {
     btn.addEventListener('click', () => deleteFromTrash(parseInt(btn.dataset.trashIdx, 10)));
   });
 }
+
 function deleteFromTrash(idx) {
   const entry = trash[idx];
   if (!entry) return;
@@ -1753,6 +1822,7 @@ function closeTrashModal() { trashOverlay.classList.remove('open'); releaseBodyS
 document.getElementById('trashBtn').addEventListener('click', openTrashModal);
 document.getElementById('trashClose').addEventListener('click', closeTrashModal);
 trashOverlay.addEventListener('click', (e) => { if (e.target === trashOverlay) closeTrashModal(); });
+
 const transferOverlay = document.getElementById('transferOverlay');
 const transferGroupSelect = document.getElementById('transferGroup');
 const transferHint = document.getElementById('transferHint');
@@ -1821,6 +1891,7 @@ document.getElementById('transferConfirm').addEventListener('click', () => {
   closeTransferModal(); closeModal();
   push(courseChanged || specChanged ? `«${student.fullName}» переведён в ${newGroupCode}` : `«${student.fullName}» переведён из ${oldGroup} в ${newGroupCode}`, 'success', 3200);
 });
+
 const teacherFormOverlay = document.getElementById('teacherFormOverlay');
 const teacherForm = document.getElementById('teacherForm');
 const teacherFormTitle = document.getElementById('teacherFormTitle');
@@ -1903,6 +1974,7 @@ teacherForm.addEventListener('submit', (e) => {
     push(`Преподаватель «${ln} ${fn}» добавлен`, 'success', 2800);
   }
 });
+
 const pickerOverlay = document.getElementById('pickerOverlay');
 const pickerList = document.getElementById('pickerList');
 const pickerSearch = document.getElementById('pickerSearch');
@@ -1967,6 +2039,7 @@ function closePicker() { pickerOverlay.classList.remove('open'); pickerContext =
 document.getElementById('pickerClose').addEventListener('click', closePicker);
 pickerOverlay.addEventListener('click', (e) => { if (e.target === pickerOverlay) closePicker(); });
 pickerSearch.addEventListener('input', renderPickerList);
+
 const journalOverlay = document.getElementById('journalOverlay');
 const journalEditBtn = document.getElementById('journalEditBtn');
 const journalTable = document.getElementById('journalTable');
@@ -2179,6 +2252,7 @@ function afterJournalGradeEdit(student) {
   renderGroups(); renderStudents(); renderJournal();
   push('Оценка обновлена', 'success', 900);
 }
+
 function generateGroupExcelReport(groupCode) {
   if (typeof window.XLSX === 'undefined') { push('❌ XLSX-библиотека не загружена.', 'error', 5000); return; }
   const group = GROUPS.find(g => g.code === groupCode);
@@ -2211,6 +2285,7 @@ function generateGroupExcelReport(groupCode) {
     push(`📊 Excel-отчёт сохранён`, 'success', 3500);
   } catch (err) { console.error(err); push(`Ошибка Excel: ${err.message || 'неизвестно'}`, 'error', 5000); }
 }
+
 function exportJournalToExcel() {
   if (typeof window.XLSX === 'undefined') { push('❌ XLSX-библиотека не загружена', 'error', 5000); return; }
   const group = GROUPS.find(g => g.code === currentGroupCodeForJournal);
@@ -2259,6 +2334,7 @@ function exportJournalToExcel() {
     push(`📊 Журнал сохранён`, 'success', 3500);
   } catch (err) { console.error(err); push(`Ошибка Excel: ${err.message || 'неизвестно'}`, 'error', 5000); }
 }
+
 function exportToExcel() {
   if (typeof window.XLSX === 'undefined') { push('❌ XLSX-библиотека не загружена', 'error', 5000); return; }
   if (STUDENTS.length === 0) { push('Нет студентов для экспорта', 'error', 2200); return; }
@@ -2274,6 +2350,7 @@ function exportToExcel() {
 }
 document.getElementById('exportExcelBtn').addEventListener('click', exportToExcel);
 document.getElementById('journalExcelBtn').addEventListener('click', exportJournalToExcel);
+
 /* ==================== ЗАЯВКИ ==================== */
 const CLAIM_TYPE_LABELS = { transfer:'🚚 Перевод в другую группу', resit:'📝 Пересдать предмет', question:'❓ Вопрос по оценке', other:'📌 Другое' };
 const CLAIM_STATUS_LABELS = {
@@ -2282,6 +2359,7 @@ const CLAIM_STATUS_LABELS = {
   done:{ label:'Решена', color:'#2E8B2E', bg:'rgba(46,139,46,0.12)', icon:'✅' },
   rejected:{ label:'Отклонена', color:'#E64646', bg:'rgba(230,70,70,0.12)', icon:'❌' }
 };
+
 const claimFormOverlay = document.getElementById('claimFormOverlay');
 const claimForm = document.getElementById('claimForm');
 const claimFormTitle = document.getElementById('claimFormTitle');
@@ -2289,6 +2367,7 @@ const claimStudentInfo = document.getElementById('claimStudentInfo');
 const claimType = document.getElementById('claimType');
 const claimText = document.getElementById('claimText');
 let claimFormStudentId = null;
+
 function updateClaimTypeFields() {
   const type = claimType.value;
   const resitFields = document.getElementById('claimResitFields');
@@ -2298,6 +2377,7 @@ function updateClaimTypeFields() {
   if (type === 'resit') populateClaimResitFields();
   if (type === 'transfer') populateClaimTransferFields();
 }
+
 function populateClaimResitFields() {
   const subjectSel = document.getElementById('claimSubject');
   const teacherSel = document.getElementById('claimTeacher');
@@ -2312,6 +2392,7 @@ function populateClaimResitFields() {
   populateClaimTeachersForSubject();
   subjectSel.onchange = populateClaimTeachersForSubject;
 }
+
 function populateClaimTeachersForSubject() {
   const subjectSel = document.getElementById('claimSubject');
   const teacherSel = document.getElementById('claimTeacher');
@@ -2327,6 +2408,7 @@ function populateClaimTeachersForSubject() {
   teacherSel.innerHTML = '<option value="">— Выберите преподавателя —</option>' + teachers.map(t => { const isA = assignedId === t.id; return `<option value="${t.id}"${isA ? ' selected' : ''}>${escapeHtml(t.fullName)}${isA ? ' · ✓ ведёт у группы' : ''}</option>`; }).join('');
   if (hintEl) { hintEl.style.display = 'block'; hintEl.textContent = `Показаны только преподаватели, ведущие «${subject}»`; }
 }
+
 function populateClaimTransferFields() {
   const sel = document.getElementById('claimTargetGroup');
   const info = document.getElementById('claimTargetGroupInfo');
@@ -2358,6 +2440,7 @@ function populateClaimTransferFields() {
   updateInfo();
 }
 if (claimType) claimType.addEventListener('change', updateClaimTypeFields);
+
 function openClaimForm(student) {
   if (isAdminAuthed || isScopedAdmin()) {
     push('Подача заявок доступна пользователям, но не администратору.', 'error', 3000);
@@ -2381,10 +2464,12 @@ function openClaimForm(student) {
   setTimeout(() => claimText.focus(), 150);
 }
 function closeClaimForm() { claimFormOverlay.classList.remove('open'); claimFormStudentId = null; releaseBodyScroll(); }
+
 document.getElementById('claimFormClose').addEventListener('click', closeClaimForm);
 document.getElementById('claimCancelBtn').addEventListener('click', closeClaimForm);
 claimFormOverlay.addEventListener('click', (e) => { if (e.target === claimFormOverlay) closeClaimForm(); });
 document.getElementById('modalClaimBtn').addEventListener('click', () => { if (currentStudent) openClaimForm(currentStudent); });
+
 claimForm.addEventListener('submit', (e) => {
   e.preventDefault();
   if (isAdminAuthed || isScopedAdmin()) {
@@ -2419,6 +2504,7 @@ claimForm.addEventListener('submit', (e) => {
   closeClaimForm();
   push('✅ Заявка отправлена!', 'success', 2800);
 });
+
 function updateClaimsBadge() {
   const badge = document.getElementById('claimsBadge');
   if (badge) {
@@ -2428,11 +2514,14 @@ function updateClaimsBadge() {
   }
   renderDashboard();
 }
+
 const claimsAdminOverlay = document.getElementById('claimsAdminOverlay');
 const claimsAdminList = document.getElementById('claimsAdminList');
 const claimsStats = document.getElementById('claimsStats');
+
 function openClaimsAdmin() { renderClaimsAdmin(); claimsAdminOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeClaimsAdmin() { claimsAdminOverlay.classList.remove('open'); releaseBodyScroll(); }
+
 function renderClaimsAdmin() {
   const counts = { new:0, in_progress:0, done:0, rejected:0 };
   claims.forEach(c => { if (counts[c.status] != null) counts[c.status]++; });
@@ -2467,6 +2556,7 @@ claimsAdminOverlay.addEventListener('click', (e) => { if (e.target === claimsAdm
 document.getElementById('claimsAdminNewBtn').addEventListener('click', () => { closeClaimsAdmin(); openClaimForm(null); });
 document.getElementById('navClaimsLink').addEventListener('click', (e) => { e.preventDefault(); openClaimsAdmin(); });
 document.getElementById('openFullAdminBtn').addEventListener('click', () => { closeClaimsAdmin(); tryEnterAdmin(); });
+
 function executeResit(claimId) {
   const claim = claims.find(c => c.id === claimId);
   if (!claim) return;
@@ -2498,6 +2588,7 @@ function executeResit(claimId) {
   if (claim.resitPassed) push(`✅ Пересдал(а): «${claim.subject}» — оценка ${claim.resitGrade}`, 'success', 3500);
   else push(`❌ Не пересдал(а): «${claim.subject}»`, 'error', 3500);
 }
+
 function executeTransfer(claimId) {
   const claim = claims.find(c => c.id === claimId);
   if (!claim) return;
@@ -2528,10 +2619,12 @@ function executeTransfer(claimId) {
   renderGroups(); renderStudents(); renderAdminAll(); updateClaimsBadge();
   push(`✅ Студент переведён из ${oldGroup} в ${newGroupCode}`, 'success', 3500);
 }
+
 const passwordOverlay = document.getElementById('passwordOverlay');
 const passwordForm = document.getElementById('passwordForm');
 const passwordInput = document.getElementById('passwordInput');
 const passwordError = document.getElementById('passwordError');
+
 function openPasswordModal() {
   passwordInput.value = '';
   passwordError.classList.remove('show');
@@ -2543,6 +2636,7 @@ function closePasswordModal() { passwordOverlay.classList.remove('open'); passwo
 document.getElementById('passwordClose').addEventListener('click', closePasswordModal);
 document.getElementById('passwordCancel').addEventListener('click', closePasswordModal);
 passwordOverlay.addEventListener('click', (e) => { if (e.target === passwordOverlay) closePasswordModal(); });
+
 passwordForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const pwd = passwordInput.value;
@@ -2557,6 +2651,7 @@ passwordForm.addEventListener('submit', (e) => {
     passwordInput.select();
   }
 });
+
 /* ==== АДМИН-ПАНЕЛЬ: открытие/закрытие через Ctrl+Shift+A ==== */
 function switchToAdmin() {
   if (adminOrigin === 'public') {
@@ -2624,6 +2719,7 @@ function tryEnterAdmin() {
   if (isAdminAuthed) { switchToAdmin(); return; }
   openPasswordModal();
 }
+
 window.__dtpaSwitchToAdminSlot = function (slot) {
   if (!window.__dtpaMasterAdminAuthorized || !isAdminAuthed) {
     return { ok:false, message:'Переключать администраторов может только главный администратор.' };
@@ -2633,6 +2729,7 @@ window.__dtpaSwitchToAdminSlot = function (slot) {
   }
   const result = window.__dtpaSetAdminActingAs(slot);
   if (!result.ok) return result;
+
   isAdminAuthed = false;
   isAdminView = false;
   adminOrigin = 'perf';
@@ -2670,10 +2767,12 @@ window.__dtpaSwitchToAdminSlot = function (slot) {
   window.scrollTo({ top:0, behavior:'smooth' });
   return result;
 };
+
 // Делаем выход доступным из глобального showPublicSite
 window.__dtpaExitAdmin = function () {
   if (isAdminView) switchToMain();
 };
+
 // Горячая клавиша Ctrl+Shift+A (и Cmd+Shift+A на macOS, а также русская «ф»)
 document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.code === 'KeyA' || e.key === 'A' || e.key === 'a' || e.key === 'ф' || e.key === 'Ф')) {
@@ -2681,6 +2780,7 @@ document.addEventListener('keydown', (e) => {
     tryEnterAdmin();
   }
 });
+
 function readRegisteredAccounts() {
   try {
     const raw = localStorage.getItem('dontpa-accounts-v1');
@@ -2690,22 +2790,26 @@ function readRegisteredAccounts() {
     return [];
   }
 }
+
 function escapeRegisteredText(value) {
   return String(value == null ? '' : value).replace(/[&<>\"']/g, (ch) => ({
     '&':'&amp;', '<':'&lt;', '>':'&gt;', '\"':'&quot;', "'":'&#39;'
   }[ch]));
 }
+
 function formatRegisteredDate(value) {
   if (!value) return '—';
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? '—' : date.toLocaleString('ru-RU');
 }
+
 function renderRegisteredUsers() {
   const tbody = document.getElementById('registeredUsersBody');
   const summary = document.getElementById('registeredUsersSummary');
   const empty = document.getElementById('registeredUsersEmpty');
   const search = document.getElementById('registeredUsersSearch');
   if (!tbody || !summary || !empty) return;
+
   const accounts = readRegisteredAccounts().slice().sort((a, b) => Number(b.registeredAt || 0) - Number(a.registeredAt || 0));
   const query = String(search && search.value || '').trim().toLowerCase();
   const roleLabels = { student:'Студент', teacher:'Преподаватель', admin:'Администратор' };
@@ -2714,6 +2818,7 @@ function renderRegisteredUsers() {
       .join(' ').toLowerCase();
     return !query || haystack.includes(query);
   });
+
   summary.textContent = `Всего зарегистрировано: ${accounts.length}. Отображается: ${filtered.length}.`;
   tbody.innerHTML = filtered.map((account, index) => {
     const safeEmail = String(account.email || '').replace(/[&<>"'`]/g, c => ({
@@ -2741,6 +2846,7 @@ function renderRegisteredUsers() {
   else if (query && filtered.length === 0) empty.textContent = 'По вашему запросу ничего не найдено.';
   else empty.textContent = 'Пока нет зарегистрированных аккаунтов в хранилище этого браузера.';
 }
+
 function deleteRegisteredUser(email) {
   const accountEmail = String(email || '').trim().toLowerCase();
   if (!accountEmail) { push('Не удалось определить аккаунт для удаления', 'error', 2400); return; }
@@ -2759,6 +2865,7 @@ function deleteRegisteredUser(email) {
     push('Не удалось удалить аккаунт: ' + (e.message || 'ошибка'), 'error', 3000);
   }
 }
+
 function exportRegisteredUsers() {
   const accounts = readRegisteredAccounts().slice().sort((a, b) => Number(b.registeredAt || 0) - Number(a.registeredAt || 0));
   if (!accounts.length) {
@@ -2784,7 +2891,9 @@ function exportRegisteredUsers() {
   URL.revokeObjectURL(url);
   push('Список зарегистрированных пользователей экспортирован.', 'success', 3500);
 }
+
 function renderAdminAll() { renderAdminStats(); renderAdminGroupFilter(); renderAdminClaims(); renderRegisteredUsers(); }
+
 const registeredUsersSearch = document.getElementById('registeredUsersSearch');
 if (registeredUsersSearch) registeredUsersSearch.addEventListener('input', renderRegisteredUsers);
 const refreshRegisteredUsersBtn = document.getElementById('refreshRegisteredUsersBtn');
@@ -2794,6 +2903,7 @@ if (exportRegisteredUsersBtn) exportRegisteredUsersBtn.addEventListener('click',
 window.addEventListener('storage', event => {
   if (event.key === 'dontpa-accounts-v1') renderRegisteredUsers();
 });
+
 function renderAdminStats() {
   const counts = { all:claims.length, new:0, in_progress:0, done:0, rejected:0 };
   claims.forEach(c => { if (counts[c.status] != null) counts[c.status]++; });
@@ -2821,6 +2931,7 @@ function renderAdminStats() {
     });
   });
 }
+
 function renderAdminGroupFilter() {
   const groups = new Set();
   claims.forEach(c => { if (c.studentGroup) groups.add(c.studentGroup); });
@@ -2832,6 +2943,7 @@ function renderAdminGroupFilter() {
   else if (sorted.includes(adminState.group)) sel.value = adminState.group;
   else { sel.value = 'all'; adminState.group = 'all'; }
 }
+
 function getFilteredAdminClaims() {
   let list = claims.slice();
   if (adminState.status !== 'all') list = list.filter(c => c.status === adminState.status);
@@ -2849,6 +2961,7 @@ function getFilteredAdminClaims() {
   }
   return list;
 }
+
 function buildResolutionHTML(c) {
   if (c.type === 'resit') {
     const student = c.studentId ? STUDENTS.find(s => s.id === c.studentId) : null;
@@ -2895,6 +3008,7 @@ function buildResolutionHTML(c) {
   }
   return '';
 }
+
 function renderAdminClaims() {
   const list = getFilteredAdminClaims();
   const container = document.getElementById('adminClaimsList');
@@ -3027,12 +3141,14 @@ function renderAdminClaims() {
   });
   updateAdminBulkUI();
 }
+
 function updateAdminBulkUI() {
   const bulk = document.getElementById('adminBulkActions');
   const info = document.getElementById('adminBulkInfo');
   if (adminSelectedIds.size === 0) bulk.style.display = 'none';
   else { bulk.style.display = 'flex'; info.textContent = `Выбрано: ${adminSelectedIds.size}`; }
 }
+
 function handleAdminAction(action, id) {
   const claim = claims.find(c => c.id === id);
   if (!claim) return;
@@ -3051,6 +3167,7 @@ function handleAdminAction(action, id) {
   const labels = { new:'возвращена в новые', in_progress:'взята в работу', done:'решена', rejected:'отклонена' };
   push(`Заявка ${labels[action] || 'обновлена'}`, 'success', 1800);
 }
+
 document.querySelectorAll('#adminStatusTabs .status-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('#adminStatusTabs .status-tab').forEach(t => t.classList.remove('active'));
@@ -3067,6 +3184,7 @@ document.getElementById('adminSearchInput').addEventListener('input', (e) => {
 document.getElementById('adminTypeFilter').addEventListener('change', (e) => { adminState.type = e.target.value; renderAdminClaims(); });
 document.getElementById('adminGroupFilter').addEventListener('change', (e) => { adminState.group = e.target.value; renderAdminClaims(); });
 document.getElementById('adminSortSelect').addEventListener('change', (e) => { adminState.sort = e.target.value; renderAdminClaims(); });
+
 document.querySelectorAll('#adminBulkActions .bulk-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const action = btn.dataset.action;
@@ -3090,6 +3208,7 @@ document.querySelectorAll('#adminBulkActions .bulk-btn').forEach(btn => {
     push(`Применено к ${n} заявкам`, 'success', 2000);
   });
 });
+
 document.getElementById('adminNewClaimBtn').addEventListener('click', () => openClaimForm(null));
 document.getElementById('adminRefreshBtn').addEventListener('click', () => {
   claims = normalizeClaims(SafeStorage.get(CLAIMS_KEY, []));
@@ -3121,6 +3240,7 @@ document.getElementById('adminExportBtn').addEventListener('click', () => {
     push('📊 Excel-файл сохранён', 'success', 3000);
   } catch (err) { console.error(err); push('Ошибка экспорта: ' + err.message, 'error', 4000); }
 });
+
 document.querySelectorAll('.course-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
@@ -3155,6 +3275,7 @@ document.getElementById('teacherSearch').addEventListener('input', (e) => {
   teacherSearchTimer = setTimeout(() => { teacherState.search = e.target.value.trim(); renderTeachers(); }, 200);
 });
 document.getElementById('teacherRoleFilter').addEventListener('change', (e) => { teacherState.role = e.target.value; renderTeachers(); });
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (passwordOverlay.classList.contains('open')) closePasswordModal();
@@ -3173,6 +3294,7 @@ document.addEventListener('keydown', (e) => {
 document.querySelectorAll('#perfApp a[data-scroll]').forEach(a => {
   a.addEventListener('click', (e) => { e.preventDefault(); scrollToElement(a.getAttribute('href').replace('#', '')); });
 });
+
 window.addEventListener('storage', (e) => {
   if (e.key === CLAIMS_KEY) {
     claims = normalizeClaims(SafeStorage.get(CLAIMS_KEY, []));
@@ -3181,6 +3303,7 @@ window.addEventListener('storage', (e) => {
     if (claimsAdminOverlay.classList.contains('open')) renderClaimsAdmin();
   }
 });
+
 renderGroups();
 renderTeachers();
 updateGroupOptions();
@@ -3188,11 +3311,16 @@ renderStudents();
 updateTrashButton();
 updateClaimsBadge();
 setSaveStatus(SafeStorage.available ? 'saved' : 'error');
+
+
 /* ===== НОВАЯ ВЕДОМОСТЬ ПОСЕЩАЕМОСТИ + НАЗНАЧЕНИЕ СТАРОСТ ===== */
 const ATTENDANCE_KEY = 'dtpa-attendance-register-v1';
 let attendanceRegister = {};
 try { attendanceRegister = JSON.parse(localStorage.getItem(ATTENDANCE_KEY) || '{}') || {}; } catch (_) { attendanceRegister = {}; }
-let attendanceDate = new Date().toISOString().slice(0,10);
+let attendanceDate = attendanceIsoDate(new Date());
+let attendanceModalPeriodStart = '';
+let attendanceModalPeriodEnd = '';
+
 function currentAttendanceUser() {
   try {
     const u = JSON.parse(localStorage.getItem('dontpa-user') || 'null');
@@ -3250,12 +3378,9 @@ function exportAttendanceJournalToExcel() {
   const groupCode = document.getElementById('attendanceJournalGroup').value;
   const periodStart = document.getElementById('attendancePeriodStart').value;
   const periodEnd = document.getElementById('attendancePeriodEnd').value;
-  if (!periodStart || !periodEnd || !/^\d{4}-\d{2}-\d{2}$/.test(periodStart) || !/^\d{4}-\d{2}-\d{2}$/.test(periodEnd)) {
-    push('Укажите начало и конец периода посещаемости.', 'error', 3000);
-    return;
-  }
-  if (periodStart > periodEnd) {
-    push('Начало периода не может быть позже его окончания.', 'error', 3000);
+  const selectedDates = attendanceDatesBetween(periodStart, periodEnd);
+  if (!selectedDates.length) {
+    push('Укажите корректный период не более 366 дней: начало не позже окончания.', 'error', 3500);
     return;
   }
   const group = attendanceJournalGroups().find(item => item.code === groupCode);
@@ -3267,9 +3392,10 @@ function exportAttendanceJournalToExcel() {
     push('Библиотека Excel не загружена. Проверьте подключение к интернету и повторите экспорт.', 'error', 5000);
     return;
   }
+
   const students = group.students.slice().sort((a, b) => a.fullName.localeCompare(b.fullName));
   const dates = Object.keys(attendanceRegister[group.code] || {})
-    .filter(date => /^\d{4}-\d{2}-\d{2}$/.test(date) && date >= periodStart && date <= periodEnd)
+    .filter(date => selectedDates.includes(date))
     .filter(date => students.some(student => attendanceRegister[group.code][date]?.[String(student.id)]))
     .sort();
   const statusLabels = { present:'Присутствует', absent:'Отсутствует', late:'Опоздал', excused:'Уважительная причина' };
@@ -3286,6 +3412,7 @@ function exportAttendanceJournalToExcel() {
   ];
   const totals = { present:0, absent:0, late:0, excused:0 };
   const dateTotals = dates.map(() => ({ present:0, absent:0, late:0, excused:0 }));
+
   students.forEach((student, index) => {
     const counts = { present:0, absent:0, late:0, excused:0 };
     const marks = dates.map((date, dateIndex) => {
@@ -3311,6 +3438,7 @@ function exportAttendanceJournalToExcel() {
       attendancePercent
     ]);
   });
+
   const totalMarks = totals.present + totals.absent + totals.late + totals.excused;
   const totalAttendancePercent = totalMarks ? Math.round((totals.present + totals.late) / totalMarks * 100) : '';
   rows.push([
@@ -3324,6 +3452,7 @@ function exportAttendanceJournalToExcel() {
     totalMarks,
     totalAttendancePercent
   ]);
+
   try {
     const sheet = XLSX.utils.aoa_to_sheet(rows);
     sheet['!cols'] = [
@@ -3341,11 +3470,194 @@ function exportAttendanceJournalToExcel() {
     push('Не удалось создать Excel-ведомость посещаемости.', 'error', 4500);
   }
 }
+const ATTENDANCE_STATUS_ORDER = ['', 'present', 'absent', 'late', 'excused'];
+const ATTENDANCE_STATUS_LABELS = {
+  '':'Не отмечено',
+  present:'Присутствует',
+  absent:'Отсутствует',
+  late:'Опоздал',
+  excused:'Уважительная причина'
+};
+const ATTENDANCE_STATUS_MARKS = { '':'·', present:'✓', absent:'н', late:'о', excused:'у' };
+function attendanceIsoDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+function attendanceAddDays(isoDate, days) {
+  const [year, month, day] = isoDate.split('-').map(Number);
+  const date = new Date(year, month - 1, day, 12);
+  date.setDate(date.getDate() + days);
+  return attendanceIsoDate(date);
+}
+function attendanceFormatDate(isoDate) {
+  const [year, month, day] = isoDate.split('-');
+  return `${day}.${month}.${year}`;
+}
+function attendanceWeekStart(isoDate) {
+  const validDate = /^\d{4}-\d{2}-\d{2}$/.test(isoDate) ? isoDate : attendanceIsoDate(new Date());
+  const [year, month, day] = validDate.split('-').map(Number);
+  const date = new Date(year, month - 1, day, 12);
+  if (attendanceIsoDate(date) !== validDate) return attendanceWeekStart(attendanceIsoDate(new Date()));
+  date.setDate(date.getDate() - ((date.getDay() + 6) % 7));
+  return attendanceIsoDate(date);
+}
+function attendanceDatesBetween(start, end) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(start) || !/^\d{4}-\d{2}-\d{2}$/.test(end) || start > end) return [];
+  const [startYear, startMonth, startDay] = start.split('-').map(Number);
+  const [endYear, endMonth, endDay] = end.split('-').map(Number);
+  if (startYear < 1000 || endYear < 1000) return [];
+  const current = new Date(startYear, startMonth - 1, startDay);
+  const last = new Date(endYear, endMonth - 1, endDay);
+  if (attendanceIsoDate(current) !== start || attendanceIsoDate(last) !== end) return [];
+  if (Math.ceil((last.getTime() - current.getTime()) / 86400000) + 1 > 366) return [];
+  const dates = [];
+  while (current <= last) {
+    dates.push(attendanceIsoDate(current));
+    current.setDate(current.getDate() + 1);
+  }
+  return dates;
+}
+function attendanceShortDate(isoDate) {
+  const [, month, day] = isoDate.split('-');
+  return `${day}.${month}`;
+}
+function attendanceWeekday(isoDate) {
+  const [year, month, day] = isoDate.split('-').map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString('ru-RU', { weekday:'short' }).replace(/\.$/, '');
+}
+function attendanceStatsForStudent(groupCode, studentId, dates) {
+  const counts = { present:0, absent:0, late:0, excused:0 };
+  dates.forEach(date => {
+    const status = attendanceRegister[groupCode]?.[date]?.[String(studentId)] || '';
+    if (Object.prototype.hasOwnProperty.call(counts, status)) counts[status]++;
+  });
+  const total = counts.present + counts.absent + counts.late + counts.excused;
+  const attended = counts.present + counts.late;
+  return { ...counts, total, attended, percent:total ? Math.round(attended / total * 100) : 0 };
+}
+function renderAttendanceRegister(target, group, dates, allowed, options = {}) {
+  const students = group.students.slice().sort((a, b) => a.fullName.localeCompare(b.fullName));
+  const today = attendanceIsoDate(new Date());
+  const classTeacher = getClassTeacherOf(group.code);
+  const classTeacherName = classTeacher ? classTeacher.fullName : 'не назначен';
+  const periodLabel = dates.length
+    ? `${attendanceFormatDate(dates[0])} — ${attendanceFormatDate(dates[dates.length - 1])}`
+    : '—';
+  const summary = { present:0, absent:0, late:0, excused:0, total:0, attended:0 };
+  const studentStats = new Map();
+  students.forEach(student => {
+    const stats = attendanceStatsForStudent(group.code, student.id, dates);
+    studentStats.set(student.id, stats);
+    Object.keys(summary).forEach(key => { summary[key] += stats[key] || 0; });
+  });
+  const average = summary.total ? Math.round(summary.attended / summary.total * 100) : 0;
+  const headerCells = dates.map(date => {
+    const todayClass = date === today ? ' today' : '';
+    return `<th class="attendance-col-day${todayClass}" scope="col"><span class="dow">${attendanceWeekday(date)}</span><span class="day">${attendanceShortDate(date)}</span>${date === today ? '<span class="today-mark">сегодня</span>' : ''}</th>`;
+  }).join('');
+  const rows = students.map((student, index) => {
+    const stats = studentStats.get(student.id);
+    const dayCells = dates.map(date => {
+      const status = attendanceRegister[group.code]?.[date]?.[String(student.id)] || '';
+      const label = ATTENDANCE_STATUS_LABELS[status] || ATTENDANCE_STATUS_LABELS[''];
+      const statusClass = status ? ` ${status}` : '';
+      const todayClass = date === today ? ' today' : '';
+      const nextStatus = ATTENDANCE_STATUS_ORDER[(ATTENDANCE_STATUS_ORDER.indexOf(status) + 1) % ATTENDANCE_STATUS_ORDER.length];
+      const actionLabel = allowed
+        ? `${student.fullName}, ${attendanceShortDate(date)}: ${label}. Нажмите, чтобы изменить на ${ATTENDANCE_STATUS_LABELS[nextStatus].toLowerCase()}.`
+        : `${student.fullName}, ${attendanceShortDate(date)}: ${label}`;
+      return `<td class="att-cell${statusClass}${todayClass}"><button type="button" class="attendance-mark${statusClass}" data-attendance-mark="${student.id}" data-attendance-date="${date}" aria-label="${escapeHtml(actionLabel)}" title="${escapeHtml(actionLabel)}" ${allowed ? '' : 'disabled'}>${ATTENDANCE_STATUS_MARKS[status] || '·'}</button></td>`;
+    }).join('');
+    return `<tr><td class="col-num">${index + 1}</td><td class="col-name" title="${escapeHtml(student.fullName)}">${escapeHtml(student.fullName)}</td>${dayCells}<td class="col-stat">${stats.attended}/${stats.total}</td><td class="col-pct">${stats.percent}%</td></tr>`;
+  }).join('');
+  const dayTotals = dates.map(date => {
+    const counts = { present:0, absent:0, late:0, excused:0 };
+    students.forEach(student => {
+      const status = attendanceRegister[group.code]?.[date]?.[String(student.id)] || '';
+      if (Object.prototype.hasOwnProperty.call(counts, status)) counts[status]++;
+    });
+    const attended = counts.present + counts.late;
+    const rowClass = attended >= counts.absent ? 't-present' : 't-absent';
+    const title = `Посетили или опоздали: ${attended} · Отсутствовали: ${counts.absent} · Уважительная причина: ${counts.excused}`;
+    return `<td class="${rowClass}" title="${title}">${attended}</td>`;
+  }).join('');
+  const periodStart = options.datePicker ? options.periodStart : '';
+  const periodEnd = options.datePicker ? options.periodEnd : '';
+  const periodControl = options.datePicker
+    ? `<div class="attendance-period-bar">
+        <label for="attendanceDateStart">Период с</label>
+        <input type="date" id="attendanceDateStart" value="${periodStart}">
+        <label for="attendanceDateEnd">Период до</label>
+        <input type="date" id="attendanceDateEnd" value="${periodEnd}">
+        <button type="button" class="attendance-week-nav" id="attendanceApplyDateRange">Показать период</button>
+      </div>`
+    : '';
+  const emptyState = students.length ? '' : '<div class="attendance-empty">В этой группе пока нет студентов.</div>';
+  target.innerHTML = `<div class="attendance-register">
+    ${periodControl}
+    <div class="journal-head">
+      <h2>Классный журнал</h2>
+      <div class="journal-meta">
+        <div class="row"><strong>Группа</strong><span>${escapeHtml(group.code)} · ${group.course} курс</span></div>
+        <div class="row"><strong>Специальность</strong><span>${escapeHtml(group.specialtyName || SPECIALTIES[group.spec] || group.spec)}</span></div>
+        <div class="row"><strong>Классный руководитель</strong><span>${escapeHtml(classTeacherName)}</span></div>
+        <div class="row"><strong>Период</strong><span>${periodLabel}</span></div>
+      </div>
+    </div>
+    ${allowed ? `<p class="attendance-register-access">Отметки сохраняются автоматически в этом браузере. Нажмите на ячейку, чтобы переключить статус.</p>` : `<p class="attendance-register-access locked">Просмотр доступен. Изменять посещаемость может только главный администратор или секретарь закреплённой специальности.</p>`}
+    ${emptyState}
+    ${students.length ? `<div class="journal-grid-wrap"><table class="journal-grid">
+      <thead><tr><th class="col-num" scope="col">№</th><th class="col-name" scope="col">Фамилия, имя, отчество</th>${headerCells}<th class="col-stat" scope="col">Посещ.<br>ений</th><th class="col-pct" scope="col">%</th></tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr><td class="col-label" colspan="2">Итого посетили</td>${dayTotals}<td colspan="2" title="Посещений / все отметки" style="font-size:11px;">${summary.attended}/${summary.total}</td></tr></tfoot>
+    </table></div>
+    <div class="journal-summary">
+      <div class="summary-item"><span class="label">Студентов</span><span class="value">${students.length}</span></div>
+      <div class="summary-item"><span class="label">Дней в периоде</span><span class="value">${dates.length}</span></div>
+      <div class="summary-item"><span class="label">Посещений</span><span class="value">${summary.attended}</span></div>
+      <div class="summary-item"><span class="label">Пропусков</span><span class="value">${summary.absent + summary.excused}</span></div>
+      <div class="summary-item"><span class="label">Средняя посещаемость</span><span class="value">${average}%</span></div>
+    </div>` : ''}
+    <div class="journal-legend">
+      <span><i class="mark p">✓</i> Присутствовал</span>
+      <span><i class="mark a">н</i> Отсутствовал</span>
+      <span><i class="mark l">о</i> Опоздал</span>
+      <span><i class="mark e">у</i> Уважительная причина</span>
+      <span class="hint">${allowed ? 'Нажимайте на ячейку, чтобы переключать отметку' : 'Ячейки доступны только для просмотра'}</span>
+    </div>
+  </div>`;
+  if (options.datePicker) {
+    const startInput = target.querySelector('#attendanceDateStart');
+    const endInput = target.querySelector('#attendanceDateEnd');
+    target.querySelector('#attendanceApplyDateRange')?.addEventListener('click', () => {
+      attendanceModalPeriodStart = startInput?.value || '';
+      attendanceModalPeriodEnd = endInput?.value || '';
+      if (!attendanceDatesBetween(attendanceModalPeriodStart, attendanceModalPeriodEnd).length) {
+        push('Укажите корректный период не более 366 дней: начало не позже окончания.', 'error', 3500);
+        return;
+      }
+      renderAttendancePanel();
+    });
+  }
+  target.querySelectorAll('[data-attendance-mark]').forEach(button => button.addEventListener('click', () => {
+    if (!allowed || !canEditAttendance(group.code)) return;
+    const studentId = Number(button.dataset.attendanceMark);
+    const date = button.dataset.attendanceDate;
+    const current = attendanceRegister[group.code]?.[date]?.[String(studentId)] || '';
+    const nextIndex = (ATTENDANCE_STATUS_ORDER.indexOf(current) + 1) % ATTENDANCE_STATUS_ORDER.length;
+    setAttendance(group.code, date, studentId, ATTENDANCE_STATUS_ORDER[nextIndex]);
+    if (options.datePicker) renderAttendancePanel();
+    else renderStandaloneAttendanceJournal();
+  }));
+}
 function renderStandaloneAttendanceJournal() {
   const groupSelect = document.getElementById('attendanceJournalGroup');
-  const dateInput = document.getElementById('attendanceJournalDate');
   const content = document.getElementById('attendanceJournalContent');
-  if (!groupSelect || !dateInput || !content) return;
+  const periodStart = document.getElementById('attendancePeriodStart');
+  const periodEnd = document.getElementById('attendancePeriodEnd');
+  if (!groupSelect || !content || !periodStart || !periodEnd) return;
   const groups = attendanceJournalGroups();
   const selectedGroup = groups.find(group => group.code === groupSelect.value) || groups[0];
   if (!selectedGroup) {
@@ -3356,29 +3668,12 @@ function renderStandaloneAttendanceJournal() {
   groupSelect.innerHTML = groups.map(group => `<option value="${escapeHtml(group.code)}">${escapeHtml(group.code)} · ${group.course} курс</option>`).join('');
   groupSelect.value = selectedGroup.code;
   groupSelect.disabled = groups.length < 2;
-  const date = dateInput.value || new Date().toISOString().slice(0, 10);
-  if (!dateInput.value) dateInput.value = date;
-  const marks = attendanceRegister[selectedGroup.code]?.[date] || {};
-  const allowed = canEditAttendance(selectedGroup.code);
-  const students = selectedGroup.students.slice().sort((a, b) => a.fullName.localeCompare(b.fullName));
-  const statuses = [['', 'Не отмечено'], ['present', '✅ Присутствует'], ['absent', '❌ Отсутствует'], ['late', '🕒 Опоздал'], ['excused', '📝 Уважительная причина']];
-  const present = Object.values(marks).filter(value => value === 'present' || value === 'late').length;
-  const absent = Object.values(marks).filter(value => value === 'absent').length;
-  const excused = Object.values(marks).filter(value => value === 'excused').length;
-  content.innerHTML = `<div class="attendance-panel active">
-    <h3 style="margin:0 0 6px;color:var(--primary,#002D62)">Ведомость группы ${escapeHtml(selectedGroup.code)}</h3>
-    <div class="attendance-toolbar"><div class="attendance-summary-card"><span>✅ Присутствуют</span><b>${present}</b></div><div class="attendance-summary-card"><span>❌ Отсутствуют</span><b>${absent}</b></div><div class="attendance-summary-card"><span>📝 Уважительная причина</span><b>${excused}</b></div></div>
-    <div class="${allowed ? 'attendance-help' : 'attendance-locked'}">${allowed ? (isAdminAuthed ? 'Главный администратор: доступ ко всем группам.' : 'Секретарь техникума: доступ к группам закреплённых специальностей.') : 'Ведомость доступна для просмотра. Отмечать посещаемость может только главный администратор или секретарь закреплённой специальности.'}</div>
-    <div class="attendance-table-wrap"><table class="attendance-table"><thead><tr><th>№</th><th>ФИО студента</th><th>Статус посещения</th></tr></thead><tbody>
-      ${students.map((student, index) => `<tr class="attendance-row"><td>${index + 1}</td><td>${escapeHtml(student.fullName)}</td><td><select data-journal-attendance-student="${student.id}" ${allowed ? '' : 'disabled'}>${statuses.map(([value, label]) => `<option value="${value}" ${marks[String(student.id)] === value ? 'selected' : ''}>${label}</option>`).join('')}</select></td></tr>`).join('')}
-    </tbody></table></div>
-    <p class="role-admin-note">Процент посещаемости: присутствовал или опоздал ÷ все проставленные отметки. Дни без отметок не учитываются.</p>
-  </div>`;
-  content.querySelectorAll('[data-journal-attendance-student]').forEach(select => select.addEventListener('change', () => {
-    if (!canEditAttendance(selectedGroup.code)) return;
-    setAttendance(selectedGroup.code, date, Number(select.dataset.journalAttendanceStudent), select.value);
-    renderStandaloneAttendanceJournal();
-  }));
+  const dates = attendanceDatesBetween(periodStart.value, periodEnd.value);
+  if (!dates.length) {
+    content.innerHTML = '<div class="attendance-locked">Укажите корректный период: дата начала не должна быть позже даты окончания.</div>';
+    return;
+  }
+  renderAttendanceRegister(content, selectedGroup, dates, canEditAttendance(selectedGroup.code));
 }
 function addAttendanceUI() {
   const modal = document.querySelector('#journalOverlay .journal-modal');
@@ -3412,45 +3707,22 @@ function renderAttendancePanel() {
   const panel = document.getElementById('attendancePanel');
   const group = GROUPS.find(g => g.code === currentGroupCodeForJournal);
   if (!panel || !group) return;
-  const allowed = canEditAttendance(group.code);
-  const user = currentAttendanceUser();
-  const students = group.students.slice().sort((a,b) => a.fullName.localeCompare(b.fullName));
-  const day = attendanceRegister[group.code]?.[attendanceDate] || {};
-  const presentCount = Object.values(day).filter(v => v === 'present' || v === 'late').length;
-  const absentCount = Object.values(day).filter(v => v === 'absent').length;
-  const excusedCount = Object.values(day).filter(v => v === 'excused').length;
-  panel.innerHTML = `
-    <h3 style="margin:0 0 6px;color:var(--primary,#002D62)">📋 Ведомость посещаемости — ${escapeHtml(group.code)}</h3>
-    <p style="opacity:.75">Отметки за выбранную дату сохраняются в этом браузере и учитываются в процентах посещаемости.</p>
-    <div class="attendance-toolbar">
-      <label for="attendanceDate">Дата:</label>
-      <input type="date" id="attendanceDate" value="${attendanceDate}" ${allowed?'':'disabled'}>
-      <span>✅ Присутствуют: <b>${presentCount}</b></span>
-      <span>❌ Отсутствуют: <b>${absentCount}</b></span>
-      <span>📝 Уважительная причина: <b>${excusedCount}</b></span>
-    </div>
-    ${allowed ? `<div class="attendance-help">${isAdminAuthed ? 'Вы вошли как главный администратор: можно отмечать посещаемость любой группы.' : 'Вы вошли как секретарь техникума: можно отмечать посещаемость групп закреплённых специальностей. Изменения сохраняются автоматически.'}</div>` :
-      `<div class="attendance-locked">Просмотр ведомости доступен всем вошедшим. Отмечать посещаемость может только главный администратор или секретарь закреплённой специальности.</div>`}
-    <div class="journal-table-wrap attendance-table-wrap"><table class="journal-table attendance-table">
-      <thead><tr><th>Студент</th><th>Посещение</th></tr></thead>
-      <tbody>${students.map((stu,i)=>{
-        const val = day[String(stu.id)] || '';
-        const opts = [['','Не отмечено'],['present','✅ Присутствует'],['absent','❌ Отсутствует'],['late','🕒 Опоздал'],['excused','📝 Уважительная причина']];
-        return `<tr class="attendance-row"><td>${escapeHtml(stu.fullName)}</td><td><select data-attendance-student="${stu.id}" aria-label="Посещаемость: ${escapeHtml(stu.fullName)}" ${allowed?'':'disabled'}>${opts.map(([v,l])=>`<option value="${v}" ${val===v?'selected':''}>${l}</option>`).join('')}</select></td></tr>`;
-      }).join('')}</tbody>
-    </table></div>
-    <p class="role-admin-note">Расчёт процента: присутствовал или опоздал ÷ все проставленные отметки. Дни без отметок в расчёт не входят.</p>`;
-  const dateInput = document.getElementById('attendanceDate');
-  if (dateInput) dateInput.addEventListener('change', () => {
-    attendanceDate = dateInput.value || new Date().toISOString().slice(0,10);
-    renderAttendancePanel();
+  if (!attendanceModalPeriodStart || !attendanceModalPeriodEnd) {
+    attendanceModalPeriodStart = attendanceWeekStart(attendanceDate);
+    attendanceModalPeriodEnd = attendanceAddDays(attendanceModalPeriodStart, 6);
+  }
+  const dates = attendanceDatesBetween(attendanceModalPeriodStart, attendanceModalPeriodEnd);
+  if (!dates.length) {
+    push('Укажите корректный период не более 366 дней: начало не позже окончания.', 'error', 3500);
+    return;
+  }
+  renderAttendanceRegister(panel, group, dates, canEditAttendance(group.code), {
+    datePicker:true,
+    periodStart:attendanceModalPeriodStart,
+    periodEnd:attendanceModalPeriodEnd
   });
-  panel.querySelectorAll('[data-attendance-student]').forEach(sel => sel.addEventListener('change', () => {
-    if (!canEditAttendance(group.code)) return;
-    setAttendance(group.code, attendanceDate, Number(sel.dataset.attendanceStudent), sel.value);
-    renderAttendancePanel();
-  }));
 }
+
 /* Управление ролями: администратор назначает старосту и закрепляет за группой */
 function addRoleManagementPanel() {
   const adminRoot = document.getElementById('adminApp');
@@ -3520,12 +3792,12 @@ addAttendanceUI();
 addRoleManagementPanel();
 renderRoleManagement();
 document.getElementById('attendanceJournalGroup').addEventListener('change', renderStandaloneAttendanceJournal);
-document.getElementById('attendanceJournalDate').value = attendanceDate;
-document.getElementById('attendanceJournalDate').addEventListener('change', renderStandaloneAttendanceJournal);
 const attendancePeriodStart = document.getElementById('attendancePeriodStart');
 const attendancePeriodEnd = document.getElementById('attendancePeriodEnd');
 attendancePeriodStart.value = attendanceDate.slice(0, 8) + '01';
 attendancePeriodEnd.value = attendanceDate;
+attendancePeriodStart.max = attendanceDate;
+attendancePeriodEnd.max = attendanceDate;
 attendancePeriodEnd.min = attendancePeriodStart.value;
 attendancePeriodStart.max = attendancePeriodEnd.value;
 attendancePeriodStart.addEventListener('change', () => {
@@ -3533,6 +3805,13 @@ attendancePeriodStart.addEventListener('change', () => {
 });
 attendancePeriodEnd.addEventListener('change', () => {
   attendancePeriodStart.max = attendancePeriodEnd.value;
+});
+document.getElementById('attendanceApplyPeriodBtn').addEventListener('click', () => {
+  if (!attendanceDatesBetween(attendancePeriodStart.value, attendancePeriodEnd.value).length) {
+    push('Укажите корректный период: дата начала не должна быть позже даты окончания.', 'error', 3000);
+    return;
+  }
+  renderStandaloneAttendanceJournal();
 });
 document.getElementById('exportAttendanceJournalBtn').addEventListener('click', exportAttendanceJournalToExcel);
 renderStandaloneAttendanceJournal();
@@ -3558,12 +3837,15 @@ switchToMain = function() {
   originalSwitchToMainForRoles();
   refreshGradeEditPermission();
 };
+
 setTimeout(() => {
   if (!SafeStorage.available) { setSaveStatus('error'); return; }
   const admins = TEACHERS.filter(t => t.role && t.role !== 'teacher').length;
   push(`Загружено: ${STUDENTS.length} студентов, ${TEACHERS.length} преподавателей (${admins} с должностями)`, 'success', 4000);
 }, 600);
+
 })();
+
 /* ============================================================
    КНОПКА-«ГЛАЗ» ДЛЯ ВСЕХ ПОЛЕЙ ПАРОЛЯ
    ============================================================ */
@@ -3599,6 +3881,7 @@ setTimeout(() => {
     initPasswordToggles();
   }
 })();
+
 /* ============================================================
    НОВОСТИ: расширенный редактор публикаций ДТПА
    Совместимость: старые записи с полем image поддерживаются.
@@ -3614,6 +3897,7 @@ setTimeout(() => {
   const MAX_ATTACHMENT_BYTES = 450 * 1024;
   const MAX_HISTORY = 30;
   const escapeHTML = value => String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
+
   function readPosts() {
     try {
       const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -3639,6 +3923,7 @@ setTimeout(() => {
     try { localStorage.setItem(NOTIFICATION_KEY, JSON.stringify(items.slice(-200))); return true; }
     catch (_) { return false; }
   }
+
   const tools = document.getElementById('newsAdminTools');
   const form = document.getElementById('newsAdminForm');
   const feed = document.getElementById('feed');
@@ -3676,6 +3961,7 @@ setTimeout(() => {
   let draftTimer = 0;
   let historyPostId = '';
   if (!tools || !form || !feed || !status || !composePrompt) return;
+
   function showStatus(message, kind) {
     status.textContent = message || '';
     status.className = 'news-admin-status' + (kind ? ' ' + kind : '');
@@ -3723,6 +4009,7 @@ setTimeout(() => {
       type: String(file.type || ''), size: Math.max(0, Number(file.size) || 0), data: safeAttachmentData(file)
     })).filter(file => file.data && file.name).slice(0, MAX_ATTACHMENTS);
   }
+
   // Стабильный идентификатор для старых статичных карточек нужен, чтобы
   // после переноса в localStorage не потерять их реакции и комментарии.
   function legacySocialId(article) {
@@ -3903,6 +4190,7 @@ setTimeout(() => {
     flushParagraph(); flushList();
     return output.join('');
   }
+
   function currentImages() {
     const images = selectedImages.slice();
     const remote = safeImageURL(imageInput ? imageInput.value : '');
@@ -4015,6 +4303,7 @@ setTimeout(() => {
     if (event.key === NOTIFICATION_KEY) renderNotifications();
     if (event.key === STORAGE_KEY) { activateScheduledPosts(); renderPublicPosts(); }
   });
+
   function activateScheduledPosts() {
     const posts = readPosts();
     let changed = false;
@@ -4028,6 +4317,7 @@ setTimeout(() => {
     });
     if (changed) { writePosts(posts); renderPublicPosts(); }
   }
+
   function renderPublicPosts() {
     feed.querySelectorAll('[data-news-admin-post="true"]').forEach(node => node.remove());
     const marker = feed.querySelector('.load-more-wrapper');
@@ -4200,6 +4490,7 @@ setTimeout(() => {
     document.body.style.overflow = '';
     historyPostId = '';
   }
+
   composePrompt.addEventListener('click', () => {
     const draft = readDraft();
     if (draft && meaningfulDraft(draft)) {
@@ -4257,6 +4548,7 @@ setTimeout(() => {
   form.addEventListener('change', event => {
     if (!event.target.matches('input[type="file"]')) scheduleDraftSave();
   });
+
   if (imageFileInput) imageFileInput.addEventListener('change', async () => {
     const files = Array.from(imageFileInput.files || []);
     imageFileInput.value = '';
@@ -4313,6 +4605,7 @@ setTimeout(() => {
     selectedAttachments.splice(Number(button.dataset.removePostAttachment), 1);
     renderAttachmentPreviews(); scheduleDraftSave();
   });
+
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!window.__dtpaNewsAdminAuthorized) { showStatus('Нет доступа. Сначала войдите в админ-панель.', 'error'); return; }
@@ -4378,6 +4671,7 @@ setTimeout(() => {
     else showStatus(oldPost ? 'Изменения сохранены. История версии обновлена.' : 'Публикация опубликована в единой ленте.', 'ok');
     saveButton.disabled = false; saveButton.textContent = 'Опубликовать';
   });
+
   feed.addEventListener('click', event => {
     const editButton = event.target.closest('[data-news-edit]');
     const deleteButton = event.target.closest('[data-news-delete]');
@@ -4435,6 +4729,7 @@ setTimeout(() => {
     showStatus('Загружена старая версия. Нажмите «Сохранить изменения», чтобы восстановить её.', 'ok');
   });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && historyModal && !historyModal.hidden) closeHistory(); });
+
   if (notificationsToggle && notificationsPanel) notificationsToggle.addEventListener('click', () => {
     notificationsPanel.hidden = !notificationsPanel.hidden;
     notificationsToggle.setAttribute('aria-expanded', String(!notificationsPanel.hidden));
@@ -4455,6 +4750,7 @@ setTimeout(() => {
     if (notificationsPanel) notificationsPanel.hidden = true;
     if (notificationsToggle) notificationsToggle.setAttribute('aria-expanded','false');
   });
+
   window.addEventListener('dtpa:admin-auth-state', event => {
     const authorized = !!(event.detail && event.detail.authorized);
     window.__dtpaNewsAdminAuthorized = authorized;
@@ -4472,6 +4768,7 @@ setTimeout(() => {
   setInterval(activateScheduledPosts, 15000);
   renderImagePreviews(); renderAttachmentPreviews();
 })();
+
 /* ============================================================
    СОЦИАЛЬНАЯ ЛЕНТА НОВОСТЕЙ: реакции и комментарии в стиле Telegram
    Все данные сохраняются локально в этом браузере.
@@ -4485,6 +4782,7 @@ setTimeout(() => {
   const GUEST_NAME_KEY = 'dtpa-news-comment-name-v1';
   const REACTIONS = ['👍', '❤️', '🔥', '👏', '😁', '🎉'];
   const openComments = new Set();
+
   function escapeHTML(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
   }
@@ -4627,6 +4925,7 @@ setTimeout(() => {
     }
     return { name, avatar:'🙂' };
   }
+
   feed.addEventListener('click', event => {
     const reactionButton = event.target.closest('[data-news-reaction]');
     const toggleButton = event.target.closest('[data-news-toggle-comments]');
@@ -4652,6 +4951,7 @@ setTimeout(() => {
       renderSocial(article, index);
     }
   });
+
   feed.addEventListener('submit', event => {
     const form = event.target.closest('[data-news-comment-form]');
     if (!form) return;
@@ -4670,6 +4970,7 @@ setTimeout(() => {
     openComments.add(id);
     if (saveSocial()) renderSocial(article, index);
   });
+
   // Админ-публикации создаются скриптом выше; наблюдатель добавляет для них реакции и комментарии.
   const observer = new MutationObserver(() => renderAllSocial());
   observer.observe(feed, { childList:true });
