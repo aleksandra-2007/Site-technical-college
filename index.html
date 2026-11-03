@@ -12,7 +12,6 @@
      ПУБЛИЧНЫЙ САЙТ
      ============================================================ -->
 <div id="publicSite">
-
 <header class="header">
   <div class="container">
     <div class="logo">🏛️ ГБПОУ "Донецкий техникум промышленной автоматики <span>им. А.В. Захарченко</span></div>
@@ -27,6 +26,7 @@
         <li><a href="#" data-page="prof">Профессионалитет</a></li>
         <li><a href="#" data-page="location">Где находимся</a></li>
         <li><a href="#" data-page="contacts">Контактные данные</a></li>
+        <li><a href="#" data-page="secretariat">🔐 Секретариат</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -37,7 +37,6 @@
     </div>
   </div>
 </header>
-
 <!-- ==================== ГЛАВНАЯ ==================== -->
 <div class="page active" id="page-home">
   <section class="hero">
@@ -57,7 +56,6 @@
       </div>
     </div>
   </section>
-
   <section class="section">
     <div class="container">
       <h2 class="section-title fade-in">Наши специальности</h2>
@@ -72,7 +70,6 @@
       </div>
     </div>
   </section>
-
   <section class="section" style="background-color:var(--color-bg-light);">
     <div class="container about-grid">
       <div class="about-text">
@@ -86,15 +83,24 @@
           <div class="feature-item"><span class="icon">🤝</span> Партнеры-работодатели</div>
         </div>
       </div>
-      <div class="about-image-placeholder">
-        <span style="font-size:4rem; opacity:0.3;">🏛️</span>
-        <span>Фотогалерея техникума</span>
-        <span style="font-size:0.85rem; opacity:0.6;">(интерактивный 3D-тур)</span>
-      </div>
+      <figure class="about-photo">
+        <img
+          class="about-photo__image"
+          src="dtpa-main.jpg"
+          alt="Главный вход Донецкого техникума промышленной автоматики"
+          width="604"
+          height="453"
+          loading="lazy"
+          decoding="async">
+        <figcaption class="about-photo__caption">
+          Главный вход техникума, лето 2008. Фото: Spanwinfora /
+          <a href="https://commons.wikimedia.org/wiki/File:Dtpa_ukraine_technikum_leto_paradnii_vhod.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>,
+          лицензия <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.
+        </figcaption>
+      </figure>
     </div>
   </section>
 </div>
-
 <!-- ==================== НОВОСТИ ==================== -->
 <div class="page" id="page-news">
 <div class="news-admin-tools" id="newsAdminTools" hidden>
@@ -196,7 +202,6 @@
     </div>
   </div>
 </div>
-
 <div class="student-notifications container" id="studentNotifications">
   <div class="student-notifications-bar">
     <button type="button" id="studentNotificationsToggle" aria-expanded="false">🔔 Уведомления <span id="studentNotificationsCount" class="student-notification-count">0</span></button>
@@ -204,7 +209,6 @@
   </div>
   <div id="studentNotificationsPanel" class="student-notifications-panel" hidden><div id="studentNotificationsList"></div></div>
 </div>
-
   <section class="news-section">
     <div class="container">
       <div class="news-layout">
@@ -279,7 +283,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== СВЕДЕНИЯ ==================== -->
 <div class="page" id="page-info">
   <section class="page-hero">
@@ -436,7 +439,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== СТУДЕНТУ ==================== -->
 <div class="page" id="page-student">
   <section class="hero">
@@ -504,7 +506,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== АБИТУРИЕНТУ ==================== -->
 <div class="page" id="page-abiturient">
   <section class="hero">
@@ -562,7 +563,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== ПРОФЕССИОНАЛИТЕТ ==================== -->
 <div class="page" id="page-prof">
   <section class="hero">
@@ -595,7 +595,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== ГДЕ НАХОДИМСЯ ==================== -->
 <div class="page" id="page-location">
   <section class="hero">
@@ -635,7 +634,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== КОНТАКТЫ ==================== -->
 <div class="page" id="page-contacts">
   <section class="hero">
@@ -680,7 +678,6 @@
     </div>
   </section>
 </div>
-
 <!-- ==================== ПОДАТЬ ДОКУМЕНТЫ ==================== -->
 <div class="page" id="page-register">
   <div class="split">
@@ -726,6 +723,7 @@
           </form>
           <div class="divider">или</div>
           <p class="login-link">Нет аккаунта?<a href="#" id="show-register">Зарегистрироваться</a></p>
+          <p class="login-link" style="margin-top:10px;"><a href="#" data-page="secretariat">🔐 Сотрудник техникума? Войти через Секретариат</a></p>
         </div>
         <div id="forgot-view" hidden>
           <h2 class="form-box__title">Восстановление аккаунта</h2>
@@ -763,7 +761,35 @@
     </main>
   </div>
 </div>
-
+<!-- ==================== СЕКРЕТАРИАТ ==================== -->
+<div class="page" id="page-secretariat">
+  <section class="v3">
+    <div class="v3__body">
+      <div class="v3__card">
+        <h1>Авторизация сотрудника</h1>
+        <p class="hint">
+          Вход доступен только администраторам и секретарям по персональным учетным данным.
+        </p>
+        <form class="sec-login-form" id="secLoginForm">
+          <div class="field">
+            <label for="secLogin">Логин</label>
+            <input id="secLogin" name="login" autocomplete="username" placeholder="Логин сотрудника" required>
+          </div>
+          <div class="field">
+            <label for="secPassword">Пароль</label>
+            <input id="secPassword" name="password" type="password" autocomplete="current-password" placeholder="Введите пароль" required>
+          </div>
+          <button type="submit">Войти в систему</button>
+          <p class="msg" id="secLoginMsg"></p>
+        </form>
+        <p class="v3__foot">
+          Служба поддержки: внутр. 210 · support@sekretariat.ru<br>
+          Не передавайте пароль третьим лицам.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
 <!-- ==================== ФУТЕР ==================== -->
 <footer class="footer">
   <div class="container">
@@ -794,9 +820,7 @@
     <div class="footer-bottom">Официальный сайт Донецкого техникума промышленной автоматики им. А.В. Захарченко</div>
   </div>
 </footer>
-
 </div><!-- /#publicSite -->
-
 <!-- Личный кабинет -->
 <div class="profile-overlay" id="profileOverlay" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
   <section class="profile-dialog">
@@ -807,12 +831,39 @@
     <div class="profile-dialog__body" id="profileBody"></div>
   </section>
 </div>
-
+<!-- ============================================================
+     ЛИЧНЫЙ КАБИНЕТ СЕКРЕТАРЯ (Секретариат)
+     ============================================================ -->
+<div class="sec-cab" id="secCab" hidden>
+  <div class="sec-cab__backdrop" data-sec-close></div>
+  <div class="sec-cab__card">
+    <header class="sec-cab__head">
+      <div class="sec-cab__avatar" id="secCabAvatar">—</div>
+      <div>
+        <p class="sec-cab__role" id="secCabRole"></p>
+        <h2 class="sec-cab__name" id="secCabName"></h2>
+        <p class="sec-cab__dept" id="secCabDept"></p>
+      </div>
+      <button class="sec-cab__close" id="secCabClose" aria-label="Закрыть кабинет">✕</button>
+    </header>
+    <div class="sec-cab__stats" id="secCabStats"></div>
+    <div class="sec-cab__section">
+      <h3>Задачи на сегодня</h3>
+      <ul class="sec-cab__tasks" id="secCabTasks"></ul>
+    </div>
+    <footer class="sec-cab__foot">
+      <span id="secCabEmail"></span>
+      <div class="sec-cab__actions">
+        <button class="sec-cab__perf" id="secCabPerfBtn" type="button">📊 Успеваемость</button>
+        <button class="sec-cab__logout" id="secCabLogout" type="button">Выйти</button>
+      </div>
+    </footer>
+  </div>
+</div>
 <!-- ============================================================
      СИСТЕМА УСПЕВАЕМОСТИ
      ============================================================ -->
 <div id="perfApp" style="display:none;">
-
 <header class="header">
   <div class="container">
     <div class="logo">📊 ДТПА <span>Успеваемость</span></div>
@@ -836,11 +887,8 @@
     </div>
   </div>
 </header>
-
 <div class="storage-warning" id="storageWarning">⚠️ <strong>Внимание:</strong> локальное хранилище недоступно. Изменения не сохранятся при перезагрузке.</div>
-
 <div id="mainApp">
-
 <section class="dashboard-section" id="dashboard">
   <div class="container">
     <div class="dashboard-header">
@@ -864,7 +912,6 @@
     </div>
   </div>
 </section>
-
 <section class="groups-section" id="groups">
   <div class="container">
     <h2 class="section-heading">🏫 Посещаемость по группам</h2>
@@ -878,7 +925,6 @@
     <div class="groups-grid" id="groupsGrid"></div>
   </div>
 </section>
-
 <section class="attendance-journal-section" id="attendanceJournal">
   <div class="container attendance-journal-card">
     <header class="attendance-journal-hero">
@@ -899,7 +945,6 @@
     </div>
   </div>
 </section>
-
 <section class="teachers-section" id="teachers">
   <div class="container">
     <div class="section-header-row">
@@ -928,7 +973,6 @@
     <div class="teachers-grid" id="teachersGrid"></div>
   </div>
 </section>
-
 <section class="students-section" id="students">
   <div class="container">
     <div class="filters-panel">
@@ -957,8 +1001,6 @@
     <div class="results-info" id="resultsInfo"></div>
   </div>
 </section>
-
-
 <!-- Модальное окно студента -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modalContent">
@@ -985,8 +1027,6 @@
     </div>
   </div>
 </div>
-
-
 <!-- Форма студента -->
 <div class="modal-overlay form-overlay" id="studentFormOverlay">
   <div class="modal student-form-modal">
@@ -1017,7 +1057,6 @@
     </div>
   </div>
 </div>
-
 <!-- Форма преподавателя -->
 <div class="modal-overlay form-overlay" id="teacherFormOverlay">
   <div class="modal student-form-modal">
@@ -1065,7 +1104,6 @@
     </div>
   </div>
 </div>
-
 <!-- Корзина -->
 <div class="modal-overlay form-overlay" id="trashOverlay">
   <div class="modal trash-modal">
@@ -1079,7 +1117,6 @@
     </div>
   </div>
 </div>
-
 <!-- Перевод -->
 <div class="modal-overlay form-overlay" id="transferOverlay">
   <div class="modal transfer-modal">
@@ -1101,7 +1138,6 @@
     </div>
   </div>
 </div>
-
 <!-- Журнал -->
 <div class="modal-overlay journal-overlay" id="journalOverlay">
   <div class="modal journal-modal">
@@ -1128,7 +1164,6 @@
     </div>
   </div>
 </div>
-
 <!-- Выбор преподавателя -->
 <div class="modal-overlay form-overlay" id="pickerOverlay">
   <div class="modal picker-modal">
@@ -1142,7 +1177,6 @@
     </div>
   </div>
 </div>
-
 <!-- Форма заявки -->
 <div class="modal-overlay form-overlay" id="claimFormOverlay" hidden>
   <div class="modal student-form-modal">
@@ -1177,7 +1211,6 @@
     </div>
   </div>
 </div>
-
 <!-- Список заявок (админ-просмотр) -->
 <div class="modal-overlay form-overlay" id="claimsAdminOverlay">
   <div class="modal trash-modal" style="max-width:680px;">
@@ -1197,9 +1230,7 @@
     </div>
   </div>
 </div>
-
 </div><!-- /#mainApp -->
-
 <div id="adminApp" class="admin-app" style="display:none;">
   <div class="container">
     <div class="stats-grid" id="adminStatsGrid"></div>
@@ -1232,7 +1263,6 @@
     </div>
     <div class="claims-list" id="adminClaimsList"></div>
     <div class="results-info" id="adminResultsInfo"></div>
-
     <section class="registered-users-panel" id="registeredUsersPanel" aria-labelledby="registeredUsersTitle">
       <div class="registered-users-head">
         <div>
@@ -1260,7 +1290,6 @@
     </section>
   </div>
 </div>
-
 <!-- Модалка пароля -->
 <div class="modal-overlay password-overlay" id="passwordOverlay">
   <div class="modal student-form-modal">
@@ -1281,12 +1310,9 @@
     </div>
   </div>
 </div>
-
 </div><!-- /#perfApp -->
-
 <!-- Общая область push-уведомлений -->
 <div class="push-area" id="push-area"></div>
-
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 
