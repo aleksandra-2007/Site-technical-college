@@ -12,7 +12,91 @@ function showPublicSite() {
   document.getElementById('publicSite').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'auto' });
 }
-
+/* ============================================================
+   СЕКРЕТАРИАТ: учётные записи секретарей техникума
+   ============================================================ */
+const DTPA_SECRETARY_ACCOUNTS = [
+  {
+    slot: 1, login: 'ucheb.ivanova', password: 'Uch2024!',
+    name: 'Иванова Мария Петровна', roleTitle: 'Секретарь учебного отдела',
+    dept: 'Учебная часть · каб. 210', email: 'ucheb.ivanova@sekretariat.ru',
+    avatar: '👩‍💼', gender: 'f',
+    stats: [
+      { value: '14',  label: 'заявок за сегодня' },
+      { value: '268', label: 'студентов на связи' },
+      { value: '9',   label: 'документов в работе' }
+    ],
+    tasks: [
+      'Подготовить расписание на 2 семестр',
+      'Выдать справки-вызовы группе ИС-21',
+      'Согласовать замену преподавателя'
+    ]
+  },
+  {
+    slot: 2, login: 'kadry.petrov', password: 'Kadr2024!',
+    name: 'Петров Алексей Сергеевич', roleTitle: 'Секретарь отдела кадров',
+    dept: 'Отдел кадров · каб. 118', email: 'kadry.petrov@sekretariat.ru',
+    avatar: '👨‍💼', gender: 'm',
+    stats: [
+      { value: '6',  label: 'заявлений на приём' },
+      { value: '42', label: 'личных дел в работе' },
+      { value: '3',  label: 'приказа к подписи' }
+    ],
+    tasks: [
+      'Оформить приказы о приёме на работу',
+      'Подготовить график отпусков на год',
+      'Внести данные новых сотрудников в 1С'
+    ]
+  },
+  {
+    slot: 3, login: 'dekanat.sidorova', password: 'Dek2024!',
+    name: 'Сидорова Ольга Николаевна', roleTitle: 'Секретарь деканата',
+    dept: 'Деканат факультета ИТ · каб. 305', email: 'dekanat.sidorova@sekretariat.ru',
+    avatar: '👩‍💼', gender: 'f',
+    stats: [
+      { value: '23', label: 'обращений студентов' },
+      { value: '5',  label: 'заседаний в плане' },
+      { value: '11', label: 'ведомостей на проверку' }
+    ],
+    tasks: [
+      'Собрать ведомости текущей аттестации',
+      'Назначить время консультаций',
+      'Разослать повестку заседания кафедры'
+    ]
+  },
+  {
+    slot: 4, login: 'priem.kuznetsov', password: 'Priem2024!',
+    name: 'Кузнецов Дмитрий Андреевич', roleTitle: 'Секретарь приёмной комиссии',
+    dept: 'Приёмная комиссия · холл 1 этажа', email: 'priem.kuznetsov@sekretariat.ru',
+    avatar: '👨‍💼', gender: 'm',
+    stats: [
+      { value: '57', label: 'заявлений принято' },
+      { value: '12', label: 'консультаций сегодня' },
+      { value: '4',  label: 'пакета документов' }
+    ],
+    tasks: [
+      'Проверить комплектность документов абитуриентов',
+      'Обновить график дней открытых дверей',
+      'Сформировать реестр вступительных испытаний'
+    ]
+  },
+  {
+    slot: 5, login: 'arhiv.morozova', password: 'Arh2024!',
+    name: 'Морозова Елена Викторовна', roleTitle: 'Секретарь архива',
+    dept: 'Архив · пом. 004', email: 'arhiv.morozova@sekretariat.ru',
+    avatar: '👩‍💼', gender: 'f',
+    stats: [
+      { value: '8',     label: 'запросов на выдачу' },
+      { value: '1 240', label: 'дел в фонде' },
+      { value: '2',     label: 'акта на списание' }
+    ],
+    tasks: [
+      'Выдать архивные справки по запросу №48',
+      'Провести опись дел за прошлый год',
+      'Подготовить акт об уничтожении черновиков'
+    ]
+  }
+];
 document.querySelectorAll('.header').forEach(header => {
   const spacer = document.createElement('div');
   spacer.className = 'header-spacer';
@@ -30,7 +114,6 @@ document.querySelectorAll('.header').forEach(header => {
     header.__dtpaHeaderResizeObserver = observer;
   } else window.addEventListener('resize', syncSpacer);
 });
-
 document.querySelectorAll('[data-nav-toggle]').forEach(button => {
   const header = button.closest('.header');
   const nav = header && header.querySelector('nav');
@@ -55,21 +138,17 @@ function getVisibleHeaderHeight() {
   const header = [...document.querySelectorAll('.header')].find(item => item.getClientRects().length);
   return header ? header.getBoundingClientRect().height : 0;
 }
-
 /* ============================================================
    ПУБЛИЧНЫЙ САЙТ
    ============================================================ */
 (function () {
 document.addEventListener('DOMContentLoaded', function () {
-
   const STORAGE_KEY = 'dontpa-theme';
   const toggleBtns = document.querySelectorAll('.theme-toggle');
-
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
-
   function updateIcons() {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     toggleBtns.forEach(btn => {
@@ -78,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   updateIcons();
-
   toggleBtns.forEach(btn => {
     btn.addEventListener('click', function () {
       const cur = document.documentElement.getAttribute('data-theme');
@@ -89,7 +167,6 @@ document.addEventListener('DOMContentLoaded', function () {
       updateIcons();
     });
   });
-
   const pushArea = document.getElementById('push-area');
   const PUSH_ICONS = { success:'✅', error:'❌', info:'ℹ️', code:'🔐' };
   function push(message, type, duration) {
@@ -106,11 +183,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }, duration || 3200);
   }
   window.__dtpaPush = push;
-
   const pages = document.querySelectorAll('#publicSite .page');
   const navLinks = document.querySelectorAll('#mainNav a');
-
+  /* Гости видят только форму входа; содержимое кабинета открывается после проверки роли. */
+  function isSecretaryOrAdmin(user) {
+    if (!user) return false;
+    const role = String(user.role || '').toLowerCase();
+    return role === 'admin' || role === 'master-admin' || role === 'secretary';
+  }
+  function canOpenSecretariat() {
+    const user = getCurrentUser();
+    return !user || isSecretaryOrAdmin(user);
+  }
   function showPage(name) {
+    if (name === 'secretariat' && !canOpenSecretariat()) {
+      push('Секретариат доступен только администраторам и секретарям. Выйдите из студенческого аккаунта или войдите под служебной учётной записью.', 'error', 6000);
+      return;
+    }
     pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + name));
     navLinks.forEach(a => a.classList.toggle('active', a.dataset.page === name));
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -123,14 +212,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   window.DTPA_navigate = showPage;
-
   document.querySelectorAll('[data-page]').forEach(el => {
     el.addEventListener('click', function (e) {
       e.preventDefault();
       showPage(this.dataset.page);
     });
   });
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -140,7 +227,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('#publicSite .fade-in').forEach(el => observer.observe(el));
-
   document.querySelectorAll('.faq-question').forEach(btn => {
     btn.addEventListener('click', function () {
       const item = this.closest('.faq-item');
@@ -149,7 +235,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!isOpen) item.classList.add('open');
     });
   });
-
   const loadMoreBtn = document.getElementById('load-more');
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', function () {
@@ -161,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 800);
     });
   }
-
   const scheduleTabs = document.querySelectorAll('.schedule-tab');
   const schedulePanes = document.querySelectorAll('.schedule-pane');
   scheduleTabs.forEach(tab => {
@@ -174,7 +258,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (activePane) activePane.classList.add('active');
     });
   });
-
   const docForm = document.getElementById('doc-form');
   if (docForm) {
     docForm.addEventListener('submit', function (e) {
@@ -209,7 +292,6 @@ document.addEventListener('DOMContentLoaded', function () {
       el.addEventListener('change', function () { this.style.borderColor = ''; this.style.outline = ''; });
     });
   }
-
   document.querySelectorAll('#publicSite a[href^="#"], #publicSite [data-scroll]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href') || '';
@@ -224,11 +306,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-
   const sections = document.querySelectorAll('#page-info .content-block');
   const subnavLinks = document.querySelectorAll('.subnav a');
   const sidebarLinks = document.querySelectorAll('#page-info .sidebar-card nav a[href^="#"]');
-
   function updateActiveLink() {
     const infoPage = document.getElementById('page-info');
     if (!infoPage || !infoPage.classList.contains('active')) return;
@@ -243,7 +323,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   window.addEventListener('scroll', updateActiveLink);
   updateActiveLink();
-
   const views = {
     register: document.getElementById('register-view'),
     login: document.getElementById('login-view'),
@@ -251,13 +330,11 @@ document.addEventListener('DOMContentLoaded', function () {
     code: document.getElementById('code-view'),
     success: document.getElementById('success-view')
   };
-
   function showView(name) {
     Object.keys(views).forEach(k => {
       if (views[k]) views[k].hidden = (k !== name);
     });
   }
-
   const bindClick = (id, view) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('click', function (e) {
@@ -271,26 +348,19 @@ document.addEventListener('DOMContentLoaded', function () {
   bindClick('back-to-login-1', 'login');
   bindClick('back-to-phone', 'forgot');
   bindClick('go-to-login', 'login');
-
   const AUTH_USERS_KEY = 'dontpa-accounts-v1';
   const CURRENT_USER_KEY = 'dontpa-user';
   window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS = {
-    1:['ПРОГ','ОИС','ССА'],
-    2:['КСК','ИБТС','ТЭРП'],
-    3:['РЕК','БД'],
-    4:['ЭБУ','ОПС']
+    1:['ПРОГ','ОИС'],
+    2:['ИБТС','ТЭРП'],
+    3:['ССА','КСК'],
+    4:['РЕК','БД'],
+    5:['ЭБУ','ОПС']
   };
-  const DEFAULT_ADMIN_ACCOUNTS = [
-    { slot:1, name:'Администратор №1', email:'admin1@dtpa.ru', password:'Admin1_Dtpa2026' },
-    { slot:2, name:'Администратор №2', email:'admin2@dtpa.ru', password:'Admin2_Dtpa2026' },
-    { slot:3, name:'Администратор №3', email:'admin3@dtpa.ru', password:'Admin3_Dtpa2026' },
-    { slot:4, name:'Администратор №4', email:'admin4@dtpa.ru', password:'Admin4_Dtpa2026' }
-  ];
-  window.__DTPA_DEFAULT_ADMIN_CREDENTIALS = DEFAULT_ADMIN_ACCOUNTS.map(account => ({...account}));
+  const SECRETARY_ACCOUNTS = DTPA_SECRETARY_ACCOUNTS;
   const profileOverlay = document.getElementById('profileOverlay');
   const profileBody = document.getElementById('profileBody');
   const profileClose = document.getElementById('profileClose');
-
   let memoryAccounts = [];
   let memorySession = null;
   let authStorageWarningShown = false;
@@ -360,7 +430,8 @@ document.addEventListener('DOMContentLoaded', function () {
     window.__dtpaCurrentUser = null;
     try { localStorage.removeItem(CURRENT_USER_KEY); } catch (e) {}
     updateUserStatus();
-    if (document.getElementById('mainApp') && document.getElementById('mainApp').style.display !== 'none') {
+    if (typeof renderDashboard === 'function' && typeof renderGroups === 'function' && typeof updateGroupOptions === 'function' && typeof renderStudents === 'function' &&
+        document.getElementById('mainApp') && document.getElementById('mainApp').style.display !== 'none') {
       renderDashboard();
       renderGroups();
       updateGroupOptions();
@@ -398,23 +469,23 @@ document.addEventListener('DOMContentLoaded', function () {
     const displayName = String(name || '').trim();
     const rawPassword = String(password || '');
     const adminSpecialties = window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS[adminSlot];
-    if (!adminSpecialties) return { ok:false, message:'Выберите администратора с 1-го по 4-й.' };
+    if (!adminSpecialties) return { ok:false, message:'Выберите секретаря с 1-го по 5-й.' };
     if (!displayName || displayName.length > 100) return { ok:false, message:'Введите имя администратора (до 100 символов).' };
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) return { ok:false, message:'Введите корректный email для входа.' };
     if (rawPassword.length < 8) return { ok:false, message:'Пароль должен содержать не менее 8 символов.' };
-
     const accounts = readAccounts().slice();
     if (accounts.some(account => String(account.email || '').trim().toLowerCase() === normalizedEmail)) {
       return { ok:false, message:'Аккаунт с таким email уже существует.' };
     }
     if (accounts.some(account => account.role === 'admin' && Number(account.adminSlot || account.adminCourse) === adminSlot)) {
-      return { ok:false, message:`Администратор №${adminSlot} уже создан.` };
+      return { ok:false, message:`Аккаунт секретаря №${adminSlot} уже создан.` };
     }
     const salt = createSalt();
     const passwordHash = await hashPassword(rawPassword, salt);
     accounts.push({
       name:displayName,
       email:normalizedEmail,
+      login:normalizedEmail.split('@')[0],
       phone:'',
       role:'admin',
       group:'',
@@ -427,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function () {
       registeredAt:Date.now()
     });
     if (!writeAccounts(accounts)) return { ok:false, message:'Не удалось сохранить аккаунт в этом браузере.' };
-    return { ok:true, message:`Аккаунт администратора №${adminSlot} создан.` };
+    return { ok:true, message:`Аккаунт секретаря №${adminSlot} создан.` };
   };
   window.__dtpaSetAdminActingAs = function (slot) {
     if (!window.__dtpaMasterAdminAuthorized) return { ok:false, message:'Переключать администраторов может только главный администратор.' };
@@ -439,38 +510,50 @@ document.addEventListener('DOMContentLoaded', function () {
   };
   async function seedDefaultAdminAccounts() {
     const accounts = readAccounts().slice();
+    const secretaryLogins = SECRETARY_ACCOUNTS.map(s => String(s.login).toLowerCase());
+    const secretaryEmails = SECRETARY_ACCOUNTS.map(s => String(s.email).toLowerCase());
+    const kept = accounts.filter(account => {
+      if (account.role !== 'admin') return true;
+      const login = String(account.login || '').toLowerCase();
+      const email = String(account.email || '').toLowerCase();
+      return secretaryLogins.includes(login) || secretaryEmails.includes(email);
+    });
+    const removed = accounts.length - kept.length;
     let created = 0;
-    for (const admin of DEFAULT_ADMIN_ACCOUNTS) {
-      if (accounts.some(item => item.role === 'admin' && Number(item.adminSlot || item.adminCourse) === admin.slot)) continue;
-      if (accounts.some(item => String(item.email || '').trim().toLowerCase() === admin.email.toLowerCase())) {
-        console.warn(`[admins] Аккаунт ${admin.email} не создан: email уже занят.`);
+    for (const secretary of SECRETARY_ACCOUNTS) {
+      if (kept.some(item => item.role === 'admin' && Number(item.adminSlot || item.adminCourse) === secretary.slot)) continue;
+      if (kept.some(item => String(item.email || '').trim().toLowerCase() === secretary.email.toLowerCase())) {
+        console.warn(`[secretariat] Аккаунт ${secretary.email} не создан: email уже занят.`);
         continue;
       }
       const salt = createSalt();
-      const passwordHash = await hashPassword(admin.password, salt);
-      accounts.push({
-        name:admin.name,
-        email:admin.email,
+      const passwordHash = await hashPassword(secretary.password, salt);
+      kept.push({
+        name:secretary.name,
+        email:secretary.email,
+        login:secretary.login,
+        roleTitle:secretary.roleTitle,
+        dept:secretary.dept,
         phone:'',
         role:'admin',
         group:'',
         adminCourse:null,
-        adminSlot:admin.slot,
-        adminSpecialties:window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS[admin.slot].slice(),
-        avatar:'🛡️',
+        adminSlot:secretary.slot,
+        adminSpecialties:window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS[secretary.slot].slice(),
+        avatar:secretary.avatar,
+        gender:secretary.gender,
         salt,
         passwordHash,
         registeredAt:Date.now()
       });
       created++;
     }
-    if (created && !writeAccounts(accounts)) {
-      console.error('[admins] Не удалось сохранить начальные аккаунты администраторов.');
+    if ((created || removed) && !writeAccounts(kept)) {
+      console.error('[secretariat] Не удалось сохранить учётные записи секретарей.');
       return;
     }
-    if (created) {
+    if (created || removed) {
       window.dispatchEvent(new CustomEvent('dtpa:admins-updated'));
-      if (typeof window.__dtpaRefreshAdminManagement === 'function') window.__dtpaRefreshAdminManagement();
     }
   }
   setTimeout(() => seedDefaultAdminAccounts().catch(error => {
@@ -537,8 +620,6 @@ document.addEventListener('DOMContentLoaded', function () {
     profileOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
-  /* ==== ИСПРАВЛЕНИЕ: делегирование клика для кнопки «Войти» ==== */
   document.addEventListener('click', function (e) {
     const btn = e.target.closest('[data-user-status]');
     if (btn) {
@@ -546,12 +627,10 @@ document.addEventListener('DOMContentLoaded', function () {
       openProfile();
     }
   });
-
   if (profileClose) profileClose.addEventListener('click', closeProfile);
   if (profileOverlay) profileOverlay.addEventListener('click', e => { if (e.target === profileOverlay) closeProfile(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && profileOverlay && profileOverlay.classList.contains('open')) closeProfile(); });
   updateUserStatus();
-
   let recoveryCode = '';
   let recoveryPhone = '';
   function generateRecoveryCode() { return String(Math.floor(1000 + Math.random() * 9000)); }
@@ -564,7 +643,6 @@ document.addEventListener('DOMContentLoaded', function () {
       'border-radius:10px;padding:10px 0;font-family:monospace;">' + code + '</div>';
     push(html, 'code', 10000);
   }
-
   const phoneForm = document.getElementById('phone-form');
   const codePhone = document.getElementById('code-phone');
   if (phoneForm) {
@@ -581,7 +659,6 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(() => showView('code'), 400);
     });
   }
-
   const codeForm = document.getElementById('code-form');
   if (codeForm) {
     codeForm.addEventListener('submit', async function (e) {
@@ -611,7 +688,6 @@ document.addEventListener('DOMContentLoaded', function () {
       } catch (err) { push(err.message || 'Не удалось обновить пароль.', 'error', 5000); }
     });
   }
-
   const resendBtn = document.getElementById('resend-code');
   if (resendBtn) {
     resendBtn.addEventListener('click', function () {
@@ -620,7 +696,6 @@ document.addEventListener('DOMContentLoaded', function () {
       sendRecoveryCode(recoveryPhone, recoveryCode);
     });
   }
-
   const registerForm = document.getElementById('registerForm');
   if (registerForm) {
     registerForm.addEventListener('submit', async function (e) {
@@ -649,7 +724,6 @@ document.addEventListener('DOMContentLoaded', function () {
       } catch (err) { push(err.message || 'Не удалось создать аккаунт.', 'error', 5000); }
     });
   }
-
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
     loginForm.addEventListener('submit', async function (e) {
@@ -668,7 +742,163 @@ document.addEventListener('DOMContentLoaded', function () {
       } catch (err) { push(err.message || 'Не удалось выполнить вход.', 'error', 5000); }
     });
   }
-
+  /* ============================================================
+     СЕКРЕТАРИАТ: вход сотрудников, ключи доступа, кабинет
+     ============================================================ */
+  const secLoginForm = document.getElementById('secLoginForm');
+  const secLoginInput = document.getElementById('secLogin');
+  const secPasswordInput = document.getElementById('secPassword');
+  const secLoginMsg = document.getElementById('secLoginMsg');
+  const secCab = document.getElementById('secCab');
+  function isSecretaryOrAdminAccount(account) {
+    const role = String(account && account.role || '').toLowerCase();
+    return role === 'admin' || role === 'master-admin' || role === 'secretary';
+  }
+  function secretaryProfile(login) {
+    return DTPA_SECRETARY_ACCOUNTS.find(item => String(item.login || '').toLowerCase() === String(login || '').toLowerCase()) || null;
+  }
+  function secretaryInitials(name) {
+    return String(name || '').trim().split(/\s+/).slice(0, 2).map(w => (w[0] || '')).join('').toUpperCase() || '—';
+  }
+  function shakeSecForm() {
+    if (!secLoginForm || !secLoginForm.animate) return;
+    secLoginForm.animate(
+      [
+        { transform: 'translateX(0)' },
+        { transform: 'translateX(-8px)' },
+        { transform: 'translateX(8px)' },
+        { transform: 'translateX(0)' }
+      ],
+      { duration: 280, easing: 'ease-in-out' }
+    );
+  }
+  function openSecCab(account) {
+    if (!secCab) return;
+    if (!isSecretaryOrAdminAccount(account)) {
+      push('Доступ в секретариат разрешён только администраторам и секретарям.', 'error');
+      return;
+    }
+    const profile = secretaryProfile(account.login) || {};
+    const name = account.name || profile.name || account.email || 'Секретарь';
+    document.getElementById('secCabAvatar').textContent = secretaryInitials(name);
+    document.getElementById('secCabRole').textContent = account.roleTitle || profile.roleTitle || 'Секретарь техникума';
+    document.getElementById('secCabName').textContent = name;
+    document.getElementById('secCabDept').textContent = account.dept || profile.dept || 'ДТПА им. А.В. Захарченко';
+    const isMaster = account.role === 'master-admin';
+    const stats = isMaster ? [
+      { value: String(DTPA_SECRETARY_ACCOUNTS.length), label: 'учётных записей секретарей' },
+      { value: 'Полный', label: 'уровень доступа' },
+      { value: 'ДТПА', label: 'организация' }
+    ] : (Array.isArray(profile.stats) ? profile.stats : []);
+    document.getElementById('secCabStats').innerHTML = stats.map(s =>
+      `<div class="stat"><b>${safeProfileText(s.value)}</b><span>${safeProfileText(s.label)}</span></div>`
+    ).join('');
+    const tasks = isMaster ? [
+      'Контролировать работу секретариата и отделов',
+      'Управлять учётными записями секретарей в административной панели',
+      'Проверять сведения и показатели системы'
+    ] : (Array.isArray(profile.tasks) ? profile.tasks : []);
+    document.getElementById('secCabTasks').innerHTML = tasks.map(t =>
+      `<li><span class="chk"></span>${safeProfileText(t)}</li>`
+    ).join('');
+    const perfButton = document.getElementById('secCabPerfBtn');
+    if (perfButton) perfButton.textContent = isMaster ? '🛠 Открыть админ-панель' : '📊 Успеваемость';
+    const emailNode = document.getElementById('secCabEmail');
+    if (emailNode) emailNode.textContent = isMaster ? 'Главный доступ к системе ДТПА' : (account.email || profile.email || '');
+    secCab.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSecCab() {
+    if (!secCab || secCab.hidden) return;
+    secCab.hidden = true;
+    document.body.style.overflow = '';
+  }
+  if (secLoginForm) {
+    secLoginForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!secLoginInput || !secPasswordInput || !secLoginMsg) return;
+      const login = secLoginInput.value.trim();
+      const password = secPasswordInput.value;
+      if (!login || !password) { secLoginMsg.textContent = '✕ Введите логин и пароль'; return; }
+      /* Главный администратор секретариата.
+         Пароль совпадает с действующим паролем админ-панели сайта. */
+      if (login.toLowerCase() === 'admin' && password === 'admin1234') {
+        const masterAccount = {
+          name: 'Главный администратор',
+          login: 'admin',
+          email: 'admin@dontpa.local',
+          role: 'master-admin',
+          roleTitle: 'Главный администратор',
+          dept: 'Администрация ДТПА',
+          avatar: '🛡️'
+        };
+        window.__dtpaMasterAdminAuthorized = true;
+        setCurrentUser(masterAccount);
+        secLoginMsg.textContent = '';
+        secLoginForm.reset();
+        openSecCab(masterAccount);
+        push('Вход выполнен: главный администратор.', 'success');
+        return;
+      }
+      const account = readAccounts().find(item =>
+        isSecretaryOrAdminAccount(item) &&
+        String(item.login || '').toLowerCase() === login.toLowerCase());
+      if (!account) {
+        secLoginMsg.textContent = '✕ Неверный логин или пароль';
+        secPasswordInput.value = '';
+        secPasswordInput.focus();
+        shakeSecForm();
+        return;
+      }
+      try {
+        const passwordHash = await hashPassword(password, account.salt || '');
+        if (passwordHash !== account.passwordHash) {
+          secLoginMsg.textContent = '✕ Неверный логин или пароль';
+          secPasswordInput.value = '';
+          secPasswordInput.focus();
+          shakeSecForm();
+          return;
+        }
+      } catch (err) {
+        secLoginMsg.textContent = '✕ Не удалось выполнить вход. Попробуйте ещё раз.';
+        return;
+      }
+      secLoginMsg.textContent = '';
+      setCurrentUser(account);
+      secLoginForm.reset();
+      openSecCab(account);
+      push('Вы вошли в систему как ' + (account.name || account.login), 'success');
+    });
+  }
+  if (secCab) {
+    document.getElementById('secCabClose').addEventListener('click', closeSecCab);
+    secCab.querySelector('[data-sec-close]').addEventListener('click', closeSecCab);
+    document.getElementById('secCabLogout').addEventListener('click', () => {
+      closeSecCab();
+      clearCurrentUser();
+      window.__dtpaMasterAdminAuthorized = false;
+      window.__dtpaActingAsAdminSlot = null;
+      push('Вы вышли из системы секретариата.', 'info');
+    });
+    document.getElementById('secCabPerfBtn').addEventListener('click', () => {
+      const current = getCurrentUser();
+      closeSecCab();
+      showPerfApp();
+      if (current && current.role === 'master-admin') {
+        /* Передаём авторизацию в существующую админ-панель сайта,
+           используя тот же пароль, который только что проверен при входе. */
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordForm = document.getElementById('passwordForm');
+        if (passwordInput && passwordForm) {
+          passwordInput.value = 'admin1234';
+          passwordForm.dispatchEvent(new Event('submit', { bubbles:true, cancelable:true }));
+        }
+      }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && secCab && !secCab.hidden) closeSecCab();
+    });
+  }
   const codeInputs = ['d1','d2','d3','d4'].map(id => document.getElementById(id)).filter(Boolean);
   codeInputs.forEach((input, i) => {
     input.addEventListener('input', () => {
@@ -690,19 +920,18 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 })();
-
 /* ============================================================
    СИСТЕМА УСПЕВАЕМОСТИ
    ============================================================ */
 (function () {
 const ADMIN_PASSWORD = 'admin1234';
 window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS = window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS || {
-  1:['ПРОГ','ОИС','ССА'],
-  2:['КСК','ИБТС','ТЭРП'],
-  3:['РЕК','БД'],
-  4:['ЭБУ','ОПС']
+  1:['ПРОГ','ОИС'],
+  2:['ИБТС','ТЭРП'],
+  3:['ССА','КСК'],
+  4:['РЕК','БД'],
+  5:['ЭБУ','ОПС']
 };
-
 const SafeStorage = (function () {
   let available = false;
   try { localStorage.setItem('__t','1'); localStorage.removeItem('__t'); available = true; } catch(e) { available = false; }
@@ -712,14 +941,12 @@ const SafeStorage = (function () {
     set(k, v) { if (!available) return false; try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch(e) { return false; } }
   };
 })();
-
 document.addEventListener('DOMContentLoaded', () => {
   if (!SafeStorage.available) {
     const w = document.getElementById('storageWarning');
     if (w) w.classList.add('show');
   }
 });
-
 const TEACHER_ROLES = {
   secretary:{label:'Секретарь техникума',short:'Секретарь',icon:'🗂️',color:'#0757A6',bg:'rgba(20,121,209,0.14)'},
   director:{label:'Директор',short:'Директор',icon:'👑',color:'#7A5C00',bg:'rgba(184,134,11,0.22)'},
@@ -750,7 +977,6 @@ function getRoleAvatarClass(role) {
   if (role === 'head_ck' || role === 'head_dept') return 'role-head';
   return '';
 }
-
 const SUBJECTS_GENERAL = ['Русский язык','Литература','Математика','История','Обществознание','Физика','Химия','Биология','География','Иностранный язык','Информатика','Физическая культура','ОБЖ'];
 const SUBJECTS_COURSE2 = {
   'ПРОГ':['Математика (проф.)','Информатика (проф.)','Иностранный язык (проф.)','Основы программирования','Архитектура ЭВМ','Операционные системы'],
@@ -825,7 +1051,6 @@ SPEC_CODES.forEach(spec => {
     GROUPS_META.push({ code:`${spec}-${course}1`, course, spec, base:BASE_LEVELS[spec] + (course - 1) * 0.02 });
   }
 });
-
 const SURNAMES_BASE = (function () {
   const out = [], seen = new Set();
   const add = s => { if (s && !seen.has(s) && out.length < 1000) { seen.add(s); out.push(s); } };
@@ -850,7 +1075,6 @@ const AVATARS = {
   'ИБТС':['🧑‍💻','👩‍💻'],'ТЭРП':['🧑‍🔧','👩‍🔧'],'РЕК':['🧑‍🎨','👩‍🎨'],'БД':['🧑‍💼','👩‍💼'],
   'ЭБУ':['🧑‍💼','👩‍💼'],'ОПС':['🧑‍💼','👩‍💼']
 };
-
 const EDITS_KEY = 'dontpa-grade-edits-v4';
 const INFO_KEY = 'dontpa-student-info-v4';
 const CUSTOM_KEY = 'dontpa-custom-students-v4';
@@ -860,7 +1084,6 @@ const TEACHERS_KEY = 'dontpa-teachers-v4';
 const CLASS_TEACHER_KEY = 'dontpa-class-teacher-v4';
 const SUBJ_TEACHER_KEY = 'dontpa-subject-teacher-v4';
 const CLAIMS_KEY = 'dontpa-claims-v4';
-
 let savedEdits = SafeStorage.get(EDITS_KEY, {});
 let savedInfo = SafeStorage.get(INFO_KEY, {});
 let customStudents = SafeStorage.get(CUSTOM_KEY, {});
@@ -869,7 +1092,6 @@ let trash = SafeStorage.get(TRASH_KEY, []); if (!Array.isArray(trash)) trash = [
 let customTeachers = SafeStorage.get(TEACHERS_KEY, {});
 let classTeacherMap = SafeStorage.get(CLASS_TEACHER_KEY, {});
 let subjectTeacherMap = SafeStorage.get(SUBJ_TEACHER_KEY, {});
-
 function normalizeClaims(arr) {
   if (!Array.isArray(arr)) return [];
   return arr.map(c => {
@@ -887,7 +1109,6 @@ function normalizeClaims(arr) {
   });
 }
 let claims = normalizeClaims(SafeStorage.get(CLAIMS_KEY, []));
-
 const PAGE_SIZE = 24;
 const RING_CIRCUMFERENCE = 2 * Math.PI * 26;
 const state = { course:'all', group:'all', search:'', sort:'gpa-desc', page:1 };
@@ -900,8 +1121,7 @@ const adminState = { status:'all', type:'all', group:'all', search:'', sort:'dat
 const adminSelectedIds = new Set();
 let isAdminView = false;
 let isAdminAuthed = false;
-let adminOrigin = 'public'; // 'public' | 'perf'
-
+let adminOrigin = 'public';
 function getScopedAdminSpecialties() {
   const user = currentAttendanceUser();
   if (!user || user.role !== 'admin') return [];
@@ -927,7 +1147,6 @@ function getVisibleStudents() {
   const specialties = getScopedAdminSpecialties();
   return specialties.length ? STUDENTS.filter(student => specialties.includes(student.spec)) : STUDENTS;
 }
-
 let saveStatusTimer = null;
 function setSaveStatus(status) {
   const el = document.getElementById('saveStatus');
@@ -955,7 +1174,6 @@ function saveAll() {
   if (ok.every(x => x)) { setSaveStatus('saved'); return true; }
   setSaveStatus('error'); return false;
 }
-
 function seededRandom(seed) { let s = seed * 9301 + 49297; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
 function femaleSurname(s) { return s.endsWith('а') ? s : s + 'а'; }
 function generateGrades(seed, level, spec, course) {
@@ -988,7 +1206,6 @@ function generateSubjectAttendance(seed, baseAttendance, subjects) {
   for (const subj of subjects) result[subj] = Math.max(55, Math.min(100, Math.round(baseAttendance + (sRng() - 0.5) * 16)));
   return result;
 }
-
 function computeAutoSemester(grades, semester) {
   if (!grades || !grades.length) return null;
   if (grades.length === 1) return grades[0];
@@ -1022,7 +1239,6 @@ function setSemesterGrade(student, subject, semester, value) {
   else se.semesterGrades[subject]['s' + semester] = value;
   savedEdits[student.id] = se;
 }
-
 function recomputeStudent(student) {
   let total = 0, count = 0;
   Object.values(student.grades).forEach(a => a.forEach(g => { total += g; count++; }));
@@ -1041,7 +1257,6 @@ function recomputeGroup(group) {
   group.counts = { excellent:0, good:0, average:0, low:0 };
   arr.forEach(s => group.counts[s.levelClass]++);
 }
-
 const BASE_STUDENTS = [];
 let uid = 1;
 GROUPS_META.forEach((meta, gi) => {
@@ -1071,7 +1286,6 @@ GROUPS_META.forEach((meta, gi) => {
     });
   }
 });
-
 const BASE_TEACHERS = [];
 const TEACHER_LAST_M = SURNAMES_BASE.slice(0, 120);
 const TEACHER_LAST_F = SURNAMES_BASE.slice(120, 240).map(femaleSurname);
@@ -1119,11 +1333,9 @@ BASE_TEACHERS.push(...generateBaseTeachers());
     }
   });
 })();
-
 let STUDENTS = [];
 let GROUPS = [];
 let TEACHERS = [];
-
 function buildAll() {
   STUDENTS = [];
   BASE_STUDENTS.forEach(base => {
@@ -1162,7 +1374,6 @@ function buildAll() {
     s.isCustom = true;
     STUDENTS.push(s);
   });
-
   const map = {};
   STUDENTS.forEach(s => {
     if (!map[s.group]) {
@@ -1178,7 +1389,6 @@ function buildAll() {
   GROUPS = Object.values(map);
   GROUPS.forEach(recomputeGroup);
   GROUPS.sort((a,b) => a.course !== b.course ? a.course - b.course : a.code.localeCompare(b.code));
-
   TEACHERS = [];
   const hiddenBaseTeachers = customTeachers['__hidden_base_teachers__'] || [];
   BASE_TEACHERS.forEach(t => {
@@ -1197,7 +1407,6 @@ function buildAll() {
     const role = t.role || 'teacher';
     TEACHERS.push({ ...t, subjects:[...(t.subjects || [])], role, avatar:getRoleAvatar(role, t.gender), isCustom:true });
   });
-
   GROUPS.forEach(g => {
     if (!classTeacherMap[g.code]) {
       const groupSubjects = getSubjectsFor(g.spec, g.course);
@@ -1234,7 +1443,6 @@ function getTeachersForSubject(subject, groupCode) {
   }
   return list;
 }
-
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c])); }
 const pushArea = document.getElementById('push-area');
 const PUSH_ICONS = { success:'✅', error:'❌', info:'ℹ️' };
@@ -1251,7 +1459,6 @@ function anyModalOpen() {
   return ids.some(id => { const el = document.getElementById(id); return el && el.classList.contains('open'); });
 }
 function releaseBodyScroll() { if (!anyModalOpen()) document.body.style.overflow = ''; }
-
 function renderDashboard() {
   const root = document.getElementById('dashTotalStudents');
   if (!root) return;
@@ -1290,7 +1497,6 @@ function renderDashboard() {
 }
 const refreshDashboardBtn = document.getElementById('refreshDashboardBtn');
 if (refreshDashboardBtn) refreshDashboardBtn.addEventListener('click', () => { renderDashboard(); push('Дашборд обновлён', 'success', 1500); });
-
 function renderGroups() {
   const grid = document.getElementById('groupsGrid');
   grid.innerHTML = getVisibleGroups().map(g => {
@@ -1340,17 +1546,23 @@ function goToGroupStudents(code, course) {
   renderStudents();
   scrollToElement('students');
 }
-
 function renderTeachers() {
   const grid = document.getElementById('teachersGrid');
   const specialtyAssignments = window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS || {
-    1:['ПРОГ','ОИС','ССА'], 2:['КСК','ИБТС','ТЭРП'], 3:['РЕК','БД'], 4:['ЭБУ','ОПС']
+    1:['ПРОГ','ОИС'], 2:['ИБТС','ТЭРП'], 3:['ССА','КСК'], 4:['РЕК','БД'], 5:['ЭБУ','ОПС']
   };
-  const secretaryDirectory = Object.entries(specialtyAssignments).map(([slot, specialties]) => ({
-    id:-Number(slot), ln:'Секретарь', fn:`№${slot}`, mn:'Секретарь техникума',
-    fullName:`Секретарь №${slot}`, gender:'f', subjects:specialties,
-    role:'secretary', directoryEntry:true
-  }));
+  const secretaryDirectory = DTPA_SECRETARY_ACCOUNTS.map(secretary => {
+    const nameParts = String(secretary.name || '').trim().split(/\s+/);
+    const specialties = (specialtyAssignments && specialtyAssignments[secretary.slot]) || [];
+    return {
+      id:-Number(secretary.slot), ln:nameParts[0] || 'Секретарь',
+      fn:nameParts.slice(1).join(' ') || `№${secretary.slot}`,
+      mn:secretary.roleTitle || 'Секретарь техникума',
+      fullName:secretary.name || `Секретарь №${secretary.slot}`,
+      gender:secretary.gender || 'f', subjects:specialties,
+      role:'secretary', directoryEntry:true
+    };
+  });
   let list = [...TEACHERS, ...secretaryDirectory];
   if (teacherState.search) {
     const q = teacherState.search.toLowerCase();
@@ -1399,7 +1611,6 @@ function renderTeachers() {
     });
   });
 }
-
 function updateGroupOptions() {
   const groupSelect = document.getElementById('groupFilter');
   const current = groupSelect.value;
@@ -1424,7 +1635,6 @@ function updateQuickJournalBtn() {
     attendanceBtn.title = state.group === 'all' ? 'Сначала выберите группу' : `Ведомость посещаемости группы ${state.group}`;
   }
 }
-
 function getFilteredStudents() {
   let list = STUDENTS.slice();
   const scopedSpecialties = getScopedAdminSpecialties();
@@ -1444,7 +1654,6 @@ function getFilteredStudents() {
   }
   return list;
 }
-
 function updatePagination(page, totalPages, total, start, count) {
   document.getElementById('pageInfo').innerHTML = `Страница <strong>${page}</strong> из <strong>${totalPages}</strong>`;
   document.getElementById('prevPage').disabled = page <= 1;
@@ -1459,7 +1668,6 @@ function scrollToElement(id) {
   const offset = target.getBoundingClientRect().top + window.pageYOffset - Math.max(getVisibleHeaderHeight() + 16, 80);
   window.scrollTo({ top:offset, behavior:'smooth' });
 }
-
 function renderStudents() {
   const grid = document.getElementById('studentsGrid');
   const list = getFilteredStudents();
@@ -1503,7 +1711,6 @@ function renderStudents() {
   });
   updatePagination(state.page, totalPages, total, start, pageItems.length);
 }
-
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const modalEditBtn = document.getElementById('modalEditBtn');
@@ -1641,7 +1848,6 @@ modalResetBtn.addEventListener('click', () => {
   renderGroups(); renderTeachers(); updateGroupOptions(); renderStudents();
   push('Все изменения сброшены', 'info', 2200);
 });
-
 const studentFormOverlay = document.getElementById('studentFormOverlay');
 const studentForm = document.getElementById('studentForm');
 const studentFormTitle = document.getElementById('studentFormTitle');
@@ -1741,7 +1947,6 @@ studentForm.addEventListener('submit', (e) => {
     push('Данные обновлены', 'success', 2500);
   }
 });
-
 function addToTrash(entry) { trash.unshift(entry); if (trash.length > 100) trash.length = 100; }
 function updateTrashButton() {
   const btn = document.getElementById('trashBtn');
@@ -1775,7 +1980,6 @@ function deleteStudentById(id) {
   closeStudentForm(); closeModal();
   push(`«${student.fullName}» удалён`, 'info', 2500);
 }
-
 const trashOverlay = document.getElementById('trashOverlay');
 const trashList = document.getElementById('trashList');
 function renderTrash() {
@@ -1795,7 +1999,6 @@ function renderTrash() {
     btn.addEventListener('click', () => deleteFromTrash(parseInt(btn.dataset.trashIdx, 10)));
   });
 }
-
 function deleteFromTrash(idx) {
   const entry = trash[idx];
   if (!entry) return;
@@ -1822,7 +2025,6 @@ function closeTrashModal() { trashOverlay.classList.remove('open'); releaseBodyS
 document.getElementById('trashBtn').addEventListener('click', openTrashModal);
 document.getElementById('trashClose').addEventListener('click', closeTrashModal);
 trashOverlay.addEventListener('click', (e) => { if (e.target === trashOverlay) closeTrashModal(); });
-
 const transferOverlay = document.getElementById('transferOverlay');
 const transferGroupSelect = document.getElementById('transferGroup');
 const transferHint = document.getElementById('transferHint');
@@ -1891,7 +2093,6 @@ document.getElementById('transferConfirm').addEventListener('click', () => {
   closeTransferModal(); closeModal();
   push(courseChanged || specChanged ? `«${student.fullName}» переведён в ${newGroupCode}` : `«${student.fullName}» переведён из ${oldGroup} в ${newGroupCode}`, 'success', 3200);
 });
-
 const teacherFormOverlay = document.getElementById('teacherFormOverlay');
 const teacherForm = document.getElementById('teacherForm');
 const teacherFormTitle = document.getElementById('teacherFormTitle');
@@ -1974,7 +2175,6 @@ teacherForm.addEventListener('submit', (e) => {
     push(`Преподаватель «${ln} ${fn}» добавлен`, 'success', 2800);
   }
 });
-
 const pickerOverlay = document.getElementById('pickerOverlay');
 const pickerList = document.getElementById('pickerList');
 const pickerSearch = document.getElementById('pickerSearch');
@@ -2039,7 +2239,6 @@ function closePicker() { pickerOverlay.classList.remove('open'); pickerContext =
 document.getElementById('pickerClose').addEventListener('click', closePicker);
 pickerOverlay.addEventListener('click', (e) => { if (e.target === pickerOverlay) closePicker(); });
 pickerSearch.addEventListener('input', renderPickerList);
-
 const journalOverlay = document.getElementById('journalOverlay');
 const journalEditBtn = document.getElementById('journalEditBtn');
 const journalTable = document.getElementById('journalTable');
@@ -2252,7 +2451,6 @@ function afterJournalGradeEdit(student) {
   renderGroups(); renderStudents(); renderJournal();
   push('Оценка обновлена', 'success', 900);
 }
-
 function generateGroupExcelReport(groupCode) {
   if (typeof window.XLSX === 'undefined') { push('❌ XLSX-библиотека не загружена.', 'error', 5000); return; }
   const group = GROUPS.find(g => g.code === groupCode);
@@ -2285,7 +2483,6 @@ function generateGroupExcelReport(groupCode) {
     push(`📊 Excel-отчёт сохранён`, 'success', 3500);
   } catch (err) { console.error(err); push(`Ошибка Excel: ${err.message || 'неизвестно'}`, 'error', 5000); }
 }
-
 function exportJournalToExcel() {
   if (typeof window.XLSX === 'undefined') { push('❌ XLSX-библиотека не загружена', 'error', 5000); return; }
   const group = GROUPS.find(g => g.code === currentGroupCodeForJournal);
@@ -2334,7 +2531,6 @@ function exportJournalToExcel() {
     push(`📊 Журнал сохранён`, 'success', 3500);
   } catch (err) { console.error(err); push(`Ошибка Excel: ${err.message || 'неизвестно'}`, 'error', 5000); }
 }
-
 function exportToExcel() {
   if (typeof window.XLSX === 'undefined') { push('❌ XLSX-библиотека не загружена', 'error', 5000); return; }
   if (STUDENTS.length === 0) { push('Нет студентов для экспорта', 'error', 2200); return; }
@@ -2350,7 +2546,6 @@ function exportToExcel() {
 }
 document.getElementById('exportExcelBtn').addEventListener('click', exportToExcel);
 document.getElementById('journalExcelBtn').addEventListener('click', exportJournalToExcel);
-
 /* ==================== ЗАЯВКИ ==================== */
 const CLAIM_TYPE_LABELS = { transfer:'🚚 Перевод в другую группу', resit:'📝 Пересдать предмет', question:'❓ Вопрос по оценке', other:'📌 Другое' };
 const CLAIM_STATUS_LABELS = {
@@ -2359,7 +2554,6 @@ const CLAIM_STATUS_LABELS = {
   done:{ label:'Решена', color:'#2E8B2E', bg:'rgba(46,139,46,0.12)', icon:'✅' },
   rejected:{ label:'Отклонена', color:'#E64646', bg:'rgba(230,70,70,0.12)', icon:'❌' }
 };
-
 const claimFormOverlay = document.getElementById('claimFormOverlay');
 const claimForm = document.getElementById('claimForm');
 const claimFormTitle = document.getElementById('claimFormTitle');
@@ -2367,7 +2561,6 @@ const claimStudentInfo = document.getElementById('claimStudentInfo');
 const claimType = document.getElementById('claimType');
 const claimText = document.getElementById('claimText');
 let claimFormStudentId = null;
-
 function updateClaimTypeFields() {
   const type = claimType.value;
   const resitFields = document.getElementById('claimResitFields');
@@ -2377,7 +2570,6 @@ function updateClaimTypeFields() {
   if (type === 'resit') populateClaimResitFields();
   if (type === 'transfer') populateClaimTransferFields();
 }
-
 function populateClaimResitFields() {
   const subjectSel = document.getElementById('claimSubject');
   const teacherSel = document.getElementById('claimTeacher');
@@ -2392,7 +2584,6 @@ function populateClaimResitFields() {
   populateClaimTeachersForSubject();
   subjectSel.onchange = populateClaimTeachersForSubject;
 }
-
 function populateClaimTeachersForSubject() {
   const subjectSel = document.getElementById('claimSubject');
   const teacherSel = document.getElementById('claimTeacher');
@@ -2408,7 +2599,6 @@ function populateClaimTeachersForSubject() {
   teacherSel.innerHTML = '<option value="">— Выберите преподавателя —</option>' + teachers.map(t => { const isA = assignedId === t.id; return `<option value="${t.id}"${isA ? ' selected' : ''}>${escapeHtml(t.fullName)}${isA ? ' · ✓ ведёт у группы' : ''}</option>`; }).join('');
   if (hintEl) { hintEl.style.display = 'block'; hintEl.textContent = `Показаны только преподаватели, ведущие «${subject}»`; }
 }
-
 function populateClaimTransferFields() {
   const sel = document.getElementById('claimTargetGroup');
   const info = document.getElementById('claimTargetGroupInfo');
@@ -2440,7 +2630,6 @@ function populateClaimTransferFields() {
   updateInfo();
 }
 if (claimType) claimType.addEventListener('change', updateClaimTypeFields);
-
 function openClaimForm(student) {
   if (isAdminAuthed || isScopedAdmin()) {
     push('Подача заявок доступна пользователям, но не администратору.', 'error', 3000);
@@ -2464,12 +2653,10 @@ function openClaimForm(student) {
   setTimeout(() => claimText.focus(), 150);
 }
 function closeClaimForm() { claimFormOverlay.classList.remove('open'); claimFormStudentId = null; releaseBodyScroll(); }
-
 document.getElementById('claimFormClose').addEventListener('click', closeClaimForm);
 document.getElementById('claimCancelBtn').addEventListener('click', closeClaimForm);
 claimFormOverlay.addEventListener('click', (e) => { if (e.target === claimFormOverlay) closeClaimForm(); });
 document.getElementById('modalClaimBtn').addEventListener('click', () => { if (currentStudent) openClaimForm(currentStudent); });
-
 claimForm.addEventListener('submit', (e) => {
   e.preventDefault();
   if (isAdminAuthed || isScopedAdmin()) {
@@ -2504,7 +2691,6 @@ claimForm.addEventListener('submit', (e) => {
   closeClaimForm();
   push('✅ Заявка отправлена!', 'success', 2800);
 });
-
 function updateClaimsBadge() {
   const badge = document.getElementById('claimsBadge');
   if (badge) {
@@ -2514,14 +2700,11 @@ function updateClaimsBadge() {
   }
   renderDashboard();
 }
-
 const claimsAdminOverlay = document.getElementById('claimsAdminOverlay');
 const claimsAdminList = document.getElementById('claimsAdminList');
 const claimsStats = document.getElementById('claimsStats');
-
 function openClaimsAdmin() { renderClaimsAdmin(); claimsAdminOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeClaimsAdmin() { claimsAdminOverlay.classList.remove('open'); releaseBodyScroll(); }
-
 function renderClaimsAdmin() {
   const counts = { new:0, in_progress:0, done:0, rejected:0 };
   claims.forEach(c => { if (counts[c.status] != null) counts[c.status]++; });
@@ -2556,7 +2739,6 @@ claimsAdminOverlay.addEventListener('click', (e) => { if (e.target === claimsAdm
 document.getElementById('claimsAdminNewBtn').addEventListener('click', () => { closeClaimsAdmin(); openClaimForm(null); });
 document.getElementById('navClaimsLink').addEventListener('click', (e) => { e.preventDefault(); openClaimsAdmin(); });
 document.getElementById('openFullAdminBtn').addEventListener('click', () => { closeClaimsAdmin(); tryEnterAdmin(); });
-
 function executeResit(claimId) {
   const claim = claims.find(c => c.id === claimId);
   if (!claim) return;
@@ -2588,7 +2770,6 @@ function executeResit(claimId) {
   if (claim.resitPassed) push(`✅ Пересдал(а): «${claim.subject}» — оценка ${claim.resitGrade}`, 'success', 3500);
   else push(`❌ Не пересдал(а): «${claim.subject}»`, 'error', 3500);
 }
-
 function executeTransfer(claimId) {
   const claim = claims.find(c => c.id === claimId);
   if (!claim) return;
@@ -2619,12 +2800,10 @@ function executeTransfer(claimId) {
   renderGroups(); renderStudents(); renderAdminAll(); updateClaimsBadge();
   push(`✅ Студент переведён из ${oldGroup} в ${newGroupCode}`, 'success', 3500);
 }
-
 const passwordOverlay = document.getElementById('passwordOverlay');
 const passwordForm = document.getElementById('passwordForm');
 const passwordInput = document.getElementById('passwordInput');
 const passwordError = document.getElementById('passwordError');
-
 function openPasswordModal() {
   passwordInput.value = '';
   passwordError.classList.remove('show');
@@ -2636,7 +2815,6 @@ function closePasswordModal() { passwordOverlay.classList.remove('open'); passwo
 document.getElementById('passwordClose').addEventListener('click', closePasswordModal);
 document.getElementById('passwordCancel').addEventListener('click', closePasswordModal);
 passwordOverlay.addEventListener('click', (e) => { if (e.target === passwordOverlay) closePasswordModal(); });
-
 passwordForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const pwd = passwordInput.value;
@@ -2651,8 +2829,6 @@ passwordForm.addEventListener('submit', (e) => {
     passwordInput.select();
   }
 });
-
-/* ==== АДМИН-ПАНЕЛЬ: открытие/закрытие через Ctrl+Shift+A ==== */
 function switchToAdmin() {
   if (adminOrigin === 'public') {
     document.getElementById('publicSite').style.display = 'none';
@@ -2719,7 +2895,6 @@ function tryEnterAdmin() {
   if (isAdminAuthed) { switchToAdmin(); return; }
   openPasswordModal();
 }
-
 window.__dtpaSwitchToAdminSlot = function (slot) {
   if (!window.__dtpaMasterAdminAuthorized || !isAdminAuthed) {
     return { ok:false, message:'Переключать администраторов может только главный администратор.' };
@@ -2729,7 +2904,6 @@ window.__dtpaSwitchToAdminSlot = function (slot) {
   }
   const result = window.__dtpaSetAdminActingAs(slot);
   if (!result.ok) return result;
-
   isAdminAuthed = false;
   isAdminView = false;
   adminOrigin = 'perf';
@@ -2767,20 +2941,15 @@ window.__dtpaSwitchToAdminSlot = function (slot) {
   window.scrollTo({ top:0, behavior:'smooth' });
   return result;
 };
-
-// Делаем выход доступным из глобального showPublicSite
 window.__dtpaExitAdmin = function () {
   if (isAdminView) switchToMain();
 };
-
-// Горячая клавиша Ctrl+Shift+A (и Cmd+Shift+A на macOS, а также русская «ф»)
 document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.code === 'KeyA' || e.key === 'A' || e.key === 'a' || e.key === 'ф' || e.key === 'Ф')) {
     e.preventDefault();
     tryEnterAdmin();
   }
 });
-
 function readRegisteredAccounts() {
   try {
     const raw = localStorage.getItem('dontpa-accounts-v1');
@@ -2790,26 +2959,22 @@ function readRegisteredAccounts() {
     return [];
   }
 }
-
 function escapeRegisteredText(value) {
   return String(value == null ? '' : value).replace(/[&<>\"']/g, (ch) => ({
     '&':'&amp;', '<':'&lt;', '>':'&gt;', '\"':'&quot;', "'":'&#39;'
   }[ch]));
 }
-
 function formatRegisteredDate(value) {
   if (!value) return '—';
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? '—' : date.toLocaleString('ru-RU');
 }
-
 function renderRegisteredUsers() {
   const tbody = document.getElementById('registeredUsersBody');
   const summary = document.getElementById('registeredUsersSummary');
   const empty = document.getElementById('registeredUsersEmpty');
   const search = document.getElementById('registeredUsersSearch');
   if (!tbody || !summary || !empty) return;
-
   const accounts = readRegisteredAccounts().slice().sort((a, b) => Number(b.registeredAt || 0) - Number(a.registeredAt || 0));
   const query = String(search && search.value || '').trim().toLowerCase();
   const roleLabels = { student:'Студент', teacher:'Преподаватель', admin:'Администратор' };
@@ -2818,7 +2983,6 @@ function renderRegisteredUsers() {
       .join(' ').toLowerCase();
     return !query || haystack.includes(query);
   });
-
   summary.textContent = `Всего зарегистрировано: ${accounts.length}. Отображается: ${filtered.length}.`;
   tbody.innerHTML = filtered.map((account, index) => {
     const safeEmail = String(account.email || '').replace(/[&<>"'`]/g, c => ({
@@ -2846,7 +3010,6 @@ function renderRegisteredUsers() {
   else if (query && filtered.length === 0) empty.textContent = 'По вашему запросу ничего не найдено.';
   else empty.textContent = 'Пока нет зарегистрированных аккаунтов в хранилище этого браузера.';
 }
-
 function deleteRegisteredUser(email) {
   const accountEmail = String(email || '').trim().toLowerCase();
   if (!accountEmail) { push('Не удалось определить аккаунт для удаления', 'error', 2400); return; }
@@ -2865,7 +3028,6 @@ function deleteRegisteredUser(email) {
     push('Не удалось удалить аккаунт: ' + (e.message || 'ошибка'), 'error', 3000);
   }
 }
-
 function exportRegisteredUsers() {
   const accounts = readRegisteredAccounts().slice().sort((a, b) => Number(b.registeredAt || 0) - Number(a.registeredAt || 0));
   if (!accounts.length) {
@@ -2891,9 +3053,7 @@ function exportRegisteredUsers() {
   URL.revokeObjectURL(url);
   push('Список зарегистрированных пользователей экспортирован.', 'success', 3500);
 }
-
 function renderAdminAll() { renderAdminStats(); renderAdminGroupFilter(); renderAdminClaims(); renderRegisteredUsers(); }
-
 const registeredUsersSearch = document.getElementById('registeredUsersSearch');
 if (registeredUsersSearch) registeredUsersSearch.addEventListener('input', renderRegisteredUsers);
 const refreshRegisteredUsersBtn = document.getElementById('refreshRegisteredUsersBtn');
@@ -2903,7 +3063,6 @@ if (exportRegisteredUsersBtn) exportRegisteredUsersBtn.addEventListener('click',
 window.addEventListener('storage', event => {
   if (event.key === 'dontpa-accounts-v1') renderRegisteredUsers();
 });
-
 function renderAdminStats() {
   const counts = { all:claims.length, new:0, in_progress:0, done:0, rejected:0 };
   claims.forEach(c => { if (counts[c.status] != null) counts[c.status]++; });
@@ -2931,7 +3090,6 @@ function renderAdminStats() {
     });
   });
 }
-
 function renderAdminGroupFilter() {
   const groups = new Set();
   claims.forEach(c => { if (c.studentGroup) groups.add(c.studentGroup); });
@@ -2943,7 +3101,6 @@ function renderAdminGroupFilter() {
   else if (sorted.includes(adminState.group)) sel.value = adminState.group;
   else { sel.value = 'all'; adminState.group = 'all'; }
 }
-
 function getFilteredAdminClaims() {
   let list = claims.slice();
   if (adminState.status !== 'all') list = list.filter(c => c.status === adminState.status);
@@ -2961,7 +3118,6 @@ function getFilteredAdminClaims() {
   }
   return list;
 }
-
 function buildResolutionHTML(c) {
   if (c.type === 'resit') {
     const student = c.studentId ? STUDENTS.find(s => s.id === c.studentId) : null;
@@ -3008,7 +3164,6 @@ function buildResolutionHTML(c) {
   }
   return '';
 }
-
 function renderAdminClaims() {
   const list = getFilteredAdminClaims();
   const container = document.getElementById('adminClaimsList');
@@ -3141,14 +3296,12 @@ function renderAdminClaims() {
   });
   updateAdminBulkUI();
 }
-
 function updateAdminBulkUI() {
   const bulk = document.getElementById('adminBulkActions');
   const info = document.getElementById('adminBulkInfo');
   if (adminSelectedIds.size === 0) bulk.style.display = 'none';
   else { bulk.style.display = 'flex'; info.textContent = `Выбрано: ${adminSelectedIds.size}`; }
 }
-
 function handleAdminAction(action, id) {
   const claim = claims.find(c => c.id === id);
   if (!claim) return;
@@ -3167,7 +3320,6 @@ function handleAdminAction(action, id) {
   const labels = { new:'возвращена в новые', in_progress:'взята в работу', done:'решена', rejected:'отклонена' };
   push(`Заявка ${labels[action] || 'обновлена'}`, 'success', 1800);
 }
-
 document.querySelectorAll('#adminStatusTabs .status-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('#adminStatusTabs .status-tab').forEach(t => t.classList.remove('active'));
@@ -3184,7 +3336,6 @@ document.getElementById('adminSearchInput').addEventListener('input', (e) => {
 document.getElementById('adminTypeFilter').addEventListener('change', (e) => { adminState.type = e.target.value; renderAdminClaims(); });
 document.getElementById('adminGroupFilter').addEventListener('change', (e) => { adminState.group = e.target.value; renderAdminClaims(); });
 document.getElementById('adminSortSelect').addEventListener('change', (e) => { adminState.sort = e.target.value; renderAdminClaims(); });
-
 document.querySelectorAll('#adminBulkActions .bulk-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const action = btn.dataset.action;
@@ -3208,7 +3359,6 @@ document.querySelectorAll('#adminBulkActions .bulk-btn').forEach(btn => {
     push(`Применено к ${n} заявкам`, 'success', 2000);
   });
 });
-
 document.getElementById('adminNewClaimBtn').addEventListener('click', () => openClaimForm(null));
 document.getElementById('adminRefreshBtn').addEventListener('click', () => {
   claims = normalizeClaims(SafeStorage.get(CLAIMS_KEY, []));
@@ -3240,7 +3390,6 @@ document.getElementById('adminExportBtn').addEventListener('click', () => {
     push('📊 Excel-файл сохранён', 'success', 3000);
   } catch (err) { console.error(err); push('Ошибка экспорта: ' + err.message, 'error', 4000); }
 });
-
 document.querySelectorAll('.course-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
@@ -3275,7 +3424,6 @@ document.getElementById('teacherSearch').addEventListener('input', (e) => {
   teacherSearchTimer = setTimeout(() => { teacherState.search = e.target.value.trim(); renderTeachers(); }, 200);
 });
 document.getElementById('teacherRoleFilter').addEventListener('change', (e) => { teacherState.role = e.target.value; renderTeachers(); });
-
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (passwordOverlay.classList.contains('open')) closePasswordModal();
@@ -3294,7 +3442,6 @@ document.addEventListener('keydown', (e) => {
 document.querySelectorAll('#perfApp a[data-scroll]').forEach(a => {
   a.addEventListener('click', (e) => { e.preventDefault(); scrollToElement(a.getAttribute('href').replace('#', '')); });
 });
-
 window.addEventListener('storage', (e) => {
   if (e.key === CLAIMS_KEY) {
     claims = normalizeClaims(SafeStorage.get(CLAIMS_KEY, []));
@@ -3303,7 +3450,6 @@ window.addEventListener('storage', (e) => {
     if (claimsAdminOverlay.classList.contains('open')) renderClaimsAdmin();
   }
 });
-
 renderGroups();
 renderTeachers();
 updateGroupOptions();
@@ -3311,8 +3457,6 @@ renderStudents();
 updateTrashButton();
 updateClaimsBadge();
 setSaveStatus(SafeStorage.available ? 'saved' : 'error');
-
-
 /* ===== НОВАЯ ВЕДОМОСТЬ ПОСЕЩАЕМОСТИ + НАЗНАЧЕНИЕ СТАРОСТ ===== */
 const ATTENDANCE_KEY = 'dtpa-attendance-register-v1';
 let attendanceRegister = {};
@@ -3320,7 +3464,6 @@ try { attendanceRegister = JSON.parse(localStorage.getItem(ATTENDANCE_KEY) || '{
 let attendanceDate = attendanceIsoDate(new Date());
 let attendanceModalPeriodStart = '';
 let attendanceModalPeriodEnd = '';
-
 function currentAttendanceUser() {
   try {
     const u = JSON.parse(localStorage.getItem('dontpa-user') || 'null');
@@ -3392,7 +3535,6 @@ function exportAttendanceJournalToExcel() {
     push('Библиотека Excel не загружена. Проверьте подключение к интернету и повторите экспорт.', 'error', 5000);
     return;
   }
-
   const students = group.students.slice().sort((a, b) => a.fullName.localeCompare(b.fullName));
   const dates = Object.keys(attendanceRegister[group.code] || {})
     .filter(date => selectedDates.includes(date))
@@ -3412,7 +3554,6 @@ function exportAttendanceJournalToExcel() {
   ];
   const totals = { present:0, absent:0, late:0, excused:0 };
   const dateTotals = dates.map(() => ({ present:0, absent:0, late:0, excused:0 }));
-
   students.forEach((student, index) => {
     const counts = { present:0, absent:0, late:0, excused:0 };
     const marks = dates.map((date, dateIndex) => {
@@ -3438,7 +3579,6 @@ function exportAttendanceJournalToExcel() {
       attendancePercent
     ]);
   });
-
   const totalMarks = totals.present + totals.absent + totals.late + totals.excused;
   const totalAttendancePercent = totalMarks ? Math.round((totals.present + totals.late) / totalMarks * 100) : '';
   rows.push([
@@ -3452,7 +3592,6 @@ function exportAttendanceJournalToExcel() {
     totalMarks,
     totalAttendancePercent
   ]);
-
   try {
     const sheet = XLSX.utils.aoa_to_sheet(rows);
     sheet['!cols'] = [
@@ -3722,47 +3861,10 @@ function renderAttendancePanel() {
     periodEnd:attendanceModalPeriodEnd
   });
 }
-
-/* Управление ролями: администратор назначает старосту и закрепляет за группой */
-function addRoleManagementPanel() {
-  const adminRoot = document.getElementById('adminApp');
-  const container = adminRoot && adminRoot.querySelector('.container');
-  if (!container || document.getElementById('roleManagementPanel')) return;
-  const section = document.createElement('section');
-  section.className = 'role-admin-panel'; section.id = 'roleManagementPanel';
-  section.innerHTML = `<h2>🏢 Секретари техникума</h2>
-    <p>В системе работают четыре секретаря-администратора. Главный администратор может переключаться между аккаунтами; каждый секретарь работает только с группами закреплённых специальностей.</p>
-    <div id="courseAdminSlots" class="course-admin-slots"></div>
-    <div class="role-admin-note">Демо-логины и пароли показаны в карточках. Данные страницы хранятся локально; для реальной защиты нужна серверная авторизация.</div>`;
-  container.insertBefore(section, container.firstChild);
-  window.addEventListener('dtpa:admins-updated', renderRoleManagement);
-}
-function renderRoleManagement() {
-  const slots = document.getElementById('courseAdminSlots');
-  if (!slots) return;
-  let accounts = [];
-  try { accounts = JSON.parse(localStorage.getItem('dontpa-accounts-v1') || '[]'); } catch (_) {}
-  if (!Array.isArray(accounts)) accounts = [];
-  const specialties = window.__DTPA_ADMIN_SPECIALTY_ASSIGNMENTS;
-  const defaults = window.__DTPA_DEFAULT_ADMIN_CREDENTIALS || [];
-  slots.innerHTML = [1,2,3,4].map(slot => {
-    const admin = accounts.find(account => account.role === 'admin' && Number(account.adminSlot || account.adminCourse) === slot);
-    const labels = specialties[slot].map(code => escapeHtml(SPECIALTIES[code] || code)).join(', ');
-    const defaultCredentials = defaults.find(item => item.slot === slot && item.email === (admin && admin.email));
-    const credentials = defaultCredentials
-      ? `<small>Логин: ${escapeHtml(defaultCredentials.email)}<br>Пароль: ${escapeHtml(defaultCredentials.password)}</small>`
-      : `<small>${admin ? `Логин: ${escapeHtml(admin.email || '')}<br>Пароль задан отдельно` : 'Аккаунт ещё не создан'}</small>`;
-    return `<div class="course-admin-slot ${admin ? 'is-assigned' : 'is-empty'}"><span class="course-admin-slot__course">Секретарь №${slot}</span><strong>${admin ? escapeHtml(admin.name || admin.email) : 'Создаётся автоматически'}</strong>${credentials}<small>${labels}</small><button type="button" class="role-save-btn admin-switch-btn" data-admin-slot="${slot}" ${admin ? '' : 'disabled'}>Перейти в режим секретаря №${slot}</button></div>`;
-  }).join('');
-  slots.querySelectorAll('.admin-switch-btn').forEach(button => button.addEventListener('click', () => {
-    if (typeof window.__dtpaSwitchToAdminSlot !== 'function') {
-      push('Переключение режима секретаря пока недоступно.', 'error', 3000);
-      return;
-    }
-    const result = window.__dtpaSwitchToAdminSlot(button.dataset.adminSlot);
-    if (!result.ok) push(result.message, 'error', 3500);
-  }));
-}
+/* === Панель «Секретари техникума» удалена. Функции оставлены как заглушки,
+       чтобы не ломать существующие вызовы. === */
+function addRoleManagementPanel() {}
+function renderRoleManagement() {}
 window.__dtpaRefreshAdminManagement = renderRoleManagement;
 function refreshGradeEditPermission() {
   const canEditStudent = !!(currentStudent && canManageGroup(currentStudent.group));
@@ -3789,8 +3891,6 @@ function refreshGradeEditPermission() {
 syncAttendancePercentages();
 renderGroups(); renderStudents();
 addAttendanceUI();
-addRoleManagementPanel();
-renderRoleManagement();
 document.getElementById('attendanceJournalGroup').addEventListener('change', renderStandaloneAttendanceJournal);
 const attendancePeriodStart = document.getElementById('attendancePeriodStart');
 const attendancePeriodEnd = document.getElementById('attendancePeriodEnd');
@@ -3828,8 +3928,6 @@ renderJournal = function() {
 const originalSwitchToAdminForRoles = switchToAdmin;
 switchToAdmin = function() {
   originalSwitchToAdminForRoles();
-  addRoleManagementPanel();
-  renderRoleManagement();
   refreshGradeEditPermission();
 };
 const originalSwitchToMainForRoles = switchToMain;
@@ -3837,15 +3935,12 @@ switchToMain = function() {
   originalSwitchToMainForRoles();
   refreshGradeEditPermission();
 };
-
 setTimeout(() => {
   if (!SafeStorage.available) { setSaveStatus('error'); return; }
   const admins = TEACHERS.filter(t => t.role && t.role !== 'teacher').length;
   push(`Загружено: ${STUDENTS.length} студентов, ${TEACHERS.length} преподавателей (${admins} с должностями)`, 'success', 4000);
 }, 600);
-
 })();
-
 /* ============================================================
    КНОПКА-«ГЛАЗ» ДЛЯ ВСЕХ ПОЛЕЙ ПАРОЛЯ
    ============================================================ */
@@ -3881,11 +3976,8 @@ setTimeout(() => {
     initPasswordToggles();
   }
 })();
-
 /* ============================================================
    НОВОСТИ: расширенный редактор публикаций ДТПА
-   Совместимость: старые записи с полем image поддерживаются.
-   Хранилище: localStorage (клиентский режим без сервера).
    ============================================================ */
 (function () {
   'use strict';
@@ -3897,7 +3989,6 @@ setTimeout(() => {
   const MAX_ATTACHMENT_BYTES = 450 * 1024;
   const MAX_HISTORY = 30;
   const escapeHTML = value => String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
-
   function readPosts() {
     try {
       const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -3923,7 +4014,6 @@ setTimeout(() => {
     try { localStorage.setItem(NOTIFICATION_KEY, JSON.stringify(items.slice(-200))); return true; }
     catch (_) { return false; }
   }
-
   const tools = document.getElementById('newsAdminTools');
   const form = document.getElementById('newsAdminForm');
   const feed = document.getElementById('feed');
@@ -3961,7 +4051,6 @@ setTimeout(() => {
   let draftTimer = 0;
   let historyPostId = '';
   if (!tools || !form || !feed || !status || !composePrompt) return;
-
   function showStatus(message, kind) {
     status.textContent = message || '';
     status.className = 'news-admin-status' + (kind ? ' ' + kind : '');
@@ -4009,9 +4098,6 @@ setTimeout(() => {
       type: String(file.type || ''), size: Math.max(0, Number(file.size) || 0), data: safeAttachmentData(file)
     })).filter(file => file.data && file.name).slice(0, MAX_ATTACHMENTS);
   }
-
-  // Стабильный идентификатор для старых статичных карточек нужен, чтобы
-  // после переноса в localStorage не потерять их реакции и комментарии.
   function legacySocialId(article) {
     const seed = (article.dataset.category || '') + '|' + (article.querySelector('.post-author')?.textContent || '') + '|' + (article.querySelector('.post-content')?.textContent || '').slice(0, 160);
     let hash = 2166136261;
@@ -4042,8 +4128,6 @@ setTimeout(() => {
     return legacyNodeToMarkdown(element).replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
   }
   function migrateLegacyStaticPosts() {
-    // Карточки, которые раньше были прописаны прямо в HTML, не имели кнопки
-    // редактирования. Переносим их в тот же реестр, что и новые публикации.
     const legacyArticles = Array.from(feed.querySelectorAll('.post:not([data-news-admin-post="true"]):not([data-news-post-id])'));
     if (!legacyArticles.length) return;
     const posts = readPosts();
@@ -4095,7 +4179,6 @@ setTimeout(() => {
       });
       changed = true;
     });
-    // Не удаляем исходную HTML-разметку, если браузер не дал сохранить записи.
     const persisted = changed ? writePosts(posts) : true;
     if (persisted) legacyArticles.forEach(article => article.remove());
   }
@@ -4190,7 +4273,6 @@ setTimeout(() => {
     flushParagraph(); flushList();
     return output.join('');
   }
-
   function currentImages() {
     const images = selectedImages.slice();
     const remote = safeImageURL(imageInput ? imageInput.value : '');
@@ -4303,7 +4385,6 @@ setTimeout(() => {
     if (event.key === NOTIFICATION_KEY) renderNotifications();
     if (event.key === STORAGE_KEY) { activateScheduledPosts(); renderPublicPosts(); }
   });
-
   function activateScheduledPosts() {
     const posts = readPosts();
     let changed = false;
@@ -4317,7 +4398,6 @@ setTimeout(() => {
     });
     if (changed) { writePosts(posts); renderPublicPosts(); }
   }
-
   function renderPublicPosts() {
     feed.querySelectorAll('[data-news-admin-post="true"]').forEach(node => node.remove());
     const marker = feed.querySelector('.load-more-wrapper');
@@ -4381,7 +4461,6 @@ setTimeout(() => {
     if (summaryInput) summaryInput.value = source.summary || '';
     bodyInput.value = source.body || '';
     selectedImages = Array.isArray(source.images) ? source.images.map(safeImageURL).filter(Boolean).slice(0,MAX_IMAGES) : normalizeImages(source);
-    // При редактировании поста изображения уже находятся в списке; в черновике сохраняем незавершённую ссылку отдельно.
     imageInput.value = values && values.imageUrlDraft ? String(values.imageUrlDraft) : '';
     selectedAttachments = normalizeAttachments(source);
     if (scheduleInput) scheduleInput.value = localDateTimeValue(source.scheduledAt || 0);
@@ -4490,7 +4569,6 @@ setTimeout(() => {
     document.body.style.overflow = '';
     historyPostId = '';
   }
-
   composePrompt.addEventListener('click', () => {
     const draft = readDraft();
     if (draft && meaningfulDraft(draft)) {
@@ -4548,7 +4626,6 @@ setTimeout(() => {
   form.addEventListener('change', event => {
     if (!event.target.matches('input[type="file"]')) scheduleDraftSave();
   });
-
   if (imageFileInput) imageFileInput.addEventListener('change', async () => {
     const files = Array.from(imageFileInput.files || []);
     imageFileInput.value = '';
@@ -4605,7 +4682,6 @@ setTimeout(() => {
     selectedAttachments.splice(Number(button.dataset.removePostAttachment), 1);
     renderAttachmentPreviews(); scheduleDraftSave();
   });
-
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!window.__dtpaNewsAdminAuthorized) { showStatus('Нет доступа. Сначала войдите в админ-панель.', 'error'); return; }
@@ -4671,7 +4747,6 @@ setTimeout(() => {
     else showStatus(oldPost ? 'Изменения сохранены. История версии обновлена.' : 'Публикация опубликована в единой ленте.', 'ok');
     saveButton.disabled = false; saveButton.textContent = 'Опубликовать';
   });
-
   feed.addEventListener('click', event => {
     const editButton = event.target.closest('[data-news-edit]');
     const deleteButton = event.target.closest('[data-news-delete]');
@@ -4729,7 +4804,6 @@ setTimeout(() => {
     showStatus('Загружена старая версия. Нажмите «Сохранить изменения», чтобы восстановить её.', 'ok');
   });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && historyModal && !historyModal.hidden) closeHistory(); });
-
   if (notificationsToggle && notificationsPanel) notificationsToggle.addEventListener('click', () => {
     notificationsPanel.hidden = !notificationsPanel.hidden;
     notificationsToggle.setAttribute('aria-expanded', String(!notificationsPanel.hidden));
@@ -4750,7 +4824,6 @@ setTimeout(() => {
     if (notificationsPanel) notificationsPanel.hidden = true;
     if (notificationsToggle) notificationsToggle.setAttribute('aria-expanded','false');
   });
-
   window.addEventListener('dtpa:admin-auth-state', event => {
     const authorized = !!(event.detail && event.detail.authorized);
     window.__dtpaNewsAdminAuthorized = authorized;
@@ -4768,10 +4841,8 @@ setTimeout(() => {
   setInterval(activateScheduledPosts, 15000);
   renderImagePreviews(); renderAttachmentPreviews();
 })();
-
 /* ============================================================
    СОЦИАЛЬНАЯ ЛЕНТА НОВОСТЕЙ: реакции и комментарии в стиле Telegram
-   Все данные сохраняются локально в этом браузере.
    ============================================================ */
 (function () {
   'use strict';
@@ -4782,7 +4853,6 @@ setTimeout(() => {
   const GUEST_NAME_KEY = 'dtpa-news-comment-name-v1';
   const REACTIONS = ['👍', '❤️', '🔥', '👏', '😁', '🎉'];
   const openComments = new Set();
-
   function escapeHTML(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
   }
@@ -4925,7 +4995,6 @@ setTimeout(() => {
     }
     return { name, avatar:'🙂' };
   }
-
   feed.addEventListener('click', event => {
     const reactionButton = event.target.closest('[data-news-reaction]');
     const toggleButton = event.target.closest('[data-news-toggle-comments]');
@@ -4951,7 +5020,6 @@ setTimeout(() => {
       renderSocial(article, index);
     }
   });
-
   feed.addEventListener('submit', event => {
     const form = event.target.closest('[data-news-comment-form]');
     if (!form) return;
@@ -4970,8 +5038,6 @@ setTimeout(() => {
     openComments.add(id);
     if (saveSocial()) renderSocial(article, index);
   });
-
-  // Админ-публикации создаются скриптом выше; наблюдатель добавляет для них реакции и комментарии.
   const observer = new MutationObserver(() => renderAllSocial());
   observer.observe(feed, { childList:true });
   renderAllSocial();
